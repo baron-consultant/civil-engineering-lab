@@ -14,7 +14,7 @@ namespace SplitMD
     {
         static void Main(string[] args)
         {
-            var mdFile = @"C:\Test\Command\_.md";
+            var mdFile = @"E:\Test\Command\_.md";
             Extract(File.ReadAllLines(mdFile));
         }
 
@@ -81,12 +81,12 @@ namespace SplitMD
 
             header.AppendLine("[**<Icon name=\"youtube\" class=\"emoji\"/> 시연 영상 보기**]()");
 
-            var dir = $@"C:\Test\Command\_mdx\{command.First().ToString().ToUpper()}";
+            var dir = $@"E:\Test\Command\_mdx\{command.First().ToString().ToUpper()}";
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            File.Delete($@"{dir}\{command}.mdx");
-            File.WriteAllText($@"{dir}\{command.ToLower()}.mdx", header.ToString());
+            File.Delete($@"{dir}\_{command}.mdx");
+            File.WriteAllText($@"{dir}\_{command.ToLower()}.mdx", header.ToString());
         }
     }
 }

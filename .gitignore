@@ -231,3 +231,4 @@ UpgradeLog*.XML
 UpgradeLog*.htm
 
 !**/images/commands/**
+**/tools/**

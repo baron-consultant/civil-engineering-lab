@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             var sourceDir = @"V:\";
-            var targetDir = @"C:\Test\UploadPool";
+            var targetDir = @"E:\Test\UploadPool";
             var commnadpath = "D:\\eg-bim_guide\\src\\content\\docs\\ko\\commands";
             var needVideos = Directory.GetFiles(commnadpath, "*.mdx", SearchOption.AllDirectories)
                 .Select(i => Path.GetFileName(i))
