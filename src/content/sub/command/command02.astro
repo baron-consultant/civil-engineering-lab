@@ -1,0 +1,75 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+<section id="group12" class="command02">
+<!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3><span>토목/도로분야</span>의 도면 작업시 자주 사용되는 특화 명령어</h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방식 1</dt>
+        <dd>
+          명령어 아이콘바&nbsp;&nbsp;>&nbsp;&nbsp;명령어
+          전체보기&nbsp;&nbsp;>&nbsp;&nbsp;선형/횡단
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+      <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/command/command_02.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/command/2x_command_02.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/command_02.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/command/command_02.svg`} alt="" />
+    </div>
+
+      <!-- 링크 -->
+      <ul>
+        <li>
+          <a class="link-systm" href="javascript:selectImg('group5')">
+            <span class="blind">디스플레이/마우스</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="link-prfall" href="javascript:selectImg('group12')">
+            <span class="blind">보조기능</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="link-cmdall" href="javascript:selectImg('group11')">
+            <span class="blind">명령어 구성</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="link-cven" href="javascript:selectImg('group13')">
+            <span class="blind">선형/횡단</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="link-shortcut" href="javascript:selectImg('group7')">
+            <span class="blind">단축키</span>
+          </a>
+        </li>
+      </ul>
+      <!-- // 링크 -->
+    </div>
+  </div>
+</section>

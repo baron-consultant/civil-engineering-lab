@@ -1,0 +1,62 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+
+<section id="group11" class="command01">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3>
+        EG-BIM에서 사용할 수 있는 모든 명령어를&nbsp;
+        <span>12개 그룹 및 실행·설정 명령어로 분류</span>
+      </h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방식 1</dt>
+        <dd>명령어 아이콘바&nbsp;&nbsp;>&nbsp;&nbsp;명령어 전체보기</dd>
+      </dl>
+      <dl>
+        <dt>방식 2</dt>
+        <dd>명령어 아이콘바&nbsp;&nbsp;>&nbsp;&nbsp;+ 아이콘 추가</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+      <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/command/command_01.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/command/2x_command_01.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/command_01.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/command/command_01.svg`} alt="" />
+    </div>
+
+      <!-- 링크 -->
+      <ul>
+        <li>
+          <a class="link-cven" href="/eg-bim_guide/help/command02">
+            <span class="blind">선형/횡단</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="link-struc" href="/eg-bim_guide/help/command03">
+            <span class="blind">구조/배근</span>
+          </a>
+        </li>
+      </ul>
+      <!-- // 링크 -->
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+ 
+ <section id="group5" class="customize02">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3>
+        사용자 작업 스타일에 맞게&nbsp;
+        <span>기본적인 프로그램</span>&nbsp;환경을 설정
+      </h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방식 1</dt>
+        <dd>명령어 입력창&nbsp;&nbsp;>&nbsp;&nbsp;Command : OPTIONS</dd>
+      </dl>
+      <dl>
+        <dt>방식 2</dt>
+        <dd>
+          홈메뉴&nbsp;&nbsp;>&nbsp;&nbsp;사용자
+          설정&nbsp;&nbsp;>&nbsp;&nbsp;Display&Mouse
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+      <picture>
+        <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/customize/customize_02.png`} />
+        <source
+          media="(min-resolution: 140dpi)"
+          srcset={`${IMAGE_BASE_PATH}/customize/2x_customize_02.png`}
+        />
+        <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/customize_02.png`} alt=" " />
+      </picture>
+      <div class="ex-wrap">
+        <img src={`${IMAGE_BASE_PATH}/customize/customize_02.svg`} alt="" />
+      </div>
+    </div>
+  </div>
+</section>

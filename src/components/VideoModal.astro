@@ -1,0 +1,22 @@
+---
+interface Props {
+  id: string;
+  videoSrc: string;
+}
+
+const { id, videoSrc } = Astro.props;
+---
+
+<div class="modal" id={id}>
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <video
+      src={videoSrc}
+      width="824"
+      controls
+      muted="muted"
+      controlsList="nodownload"
+    ></video>
+    <p>▲ 영상 위에 마우스 커서를 올리면 재생 컨트롤바가 보입니다.</p>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+<section id="group4" class="customize01">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <h3>
+        사용자가 <span>원하는대로</span>&nbsp;작업환경 및 명령어
+        <span>아이콘바</span>를 구성
+      </h3>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+      <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/customize/customize_01.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/customize/2x_customize_01.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/customize_01.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/customize/customize_01.svg`} alt="" />
+    </div>
+
+      <!-- 링크 -->
+      <ul>
+        <li>
+          <a class="link-prfall" href="/eg-bim_guide/help/customize03">
+            <span class="blind">보조기능 전체보기</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="link-cmdall" href="/eg-bim_guide/help/command01">
+            <span class="blind">명령어 전체보기</span>
+          </a>
+        </li>
+      </ul>
+      <!-- // 링크 -->
+    </div>
+  </div>
+</section>

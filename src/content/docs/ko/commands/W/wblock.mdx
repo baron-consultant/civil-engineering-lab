@@ -2,17 +2,16 @@
 title: WBLOCK
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 [image1]: ../../../../../assets/images/commands/wblock/image1.png
 [image2]: ../../../../../assets/images/commands/wblock/image2.png
 
-* 도면에서 선택한 객체나 블록을 새로운 DWG 파일로 저장(내보내기) 하는 기능입니다.
+- 도면에서 선택한 객체나 블록을 새로운 DWG 파일로 저장(내보내기) 하는 기능입니다.
 
 ![][image1]
 
-## **1\. 블럭을 DWG 파일로 내보내기**
+## **1\. 블럭을 DWG 파일로 내보내기** [**시연 영상**](https://youtu.be/gYsAWuQK80w)
 
 1\) 명령창에 “WBLOCK” 명령어를 입력한다.  
 2\) Write Block 대화상자에서 원하는 옵션을 설정합니다.  
@@ -20,30 +19,27 @@ import { Image } from 'astro:assets';
 3\) 설정 완료 후 OK 버튼을 클릭한다.  
 4\) 선택한 내용이 새로운 DWG 파일로 저장된다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/gYsAWuQK80w) 
-
 ## **2\. 주요 기능**
 
 1\) Source (저장 대상 선택)
 
-- Block : 도면 내 정의된 블록을 선택하여 DWG 파일로 저장  
-- Entire drawing : 현재 열려 있는 도면 전체를 하나의 DWG 파일로 저장  
+- Block : 도면 내 정의된 블록을 선택하여 DWG 파일로 저장
+- Entire drawing : 현재 열려 있는 도면 전체를 하나의 DWG 파일로 저장
 - Entities : 개별 객체를 선택하여 DWG 파일로 저장
 
 2\) Base Point (기준점)
 
-- Select point : 삽입 시 기준이 될 점을 마우스로 지정  
+- Select point : 삽입 시 기준이 될 점을 마우스로 지정
 - X, Y, Z : 좌표값으로 직접 기준점 입력
 
 3\) Entities (객체 처리 방식)
 
-- Select entities : 저장할 객체 선택  
-- Retain : 원본 객체를 도면에 그대로 유지  
-- Convert to block : 선택한 객체를 도면 안에서 블록으로 변환 후 저장  
+- Select entities : 저장할 객체 선택
+- Retain : 원본 객체를 도면에 그대로 유지
+- Convert to block : 선택한 객체를 도면 안에서 블록으로 변환 후 저장
 - Delete from drawing : 선택한 객체를 도면에서 삭제하고, 외부 파일로만 저장
 
 4\) Destination (저장 위치)
 
-- File name and path : 새로 생성될 DWG 파일의 저장 경로와 파일명 지정  
+- File name and path : 새로 생성될 DWG 파일의 저장 경로와 파일명 지정
 - Insert units : 이후 다른 도면에 삽입 시 적용될 단위
-

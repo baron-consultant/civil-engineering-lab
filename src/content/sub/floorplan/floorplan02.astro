@@ -1,0 +1,54 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+<section id="group29" class="floorPlan02">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3>
+        도면정보를 선택해 수정하며,&nbsp;
+        <span>수정된 항목은 도면에 자동 적용</span>
+      </h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방식 1</dt>
+        <dd>
+          꾸러미&nbsp;&nbsp;>&nbsp;&nbsp;상단
+          좌측&nbsp;&nbsp;>&nbsp;&nbsp;도면정보수정
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+        <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/floorplan/floorplan_02.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/floorplan/2x_floorplan_02.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/floorplan/floorplan_02.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/floorplan/floorplan_02.svg`} alt="" />
+    </div>
+
+      <!-- 링크 -->
+      <ul>
+        <li>
+          <a class="link-select" href="/eg-bim_guide/help/floorplan03">
+            <span class="blind">도면정보 항목 선택</span>
+          </a>
+        </li>
+      </ul>
+      <!-- // 링크 -->
+    </div>
+  </div>
+</section>

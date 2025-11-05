@@ -2,70 +2,61 @@
 title: POLYGON
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-
 [image1]: ../../../../../assets/images/commands/polygon/image1.png
 [image2]: ../../../../../assets/images/commands/polygon/image2.png
 [image3]: ../../../../../assets/images/commands/polygon/image3.png
 [image4]: ../../../../../assets/images/commands/polygon/image4.png
 
-* 다각형을 생성합니다.  
-* 동일한 다각형을 여러개 생성하거나 다각형의 외곽선 너비를 설정하여 다각형을 생성할 수 있습니다.
+- 다각형을 생성합니다.
+- 동일한 다각형을 여러개 생성하거나 다각형의 외곽선 너비를 설정하여 다각형을 생성할 수 있습니다.
 
-#### 다각형 생성 옵션 키워드  
+#### 다각형 생성 옵션 키워드
 
 ![][image1]
 
-- Multiple: 동일한 다각형을 여러개 그립니다.  
+- Multiple: 동일한 다각형을 여러개 그립니다.
 - Width of line: 다각형 선의 너비를 설정합니다.
 
-#### 다각형 크기 옵션 키워드  
+#### 다각형 크기 옵션 키워드
 
 ![][image2]
 
 - Edge: 다각형의 1, 2번째 점을 지정하여 크기를 결정합니다.
 
-
-
-#### 다각형 복수 생성 옵션 키워드  
+#### 다각형 복수 생성 옵션 키워드
 
 ![][image3]
 
-- Vertex: 꼭짓점을 지정하여 다각형의 크기를 결정합니다.  
+- Vertex: 꼭짓점을 지정하여 다각형의 크기를 결정합니다.
 - Midpoint of side: 한 변의 중점을 지정하여 다각형의 크기를 결정합니다.
 
-
-#### 다각형 생성 기준 옵션  
+#### 다각형 생성 기준 옵션
 
 ![][image4]
 
-- Inscribed in circle: 다각형이 원에 내접합니다.  
+- Inscribed in circle: 다각형이 원에 내접합니다.
 - Circumscribed about circle: 다각형이 원에 외접합니다.
 
-## **1\. 다각형을 그리는 방법**
+## **1\. 다각형을 그리는 방법** [**시연 영상**](https://youtu.be/sUs0W5DnyMM)
 
 1\) “POLYGON” 명령어를 실행합니다.  
-2\) 다각형 외곽선의 너비를 변경하고자 하는 경우 Width of line 키워드를 입력하고 명령어 창에 값을을 입력한 후 ENTER 키를 누릅니다.  
-2\) 명령어 창에 다각형의 꼭짓점 개수를 입력하고 ENTER 키를 누릅니다.  
+2\) 다각형 외곽선의 너비를 변경하고자 하는 경우 Width of line 키워드를 입력하고 명령어 창에 값을을 입력한 후 ENTER를 누릅니다.  
+2\) 명령어 창에 다각형의 꼭짓점 개수를 입력하고 ENTER를 누릅니다.  
 3\) 다각형의 크기를 결정하여 다각형을 생성합니다. (2가지 방법)  
 &nbsp;&nbsp;&nbsp;&nbsp;3-1) 다각형의 중심점을 화면 상에 마우스로 지정합니다.  
 3-1.1) Inscribed in circle 또는 Circumscribed about circle 옵션을 선택합니다.  
 3-1.2) 화면 상에 마우스로 원의 반지름을 지정하여 다각형을 생성합니다.  
 &nbsp;&nbsp;&nbsp;&nbsp;3-2) Edge 키워드를 입력해 다각형의 1, 2번째 꼭짓점을 지정하여 다각형을 생성합니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/sUs0W5DnyMM)
-
-## **2\. 여러개의 동일한 다각형을 그리는 방법**
+## **2\. 여러개의 동일한 다각형을 그리는 방법** [**시연 영상**](https://youtu.be/7O8VMJy26vY)
 
 1\) “POLYGON” 명령어를 실행합니다.  
-2\) Multiple 키워드를 입력합니다.   
-3\) 명령어 창에 다각형의 꼭짓점 개수를 입력하고 ENTER 키를 누릅니다.  
+2\) Multiple 키워드를 입력합니다.  
+3\) 명령어 창에 다각형의 꼭짓점 개수를 입력하고 ENTER를 누릅니다.  
 4\) 다각형의 크기를 결정하여 다각형을 생성합니다. (2가지 방법)  
 &nbsp;&nbsp;&nbsp;&nbsp;4-1) 첫번째 다각형의 중심점을 지정하고 다각형의 크기 옵션을 선택합니다.  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-1-1) (Side 키워드) ENTER 키를 눌러 다각형 한 변의 중점으로  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-1-1) (Side 키워드) ENTER를 눌러 다각형 한 변의 중점으로  
 다각형의 크기를 결정합니다.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4-1-2) Vertex 키워드를 입력해 꼭짓점을 이용하여 다각형의 크기를 결정합니다.  
 &nbsp;&nbsp;&nbsp;&nbsp;4-2) Edge 키워드를 입력해 다각형의 1, 2번째 꼭짓점을 지정하여 크기를 결정합니다.  
 5\) 화면 상에 마우스로 다각형의 중심을 지정하면 동일한 다각형이 여러개 생성됩니다.
-
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/7O8VMJy26vY)

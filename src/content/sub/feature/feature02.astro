@@ -1,0 +1,49 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+<section id="group19" class="feature02">
+<!-- 타이틀 -->
+<div class="page-tit-wrap">
+  <div class="tit-box">
+    <span class="page-tail"></span>
+    <h3>
+      적용할&nbsp;<span>색상을 선택</span>하고 선택 색상에 대한&nbsp;
+      <span>속성 값</span>&nbsp;확인
+    </h3>
+    <span class="page-tail"></span>
+  </div>
+  <div class="tip-box">
+    <h4 class="tip-tit">How to use</h4>
+    <dl>
+      <dt>방식 1</dt>
+      <dd>명령어 입력창&nbsp;&nbsp;>&nbsp;&nbsp;Command : COLOR</dd>
+    </dl>
+    <dl>
+      <dt>방식 2</dt>
+      <dd>
+        상단 바&nbsp;&nbsp;>&nbsp;&nbsp;색상&nbsp;&nbsp;>&nbsp;&nbsp;색상
+        상세보기
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<!-- // 타이틀 -->
+<div class="contents">
+  <div class="inner">
+    <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/feature/feature_02.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/feature/2x_feature_02.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/feature/feature_02.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/feature/feature_02.svg`} alt="" />
+    </div>
+    
+  </div>
+</div>
+</section>

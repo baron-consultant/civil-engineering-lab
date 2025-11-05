@@ -2,12 +2,11 @@
 title: SETBYLAYERMODE
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 [image1]: ../../../../../assets/images/commands/setbylayermode/image1.png
 
-* SETBYLAYER 명령어 실행 시 어떤 속성(Color, Linetype, Lineweight 등)을 ByLayer로 강제 변경할지 자동 적용 범위를 제어하는 시스템 변수입니다.
+- SETBYLAYER 명령어 실행 시 어떤 속성(Color, Linetype, Lineweight 등)을 ByLayer로 강제 변경할지 자동 적용 범위를 제어하는 시스템 변수입니다.
 
 ![][image1]
 
@@ -17,7 +16,7 @@ import { Image } from 'astro:assets';
 2\) 원하는 값을 숫자로 입력합니다. (비트코드 방식)  
 3\) 설정된 값에 따라 SETBYLAYER 명령어 실행 시 자동으로 적용되는 속성이 달라집니다.
 
-## **2\. 값(비트 코드) 의미**
+## **2\. 값(비트 코드) 의미** [**시연 영상**]()
 
 1\) 0 : 모든 옵션을 수동으로 지정 (기본값)  
 2\) 1 : 색상(Color)을 ByLayer로 자동 설정  
@@ -28,5 +27,3 @@ import { Image } from 'astro:assets';
 
 여러 값을 동시에 적용하려면 합산해서 입력합니다.  
  예 : SETBYLAYERMODE \= 3 → 색상(1) \+ 선종류(2) 자동 적용
-
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**]()

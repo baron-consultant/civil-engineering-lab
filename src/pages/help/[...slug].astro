@@ -1,0 +1,96 @@
+---
+import BaseLayout from './_HelpLayout.astro';
+import { pageRoutes, defaultPage } from '../../lib/navigation.js';
+import { loadComponent } from '../../lib/componentLoader.js';
+import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const componentRoutes = pageRoutes.map(route => ({
+    params: { slug: route.slug },
+    props: { type: 'component', route },
+  }));
+
+  const docsEntries = await getCollection('docs', e => e.id.startsWith('ko/commands/'));
+
+  docsEntries.sort((a, b) => {
+    const pathA = a.id.toLowerCase();
+    const pathB = b.id.toLowerCase();
+    return pathA.localeCompare(pathB, 'en', { numeric: true, sensitivity: 'base' });
+  });
+
+  const docsRoutes = docsEntries.map(entry => ({
+    params: { slug: entry.id.replace(/\.mdx?$/, '') },
+    props: {
+      type: 'mdx',
+      entryId: entry.id,
+      entryData: entry.data,
+      entryBody: entry.body,
+    },
+  }));
+
+  return [
+    { params: { slug: undefined }, props: { type: 'component', route: defaultPage } },
+    ...componentRoutes,
+    ...docsRoutes,
+  ];
+}
+
+const { type, route, entryId, entryData, entryBody } = Astro.props;
+let pageTitle, activeMenu, Component, htmlContent;
+
+// 🔹 페이지 클래스명 생성
+let pageClass = '';
+
+if (type === 'mdx') {
+  pageTitle = entryData.title || entryId;
+  activeMenu = entryId.replace(/\.mdx?$/, '');
+  
+  // 🔹 ko/ 제거하고 나머지만 클래스명으로 변환
+  pageClass = entryId
+    .replace(/\.mdx?$/, '')
+    .replace(/^ko\//, '') // ko/ 제거
+    .replace(/\//g, '-')
+    .replace(/[^a-z0-9-]/gi, '-')
+    .toLowerCase();
+  
+  try {
+    const entry = await getEntry('docs', entryId.replace(/\.mdx?$/, ''));
+    if (entry && typeof entry.render === 'function') {
+      const { Content } = await entry.render();
+      Component = Content;
+    } else {
+      const { markdownToHtml } = await import('../../lib/markdownToHtml.js');
+      htmlContent = await markdownToHtml(entryBody);
+    }
+  } catch (error) {
+    console.error('Failed to render MDX:', error);
+    const { markdownToHtml } = await import('../../lib/markdownToHtml.js');
+    htmlContent = await markdownToHtml(entryBody);
+  }
+} else {
+  const current = route || defaultPage;
+  Component = await loadComponent(current.path);
+  pageTitle = current.title;
+  activeMenu = current.slug;
+  
+  // 🔹 component 타입일 때도 클래스명 생성
+  pageClass = current.slug.replace(/\//g, '-').toLowerCase();
+}
+
+const fullTitle = type === 'mdx' ? `명령어-${pageTitle}` : pageTitle;
+---
+
+
+<BaseLayout title={fullTitle} activeMenu={activeMenu} showBackButton={type !== 'markdown'} pageClass={pageClass}>
+  {Component ? (
+    <div class="markdown-content">
+      <Component />
+    </div>
+  ) : (
+    <div class="sl-markdown-content">
+      {pageTitle && <h1 class="page-title">{pageTitle}</h1>}
+      <div set:html={htmlContent} />
+    </div>
+  )}
+</BaseLayout>

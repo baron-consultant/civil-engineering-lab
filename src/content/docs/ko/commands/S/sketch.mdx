@@ -2,56 +2,48 @@
 title: SKETCH
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 [image1]: ../../../../../assets/images/commands/sketch/image1.png
 
-
-* 도면에 곡선을 자유롭게 그립니다.  
-* 곡선을 자유롭게 그리며 선 객체로 생성할 수 있습니다.
+- 도면에 곡선을 자유롭게 그립니다.
+- 곡선을 자유롭게 그리며 선 객체로 생성할 수 있습니다.
 
 ![][image1]
 
-* SKETCH의 설정 옵션 키워드  
-- ENTER : 그려진 객체를 선으로 생성하고 종료합니다.  
-- Quit : 명령을 종료하여 스케치를 취소합니다.  
-- Pen down : 마우스로 클릭하여 그리기를 중단합니다.  
-- Pen up : 마우스로 클릭하여 그리기를 계속합니다.  
-- Erase : 선을 지웁니다.  
-- Write to drawing : 그려진 객체를 선으로 생성하고 이어서 그립니다.  
-- Connect : 그려진 객체를 연결합니다.  
-- Straight to cursor : 마우스 커서 위치로 직선을 그립니다.  
-- 
+- SKETCH의 설정 옵션 키워드
 
-## **1\. 도면에 자유롭게 그리고 선 객체 생성하기 \- ENTER**
+* ENTER : 그려진 객체를 선으로 생성하고 종료합니다.
+* Quit : 명령을 종료하여 스케치를 취소합니다.
+* Pen down : 마우스로 클릭하여 그리기를 중단합니다.
+* Pen up : 마우스로 클릭하여 그리기를 계속합니다.
+* Erase : 선을 지웁니다.
+* Write to drawing : 그려진 객체를 선으로 생성하고 이어서 그립니다.
+* Connect : 그려진 객체를 연결합니다.
+* Straight to cursor : 마우스 커서 위치로 직선을 그립니다.
+
+## **1\. 도면에 자유롭게 그리고 선 객체 생성하기 \- ENTER** [**시연 영상**](https://youtu.be/AiE43CLWZ9U)
 
 1\) “SKETCH” 명령어를 실행합니다.  
 2\) Length of segments 값을 설정합니다.(정밀한 스케치가 필요하면 작은 값 / 대략적인 스케치만 필요하면 큰값)  
 3\) 마우스로 클릭하여 자유롭게 그립니다.  
-4\) ENTER 키워드를 입력해서 그려진 상태의 선 객체를 생성하고 명령어를 종료합니다.
+4\) ENTER워드를 입력해서 그려진 상태의 선 객체를 생성하고 명령어를 종료합니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/AiE43CLWZ9U) 
-
-## **2\. 도면에 자유롭게 그리다가 취소하기 \- Quit**
+## **2\. 도면에 자유롭게 그리다가 취소하기 \- Quit** [**시연 영상**](https://youtu.be/jpEodBdk-xc)
 
 1\) “SKETCH” 명령어를 실행합니다.  
 2\) Length of segments 값을 설정합니다.(정밀한 스케치가 필요하면 작은 값 / 대략적인 스케치만 필요하면 큰값)  
 3\) 마우스로 클릭하여 자유롭게 그립니다.  
 4\) Quit 키워드를 입력해서 그려진 선을 취소하고 명령어를 종료합니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/jpEodBdk-xc) 
-
-## **3\. 그리기 중단하기 \- Pen down**
+## **3\. 그리기 중단하기 \- Pen down** [**시연 영상**](https://youtu.be/lLAIaSUxPQA)
 
 1\) “SKETCH” 명령어를 실행합니다.  
 2\) Length of segments 값을 설정합니다.(정밀한 스케치가 필요하면 작은 값 / 대략적인 스케치만 필요하면 큰값)  
 3\) 마우스로 클릭하여 자유롭게 그립니다.  
 4\) Pen down 키워드를 입력하거나 마우스 클릭으로 그리기를 중단합니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/lLAIaSUxPQA) 
-
-## **4\. 그리기 계속하기 \- Pen up**
+## **4\. 그리기 계속하기 \- Pen up** [**시연 영상**](https://youtu.be/0N1zEHc9WAI)
 
 1\) “SKETCH” 명령어를 실행합니다.  
 2\) Length of segments 값을 설정합니다.(정밀한 스케치가 필요하면 작은 값 / 대략적인 스케치만 필요하면 큰값)  
@@ -59,18 +51,14 @@ import { Image } from 'astro:assets';
 4\) Pen down 키워드를 입력하거나 마우스 클릭으로 그리기를 중단합니다.  
 5\) Pen Up 키워드를 입력하거나 마우스 클릭으로 그리기를 계속합니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/0N1zEHc9WAI) 
-
-## **5\. 지우기 \- Erase**
+## **5\. 지우기 \- Erase** [**시연 영상**](https://youtu.be/QbiV1nHEuWk)
 
 1\) “SKETCH” 명령어를 실행합니다.  
 2\) Length of segments 값을 설정합니다.(정밀한 스케치가 필요하면 작은 값 / 대략적인 스케치만 필요하면 큰값)  
 3\) 마우스로 클릭하여 자유롭게 그립니다.  
 4\) Erase 키워드를 입력하여 마우스로 지웁니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/QbiV1nHEuWk) 
-
-## **6\. 그려진 객체를 선으로 생성하고 그리기 \- Write to drawing**
+## **6\. 그려진 객체를 선으로 생성하고 그리기 \- Write to drawing** [**시연 영상**](https://youtu.be/MhLL4_DjY6M)
 
 1\) “SKETCH” 명령어를 실행합니다.  
 2\) Length of segments 값을 설정합니다.(정밀한 스케치가 필요하면 작은 값 / 대략적인 스케치만 필요하면 큰값)  
@@ -78,9 +66,7 @@ import { Image } from 'astro:assets';
 4\) Write to drawing 키워드를 입력합니다.  
 5\) 선 객체가 생성되고 이어서 마우스로 자유롭게 그립니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/MhLL4_DjY6M) 
-
-## **7\. 그려진 객체를 연결하기 \- Connect**
+## **7\. 그려진 객체를 연결하기 \- Connect** [**시연 영상**](https://youtu.be/J6dC57IK8XQ)
 
 1\) “SKETCH” 명령어를 실행합니다.  
 2\) Length of segments 값을 설정합니다.(정밀한 스케치가 필요하면 작은 값 / 대략적인 스케치만 필요하면 큰값)  
@@ -89,9 +75,7 @@ import { Image } from 'astro:assets';
 5\) Connect 키워드를 입력하고 중단한 선에 마우스 커서를 올립니다.  
 6\) 이어서 그립니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/J6dC57IK8XQ) 
-
-## **8\. 마우스 커서 위치로 직선 그리기 \- Straight to cursor**
+## **8\. 마우스 커서 위치로 직선 그리기 \- Straight to cursor** [**시연 영상**](https://youtu.be/-vMv9r12aIQ)
 
 1\) “SKETCH” 명령어를 실행합니다.  
 2\) Length of segments 값을 설정합니다.(정밀한 스케치가 필요하면 작은 값 / 대략적인 스케치만 필요하면 큰값)  
@@ -99,5 +83,3 @@ import { Image } from 'astro:assets';
 4\) 마우스 클릭으로 그리기를 중단합니다.  
 5\) 직선을 그릴 지점에 마우스 커서를 위치시킵니다.  
 6\) Straight to cursor(S) 키워드를 입력합니다.
-
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/-vMv9r12aIQ) 

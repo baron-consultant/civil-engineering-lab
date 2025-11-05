@@ -1,0 +1,165 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Sidebar from '../../components/Sidebar.astro';
+
+import '../../styles/common.css';
+import '../../styles/style.css';
+import '../../styles/custom.css';
+
+const { title, activeMenu, activeGroup, showBackButton = true, pageClass = '' } = Astro.props;
+const homePath = '/eg-bim_guide/help/';
+---
+
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../favicon.svg" />
+  <title>{title}</title>
+  <ViewTransitions />
+  <style is:inline>
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation-duration: 0.2s; }
+    ::view-transition-old(sidebar),
+    ::view-transition-new(sidebar) { animation: none; }
+    .nav-wrap { view-transition-name: sidebar; }
+  </style>
+</head>
+
+<body>
+   <div class={`wrap ${pageClass ? `page-${pageClass}` : ''}`}>
+    <div class="nav-wrap" transition:persist transition:name="sidebar">
+      <header class="header"><h1>이용가이드</h1></header>
+      <Sidebar activeMenu={activeMenu} activeGroup={activeGroup} />
+    </div>
+
+    <div class="container">
+      <div id="main-content">
+        <slot />
+      </div>
+    </div>
+  </div>
+
+<script>
+(function() {
+  const homePath = '{homePath}';
+
+  /* ------------------------------
+    공통 DOM 헬퍼
+  ------------------------------ */
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => [...document.querySelectorAll(selector)];
+
+  const toggleSearchResults = (show = false) => {
+    const searchContainer = $('#search-results-container');
+    const mainContent = $('#main-content');
+    if (searchContainer) searchContainer.style.display = show ? 'block' : 'none';
+    if (mainContent) mainContent.style.display = show ? 'none' : 'block';
+    const searchInput = $('#search-input');
+    if (searchInput) {
+      searchInput.value = '';
+      const clearBtn = $('#search-clear-btn');
+      if (clearBtn) clearBtn.style.display = 'none';
+    }
+  };
+
+  /* ------------------------------
+    검색창 표시 여부
+  ------------------------------ */
+  function updateSearchBar() {
+    const searchbarWrapper = $('.searchbar-wrapper');
+    if (!searchbarWrapper) return;
+    const show = window.location.pathname.includes('/ko/commands/');
+    searchbarWrapper.style.display = show ? 'block' : 'none';
+  }
+
+  /* ------------------------------
+    사이드바 + 탭 활성화
+  ------------------------------ */
+  function updateSidebar() {
+    const currentPath = window.location.pathname;
+    let longestMatch = 0, matchedLink = null;
+
+    // 🔹 가장 긴 경로를 가진 링크 찾기 (정확한 매칭)
+    $$('a[data-page]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      
+      const linkPath = new URL(href, location.origin).pathname;
+      
+      // 정확히 일치하거나 현재 경로가 링크 경로로 시작하는 경우
+      if (currentPath === linkPath || currentPath.startsWith(linkPath + '/')) {
+        if (linkPath.length > longestMatch) {
+          matchedLink = link;
+          longestMatch = linkPath.length;
+        }
+      }
+    });
+    
+    if (!matchedLink) return;
+
+    requestAnimationFrame(() => {
+      // 모든 active 제거
+      $$('.depth02 li.active, .depth03 li.active, .depth01 > li.active').forEach(li => li.classList.remove('active'));
+      
+      // 매칭된 링크의 li만 활성화
+      const li = matchedLink.closest('li');
+      li?.classList.add('active');
+      
+      // 부모 depth01 > li 활성화
+      const parent = matchedLink.closest('.depth01 > li');
+      parent?.classList.add('active');
+      parent?.querySelector('.depth02')?.classList.remove('d-none');
+
+      // 탭 활성화
+      const tabContent = matchedLink.closest('.tab-content');
+      if (tabContent) {
+        const tabId = tabContent.getAttribute('data-tab-content');
+        $$('.tab-button.active').forEach(btn => btn.classList.remove('active'));
+        $$('.tab-content.active').forEach(c => { if (c !== tabContent) c.classList.remove('active'); });
+        $(`.tab-button[data-tab="${tabId}"]`)?.classList.add('active');
+        tabContent.classList.add('active');
+      }
+    });
+  }
+
+  /* ------------------------------
+    뷰포트 높이 CSS 변수
+  ------------------------------ */
+  const syncHeight = () => document.documentElement.style.setProperty('--window-inner-height', `${window.innerHeight}px`);
+
+  /* ------------------------------
+    초기화
+  ------------------------------ */
+  const initLayout = () => {
+    syncHeight();
+    updateSidebar();
+    updateSearchBar();
+  };
+
+  window.addEventListener('resize', syncHeight);
+  window.addEventListener('popstate', () => { toggleSearchResults(false); updateSidebar(); updateSearchBar(); });
+  document.addEventListener('astro:page-load', initLayout);
+  document.addEventListener('astro:before-preparation', e => {
+    const newUrl = e?.newDocument?.location?.pathname;
+    if (!newUrl) return;
+    
+    // 🔹 정확한 경로 매칭
+    $$('a[data-page]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      
+      const linkPath = new URL(href, location.origin).pathname;
+      if (newUrl === linkPath || newUrl.startsWith(linkPath + '/')) {
+        link.closest('li')?.classList.add('active');
+      }
+    });
+  });
+
+  initLayout();
+})();
+</script>
+</body>
+</html>

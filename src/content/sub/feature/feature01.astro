@@ -1,0 +1,56 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+<section id="group18" class="feature01">
+<!-- 타이틀 -->
+<div class="page-tit-wrap">
+  <div class="tit-box">
+    <span class="page-tail"></span>
+    <h3>
+      선택된 객체의 모든&nbsp;<span>속성 정보</span
+      >를&nbsp;<span>확인</span>하고&nbsp;
+      <span>수정</span>
+    </h3>
+    <span class="page-tail"></span>
+  </div>
+  <div class="tip-box">
+    <h4 class="tip-tit">How to use</h4>
+    <dl>
+      <dt>방식 1</dt>
+      <dd>명령어 입력창&nbsp;&nbsp;>&nbsp;&nbsp;Command : PROPERTIES</dd>
+    </dl>
+    <dl>
+      <dt>방식 2</dt>
+      <dd>
+        명령어
+        전체보기&nbsp;&nbsp;>&nbsp;&nbsp;선택/조회&nbsp;&nbsp;>&nbsp;&nbsp;
+        <img src={`${IMAGE_BASE_PATH}/ico/ico_list.svg`} alt="" />&nbsp;&nbsp;객체
+        특성조회&nbsp;&nbsp;>&nbsp;&nbsp;Properties
+      </dd>
+    </dl>
+    <dl>
+      <dt>방식 3</dt>
+      <dd>상단 우측 상세보기의 속성창 클릭</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- // 타이틀 -->
+<div class="contents">
+  <div class="inner">
+    <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/feature/feature_01.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/feature/2x_feature_01.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/feature/feature_01.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/feature/feature_01.svg`} alt="" />
+    </div>
+
+  </div>
+</div>
+</section>

@@ -1,0 +1,375 @@
+---
+import { getSidebarTabs } from '../lib/sidebarConfig';
+import SearchBar from './SearchBar.astro';
+
+const {activeMenu } = Astro.props;
+
+const sidebarTabs = await getSidebarTabs();
+
+const isActive = (id: string) => activeMenu === id || activeMenu.includes(id);
+
+// 현재 활성 탭 결정 (activeMenu가 속한 탭)
+function getActiveTab() {
+  // 1️⃣ activeMenu 기반으로 탭 찾기
+  for (const tab of sidebarTabs) {
+    for (const group of tab.groups) {
+      for (const item of group.items) {
+        if (isActive(item.id)) return tab.id;
+        if (item.children) {
+          for (const child of item.children) {
+            if (isActive(child.id)) return tab.id;
+          }
+        }
+      }
+    }
+  }
+  
+  // 2️⃣ Astro.url을 사용하여 서버/클라이언트 모두에서 URL 기반 탭 결정
+  const currentPath = Astro.url.pathname;
+  if (currentPath.includes('/ko/commands/')) {
+    return 'commands';
+  }
+  
+  // 3️⃣ activeMenu 문자열로 판단
+  if (activeMenu && activeMenu.includes('commands')) {
+    return 'commands';
+  }
+  
+  return sidebarTabs[0]?.id || 'grimmi';
+}
+
+const activeTab = getActiveTab();
+
+// 각 탭의 첫 번째 링크 찾기 함수
+function getFirstLinkForTab(tab: any): string {
+  for (const group of tab.groups) {
+    for (const item of group.items) {
+      // 직접 링크가 있는 경우
+      if (item.href) return item.href;
+      
+      // 자식이 있는 경우 첫 번째 자식의 링크
+      if (item.children && item.children.length > 0) {
+        const firstChild = item.children[0];
+        if (firstChild.href) return firstChild.href;
+        
+        // 손자가 있는 경우
+        if (firstChild.children && firstChild.children.length > 0) {
+          return firstChild.children[0].href;
+        }
+      }
+    }
+  }
+  return '#';
+}
+---
+<div class="lnb-container">
+  <!-- 탭 메뉴 -->
+  <div class="sidebar-wrap">
+    <div class="sidebar-tabs">
+      {sidebarTabs.map(tab => (
+        <button 
+          class={`tab-button ${activeTab === tab.id ? 'active' : ''}`}
+          data-tab={tab.id}
+          data-tab-link={getFirstLinkForTab(tab)}
+        >
+          {tab.icon && <i class={tab.icon}></i>}
+          <span>{tab.label}</span>
+        </button>
+      ))}
+    </div>
+    
+    <!-- SearchBar를 sidebar-tabs 아래로 이동 (B탭일 때만 표시) -->
+    <div class="searchbar-wrapper" data-show-on-tab="commands" style={activeTab === 'commands' ? 'display: block;' : 'display: none;'}>
+      <SearchBar />
+    </div>
+  </div>
+
+  <!-- 탭 컨텐츠 -->
+  {sidebarTabs.map(tab => (
+    <div 
+      class={`tab-content ${activeTab === tab.id ? 'active' : ''} ${tab.id === 'commands' ? 'grid-layout' : ''}`}
+      data-tab-content={tab.id}
+    >
+      {tab.groups.map((group, groupIdx) => (
+        <div class="nav-group">
+          <div class="group-tit">
+            <h2><i class={group.icon}></i>{group.title}</h2>
+          </div>
+
+          <ul class="depth01">
+            {group.items.map((item, idx) => {
+              const menuId = `${tab.id}_menuGroup${String(groupIdx * 10 + idx + 1).padStart(2, '0')}`;
+              
+              // 🔹 라벨이 없으면 single로 처리
+              const isSingleItem = item.children && !item.label;
+              
+              return (
+                <li class={isActive(item.id) ? 'active' : ''}>
+                  {item.children ? (
+                    <>
+                      {/* 🔹 single인 경우 depth01 > li > a 없이 바로 depth02 */}
+                      {!isSingleItem && (
+                        <a href="#" data-toggle={menuId}>
+                          <i class="ico-arrow"></i>
+                          <span>{item.label}</span>
+                        </a>
+                      )}
+                      
+                      <ul class={`depth02 ${isSingleItem ? 'single' : (isActive(item.id) ? '' : 'd-none')}`} id={menuId}>
+                        {item.children.map((child) => (
+                          <li class={isActive(child.id) ? 'active' : ''}>
+                            <a href={child.href || '#'} data-page={child.id}>
+                              <span>{child.label}</span>
+                            </a>
+                            
+                            {child.children && (
+                              <ul class="depth03">
+                                {child.children.map((grandChild) => (
+                                  <li class={isActive(grandChild.id) ? 'active' : ''}>
+                                    <a href={grandChild.href} data-page={grandChild.id}>
+                                      <span>{grandChild.label}</span>
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : (
+                    <ul class="depth02 single">
+                      <li class={isActive(item.id) ? 'active' : ''}>
+                        <a href={item.href} data-page={item.id}>
+                          <span>{item.label}</span>
+                        </a>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
+  ))}
+</div>
+
+<script>
+import { navigate } from 'astro:transitions/client';
+
+/* ------------------------------
+  사이드바 스크롤 상태 저장
+------------------------------ */
+function saveSidebarScroll() {
+  const sidebar = document.querySelector('.nav-wrap');
+  if (!sidebar) return;
+
+  const activeTabBtn = document.querySelector('.sidebar-tabs .tab-button.active');
+  const tabId = activeTabBtn?.dataset.tab || 'default';
+
+  sessionStorage.setItem(`scroll_${tabId}`, sidebar.scrollTop);
+}
+
+/* ------------------------------
+  사이드바 스크롤 복원
+------------------------------ */
+function restoreSidebarScroll() {
+  const sidebar = document.querySelector('.nav-wrap');
+  if (!sidebar) return;
+
+  const activeTabBtn = document.querySelector('.sidebar-tabs .tab-button.active');
+  const tabId = activeTabBtn?.dataset.tab || 'default';
+
+  const savedScroll = sessionStorage.getItem(`scroll_${tabId}`);
+  if (savedScroll) {
+    sidebar.scrollTop = parseFloat(savedScroll);
+  }
+}
+  /* ------------------------------
+    중앙으로 스크롤시켜주는 함수
+  ------------------------------ */
+function scrollActiveDepth02IntoView() {
+  const sidebar = document.querySelector('.nav-wrap');
+  if (!sidebar) return;
+
+  const activeItem = sidebar.querySelector('.depth02 > li.active, .depth03 > li.active');
+  if (!activeItem) return;
+
+  const sidebarRect = sidebar.getBoundingClientRect();
+  const itemRect = activeItem.getBoundingClientRect();
+  const visibleHeight = sidebar.clientHeight;
+
+  const targetScroll =
+    activeItem.offsetTop - visibleHeight / 2 + activeItem.offsetHeight / 2;
+
+  // 하단 기준값 (현재 스크롤 영역의 bottom - 160px)
+  const thresholdBottom = sidebarRect.bottom - 160;
+const thresholdTop = sidebarRect.top + 280; // 상단 여유 280px
+if (itemRect.top < thresholdTop || itemRect.bottom > thresholdBottom) {
+  sidebar.scrollTo({
+    top: targetScroll,
+    behavior: 'smooth',
+  });
+}
+}
+
+/* ------------------------------
+  사이드바 초기화 함수
+------------------------------ */
+function initializeSidebar() {
+  const tabButtons = document.querySelectorAll('.sidebar-tabs .tab-button'); 
+  const tabContents = document.querySelectorAll('.tab-content');
+  const searchbarWrapper = document.querySelector('.searchbar-wrapper');
+
+  let isNavigating = false;
+
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+
+  /* ------------------------------
+    URL 기반 초기 탭 활성화
+  ------------------------------ */
+  function setInitialTab() {
+    const path = window.location.pathname;
+    let activeTabId = path.includes('/ko/commands/') ? 'commands' : tabButtons[0]?.dataset.tab || 'grimmi';
+    activateTab(activeTabId);
+  }
+  
+  /* ------------------------------
+    탭 활성화 공통 함수
+  ------------------------------ */
+  function activateTab(tabId) {
+    tabButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabId));
+    tabContents.forEach(content => content.classList.toggle('active', content.dataset.tabContent === tabId));
+
+    if (searchbarWrapper) {
+      searchbarWrapper.style.display = searchbarWrapper.dataset.showOnTab === tabId ? 'block' : 'none';
+    }
+  }
+
+  /* ------------------------------
+    링크 클릭 시 depth 메뉴 활성화
+  ------------------------------ */
+function activateDepthMenu(targetPath) {
+  const activeTabContent = $('.tab-content.active');
+  const isGridLayout = activeTabContent?.classList.contains('grid-layout');
+
+  // 🔹 모든 메뉴 초기화 (닫기)
+  $$('.depth01 > li').forEach(li => li.classList.remove('active'));
+  $$('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
+  $$(`.depth02 li, .depth03 li`).forEach(li => li.classList.remove('active'));
+
+  // 🔹 클릭된 메뉴만 활성화
+  const targetAnchor = $$(`a[href]`).find(a => new URL(a.href, location.origin).pathname === targetPath);
+  if (!targetAnchor) return;
+
+  targetAnchor.parentElement?.classList.add('active');
+  const parentLi = targetAnchor.closest('.depth01 > li');
+  parentLi?.classList.add('active');
+  parentLi?.querySelector('.depth02')?.classList.remove('d-none');
+}
+
+  
+  /* ------------------------------
+    탭 버튼 클릭 처리
+  ------------------------------ */
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      if (isNavigating || this.classList.contains('active')) return;
+
+      const tabId = this.dataset.tab;
+      const defaultLink = this.dataset.tabLink || '#';
+      const lastVisited = sessionStorage.getItem(`lastVisited_${tabId}`) || defaultLink;
+
+      activateTab(tabId);
+      activateDepthMenu(lastVisited);
+
+      isNavigating = true;
+      requestAnimationFrame(() => {
+        navigate(lastVisited).finally(() => isNavigating = false);
+      });
+    });
+  });
+
+
+  /* ------------------------------
+    depth 메뉴 토글
+  ------------------------------ */
+  $$('.depth01 > li > a[data-toggle]').forEach(menu => {
+    const newMenu = menu.cloneNode(true);
+    menu.parentNode?.replaceChild(newMenu, menu);
+
+    newMenu.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parentLi = this.parentElement;
+      const toggleId = this.getAttribute('data-toggle');
+      const depth02 = toggleId ? document.getElementById(toggleId) : null;
+
+      if (depth02 && !depth02.classList.contains('single')) {
+        const activeTabContent = $('.tab-content.active');
+        const isGridLayout = activeTabContent?.classList.contains('grid-layout');
+
+        if (isGridLayout) {
+          // 🔹 B탭일 경우: 모든 메뉴 닫고 클릭한 메뉴만 열기
+          $$('.depth01 > li').forEach(li => li.classList.remove('active'));
+          $$('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
+          parentLi.classList.add('active');
+          depth02.classList.remove('d-none');
+        } else {
+          // 🔹 일반 탭은 기존처럼 토글
+          depth02.classList.toggle('d-none');
+          parentLi?.classList.toggle('active');
+        }
+      }
+    });
+
+  });
+
+
+  /* ------------------------------
+    링크 클릭 시 lastVisited 저장
+  ------------------------------ */
+$$('.depth02 a, .depth03 a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (!href || href === '#') {
+      e.preventDefault();
+      return;
+    }
+
+    // ✅ 현재 스크롤 위치 저장
+    saveSidebarScroll();
+
+    const activeTabBtn = $('.sidebar-tabs .tab-button.active');
+    if (activeTabBtn) {
+      sessionStorage.setItem(
+        `lastVisited_${activeTabBtn.dataset.tab}`,
+        new URL(href, location.origin).pathname
+      );
+    }
+
+    activateDepthMenu(new URL(href, location.origin).pathname);
+  });
+});
+
+
+  // 초기 탭 설정 실행
+  setInitialTab();
+}
+
+
+
+initializeSidebar();
+document.addEventListener('astro:page-load', () => {
+  initializeSidebar();
+  restoreSidebarScroll();         // 이전 스크롤 위치 복원
+  setTimeout(() => {
+    scrollActiveDepth02IntoView(); // 선택된 메뉴 중앙 배치
+  }, 100); // 살짝 지연을 줘야 DOM 위치가 잡힌 후 자연스럽게 이동됨
+});
+
+
+
+</script>

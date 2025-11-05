@@ -1,0 +1,78 @@
+---
+import { IMAGE_BASE_PATH, VIDEO_BASE_PATH } from '../config';
+
+
+import VideoModal from './../../../components/VideoModal.astro';
+
+const videoModals = [
+  { id: 'modal-rebar', videoSrc: `${VIDEO_BASE_PATH}/video/rebar_detail.mp4` },
+];
+---
+<section id="group13" class="command03">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3>
+        작업량이 많고 작업 시간이 긴 구조/배근도,&nbsp;
+        <span>특화명령어로 초보자도 쉽게</span>
+      </h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방식 1</dt>
+        <dd>
+          명령어 아이콘바&nbsp;&nbsp;>&nbsp;&nbsp;명령어
+          전체보기&nbsp;&nbsp;>&nbsp;&nbsp;구조/배근
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+      <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/command/command_03.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/command/2x_command_03.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/command_03.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/command/command_03.svg`} alt="" />
+    </div>
+
+      <!-- 링크 -->
+      <ul>
+        <li>
+          <button class="link-rebar"  type="button" data-modal="modal-rebar">
+            <span class="blind">철근 상세도 만들기</span>
+          </button>
+        </li>
+
+      </ul>
+      <!-- // 링크 -->
+    </div>
+  </div>
+
+    <!-- 모달들 -->
+  {videoModals.map(modal => (
+    <VideoModal id={modal.id} videoSrc={modal.videoSrc} />
+  ))}
+</section>
+
+<script>
+  import { initModalController } from './../../../lib/modalController';
+  
+  // 초기 로드
+  initModalController();
+  
+  // Astro 페이지 전환 시에도 재실행
+  document.addEventListener('astro:page-load', () => {
+    initModalController();
+  });
+</script>

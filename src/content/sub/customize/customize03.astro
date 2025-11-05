@@ -1,0 +1,138 @@
+---
+import { IMAGE_BASE_PATH, VIDEO_BASE_PATH } from '../config';
+
+
+import VideoModal from './../../../components/VideoModal.astro';
+
+const videoModals = [
+  { id: 'modal-grid', videoSrc: `${VIDEO_BASE_PATH}/video/grid.mp4` },
+  { id: 'modal-grip', videoSrc:`${VIDEO_BASE_PATH}/video/selected_object_grip.mp4`  },
+  { id: 'modal-ortho', videoSrc: `${VIDEO_BASE_PATH}/video/orthogonal_mode.mp4`  },
+  { id: 'modal-iso', videoSrc: `${VIDEO_BASE_PATH}/video/isometric_drawing.mp4` },
+  { id: 'modal-overlap', videoSrc: `${VIDEO_BASE_PATH}/video/selection_of_overlapping_objects.mp4` },
+  { id: 'modal-osnap', videoSrc:  `${VIDEO_BASE_PATH}/video/object_snap.mp4` },
+  { id: 'modal-dynamic', videoSrc:  `${VIDEO_BASE_PATH}/video/dynamic_input.mp4`  },
+  { id: 'modal-angle', videoSrc:  `${VIDEO_BASE_PATH}/video/angle_snap_tracking.mp4` },
+  { id: 'modal-efct', videoSrc:  `${VIDEO_BASE_PATH}/video/selection_visual_effects.mp4` },
+];
+---
+
+<section id="group6" class="customize03">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3>
+        <span>작업상황</span>에 따라 원하는 기능을 켜고 끄며&nbsp;
+        <span>작업환경</span>을 설정
+      </h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방식 1</dt>
+        <dd>보조기능 아이콘바&nbsp;&nbsp;>&nbsp;&nbsp;보조기능 전체보기</dd>
+      </dl>
+      <dl>
+        <dt>방식 2</dt>
+        <dd>
+          명령어 아이콘바&nbsp;&nbsp;>&nbsp;&nbsp;명령어
+          전체보기&nbsp;&nbsp;>&nbsp;&nbsp;보조기능
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+      <picture>
+        <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/customize/customize_03.png`} />
+        <source
+          media="(min-resolution: 140dpi)"
+          srcset={`${IMAGE_BASE_PATH}/customize/2x_customize_03.png`}
+        />
+        <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/customize_03.png`} alt=" " />
+      </picture>
+      <div class="ex-wrap">
+        <img src={`${IMAGE_BASE_PATH}/customize/customize_03.svg`} alt="" />
+      </div>
+      <!-- 링크 -->
+      <ul>
+        <li>
+          <button type="button" class="link-grid" data-modal="modal-grid">
+            <span class="blind">그리드</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="link-grip" data-modal="modal-grip">
+            <span class="blind">그립 표시 설정</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="link-ortho" data-modal="modal-ortho">
+            <span class="blind">직교모드</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="link-iso" data-modal="modal-iso">
+            <span class="blind">등각 투영 작업 모드</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="link-overlap" data-modal="modal-overlap">
+            <span class="blind">중복객체 리스트 박스</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="link-osnap" data-modal="modal-osnap">
+            <span class="blind">객체 스냅</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="link-dynamic" data-modal="modal-dynamic">
+            <span class="blind">동적 입력</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="link-angle" data-modal="modal-angle">
+            <span class="blind">극좌표 추적</span>
+          </button>
+        </li>
+
+        <li>
+          <button type="button" class="link-efct" data-modal="modal-efct">
+            <span class="blind">선택 효과 설정</span>
+          </button>
+        </li>
+      </ul>
+      <!-- // 링크 -->
+    </div>
+  </div>
+
+  <!-- 모달들 -->
+  {videoModals.map(modal => (
+    <VideoModal id={modal.id} videoSrc={modal.videoSrc} />
+  ))}
+
+</section>
+
+<script>
+  import { initModalController } from './../../../lib/modalController';
+  
+  // 초기 로드
+  initModalController();
+  
+  // Astro 페이지 전환 시에도 재실행
+  document.addEventListener('astro:page-load', () => {
+    initModalController();
+  });
+</script>

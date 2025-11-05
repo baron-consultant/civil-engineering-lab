@@ -1,0 +1,69 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+<section id="group28" class="floorPlan01">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3>
+        선택된 폴더 내의 도면 파일을&nbsp;<span>한 눈에 보면서 탐색</span
+        >하고&nbsp; <span>정보 열람이 가능</span>
+      </h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방식 1</dt>
+        <dd>
+          상단 바 우측&nbsp;&nbsp;>&nbsp;&nbsp;<img
+            src={`${IMAGE_BASE_PATH}/ico/ico_floorplan.svg`}
+            alt=""
+          />&nbsp;꾸러미
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+      <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/floorplan/floorplan_01.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/floorplan/2x_floorplan_01.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/floorplan/floorplan_01.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/floorplan/floorplan_01.svg`} alt="" />
+    </div>
+      
+
+      <!-- 링크 -->
+      <ul>
+        <li>
+          <a class="link-atrb-block" href="/eg-bim_guide/help/floorplan02">
+            <span class="blind">도면정보수정</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="link-multi-print" href="/eg-bim_guide/help/multiprint02">
+            <span class="blind">다중출력</span>
+          </a>
+        </li>
+
+        <li>
+          <a class="link-main" href="/eg-bim_guide/help/interface01">
+            <span class="blind">그리미 열기</span>
+          </a>
+        </li>
+      </ul>
+      <!-- // 링크 -->
+    </div>
+  </div>
+</section>

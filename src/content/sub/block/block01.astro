@@ -1,0 +1,73 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+<section id="group21" class="block01">
+<!-- 타이틀 -->
+<div class="page-tit-wrap">
+  <div class="tit-box">
+    <span class="page-tail"></span>
+    <h3>
+      <span>블록/속성블록/외부참조(이미지)</span>를
+      도면에&nbsp;<span>생성</span>하고&nbsp;<span>통합 관리</span>
+    </h3>
+    <span class="page-tail"></span>
+  </div>
+  <div class="tip-box">
+    <h4 class="tip-tit">How to use</h4>
+    <dl>
+      <dt>방식 1</dt>
+      <dd>명령어 입력창&nbsp;&nbsp;>&nbsp;&nbsp;Command : BLOCK</dd>
+    </dl>
+    <dl>
+      <dt>방식 2</dt>
+      <dd>
+        명령어
+        전체보기&nbsp;&nbsp;>&nbsp;&nbsp;블록&nbsp;&nbsp;>&nbsp;&nbsp;<img
+          src={`${IMAGE_BASE_PATH}/ico/ico_block.svg`}
+          alt=""
+        />&nbsp;&nbsp;블록 만들기&nbsp;&nbsp;>&nbsp;&nbsp;블록 통합 관리창
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<!-- // 타이틀 -->
+<div class="contents">
+  <div class="inner">
+    <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/block/block_01.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/block/2x_block_01.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/block_01.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/block/block_01.svg`} alt="" />
+    </div>
+
+    <!-- 링크 -->
+    <ul>
+      <li>
+        <a class="link-block" href="/eg-bim_guide/help/block02">
+          <span class="blind">블록</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="link-atrbBlock" href="/eg-bim_guide/help/block03">
+          <span class="blind">속성블록</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="link-ref" href="/eg-bim_guide/help/block04">
+          <span class="blind">외부참조</span>
+        </a>
+      </li>
+    </ul>
+    <!-- // 링크 -->
+  </div>
+</div>
+</section>

@@ -1,29 +1,28 @@
 ---
-title: CIRCLE 
+title: CIRCLE
 ---
-import { Icon } from '@astrojs/starlight/components';
 
 [image1]: ../../../../../assets/images/commands/circle/image1.png
 
-* 원을 생성합니다.  
-* 새로운 원을 생성하거나 기존에 그려져있던 호를 원으로 변환할 수 있습니다.
+- 원을 생성합니다.
+- 새로운 원을 생성하거나 기존에 그려져있던 호를 원으로 변환할 수 있습니다.
 
-### 원 그리기 옵션 키워드  
+### 원 그리기 옵션 키워드
 
 ![][image1]
 
-| 옵션 | 기능 설명 |
-| :--- | :----- |
-| 2Point | 2점 지정으로 원을 생성합니다.   |
-| 3Point | 3점 지정으로 원을 생성합니다.  |
-| RadTanTan | 두 객체에 접하는 원을 생성합니다.   |
-| TanTanTan | 3개의 객체에 접하는 원을 생성합니다.   |
-| Arc | 호를 원으로 변환합니다.   |
-| Multiple | 여러개의 원을 생성합니다. |
+| 옵션      | 기능 설명                            |
+| :-------- | :----------------------------------- |
+| 2Point    | 2점 지정으로 원을 생성합니다.        |
+| 3Point    | 3점 지정으로 원을 생성합니다.        |
+| RadTanTan | 두 객체에 접하는 원을 생성합니다.    |
+| TanTanTan | 3개의 객체에 접하는 원을 생성합니다. |
+| Arc       | 호를 원으로 변환합니다.              |
+| Multiple  | 여러개의 원을 생성합니다.            |
 
-<br/>
+<br />
 
-## **1\. 점을 지정하여 원을 그리는 방법**
+## **1\. 점을 지정하여 원을 그리는 방법** [**시연 영상**](https://youtu.be/UOeWKP48X8w)
 
 1\) “CIRCLE” 명령어를 실행합니다.  
 2\) 원 그리기 옵션 키워드를 선택합니다.  
@@ -32,34 +31,26 @@ import { Icon } from '@astrojs/starlight/components';
 &nbsp;&nbsp;&nbsp;&nbsp;2-3) 3Point 키워드를 입력하고 원이 포함하는 점 3개를 화면 상에 마우스로 지정합니다.  
 3\) 점 지정이 완료되면 원이 생성되고 명령어가 종료됩니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/UOeWKP48X8w)
-
-## **2\. 객체를 이용하여 원을 그리는 방법**
+## **2\. 객체를 이용하여 원을 그리는 방법** [**시연 영상**](https://youtu.be/wcBn6fNxD_s)
 
 1\) “CIRCLE” 명령어를 실행합니다.  
 2\) 원 그리기 옵션 키워드를 선택합니다.  
 &nbsp;&nbsp;&nbsp;&nbsp;2-1) RadTanTan 키워드를 입력합니다.  
 &nbsp;&nbsp;&nbsp;&nbsp;2-2) TanTanTan 키워드를 입력합니다.  
 3\) 객체를 선택합니다.  
-&nbsp;&nbsp;&nbsp;&nbsp;3-1) RadTanTan인 경우 first, second tangent point로 사용할 객체를 선택하고 ENTER 키를 입력하거나 유효한 반지름을 입력하면 원이 생성됩니다.  
+&nbsp;&nbsp;&nbsp;&nbsp;3-1) RadTanTan인 경우 first, second tangent point로 사용할 객체를 선택하고 ENTER를 입력하거나 유효한 반지름을 입력하면 원이 생성됩니다.  
 &nbsp;&nbsp;&nbsp;&nbsp;3-2) TanTanTan인 경우 first, second, third tangent point를 선택하면 원이 생성됩니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/wcBn6fNxD_s)
-
-## **3\. 호를 원으로 변환하는 방법**
+## **3\. 호를 원으로 변환하는 방법** [**시연 영상**](https://youtu.be/MPLWC0yO508)
 
 1\) “CIRCLE” 명령어를 실행합니다.  
 2\) Arc 키워드를 입력합니다.  
 3\) 호 객체를 선택하면 호 객체가 원으로 변환됩니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/MPLWC0yO508)
-
-## **4\. 한번에 여러개의 동일한 원을 그리는 방법**
+## **4\. 한번에 여러개의 동일한 원을 그리는 방법** [**시연 영상**](https://youtu.be/HU23pA_KgKI)
 
 1\) “CIRCLE” 명령어를 실행합니다.  
 2\) Multiple 키워드를 입력합니다.  
 3\) 원을 그릴 옵션을 선택하거나 화면 상에 마우스로 원의 중심점을 지정하여 원을 그립니다.  
 4\) 명령어를 종료하지 않고 화면 상에 원의 중심점을 계속 지정하면 처음 그렸던 원과 동일한 원이 계속 생성됩니다.  
 5\) 명령어를 종료하고자 하는 경우 ENTER 또는 ESC 키를 누릅니다.
-
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/HU23pA_KgKI)

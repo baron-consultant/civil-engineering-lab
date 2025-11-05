@@ -1,0 +1,56 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+
+<section id="group8" class="multi01">
+
+<!-- 타이틀 -->
+<div class="page-tit-wrap">
+  <div class="tit-box">
+    <span class="page-tail"></span>
+    <h3>
+      <span>작업 도면</span>과&nbsp;<span>참고 도면</span>을 함께 보면서&nbsp;
+      <span>동시 작업</span>
+    </h3>
+    <span class="page-tail"></span>
+  </div>
+  <div class="tip-box">
+    <h4 class="tip-tit">How to use</h4>
+    <dl>
+      <dt>방식 1</dt>
+      <dd>
+        파일 탭&nbsp;&nbsp;>&nbsp;&nbsp;파일 드래그 &
+        드롭&nbsp;&nbsp;>&nbsp;&nbsp;단축키
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<!-- // 타이틀 -->
+<div class="contents">
+  <div class="inner">
+    <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/multi/multi_01.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/multi/2x_multi_01.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/multi/multi_01.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/multi/multi_01.svg`} alt="" />
+    </div>
+
+    <!-- 링크 -->
+    <ul>
+      <li>
+        <a class="link-props" href="/eg-bim_guide/help/feature01">
+          <span class="blind">속성창</span>
+        </a>
+      </li>
+    </ul>
+    <!-- // 링크 -->
+  </div>
+</div>
+</section>

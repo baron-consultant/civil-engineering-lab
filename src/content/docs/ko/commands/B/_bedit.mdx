@@ -2,20 +2,19 @@
 title: BEDIT
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 [image1]: ../../../../../assets/images/commands/bedit/image1.png
 [image2]: ../../../../../assets/images/commands/bedit/image2.png
 [image3]: ../../../../../assets/images/commands/bedit/image3.png
 [image4]: ../../../../../assets/images/commands/bedit/image4.png
 
-* 도면 내 블록 정의를 편집하기 위해 블록 편집기를 여는 기능입니다.  
-* BEDIT를 실행하면 특정 블록을 선택하여 내부 객체를 수정할 수 있으며, 블록 편집 후 저장 시 도면 내 모든 참조가 동시에 업데이트됩니다.
+- 도면 내 블록 정의를 편집하기 위해 블록 편집기를 여는 기능입니다.
+- BEDIT를 실행하면 특정 블록을 선택하여 내부 객체를 수정할 수 있으며, 블록 편집 후 저장 시 도면 내 모든 참조가 동시에 업데이트됩니다.
 
 ![][image1]
 
-## **1\. 사용 방법**
+## **1\. 사용 방법** [**시연 영상**]()
 
 1\) 명령창에 “BEDIT” 명령어를 입력합니다.  
 2\) BEDIT 대화상자가 나타납니다. 이때 도면 내 존재하는 블록 목록이 표시됩니다.  
@@ -25,6 +24,3 @@ import { Image } from 'astro:assets';
 ![][image3]  
 5\) 편집이 끝나면 BCLOSE 명령어를 실행하고, 변경 사항을 저장하면 도면 내 블록이 업데이트됩니다.  
 ![][image4]
-
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**]() 
-

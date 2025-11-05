@@ -2,34 +2,30 @@
 title: UNDO
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 [image1]: ../../../../../assets/images/commands/undo/image1.png
 
-
-* 도면 작업 중 직전에 수행한 명령이나 객체 편집을 취소(되돌리기) 하는 기능입니다.
+- 도면 작업 중 직전에 수행한 명령이나 객체 편집을 취소(되돌리기) 하는 기능입니다.
 
 ![][image1]
 
-## **1\. 기본 실행**
+## **1\. 기본 실행** [**시연 영상**](https://youtu.be/XDhpsiwG6Xc)
 
 1\) “UNDO” 또는 “U” 또는 Ctrl \+ Z 단축키를 실행합니다.  
 2\) 마지막으로 수행한 명령 또는 객체 편집이 취소됩니다.  
 3\) 여러 번 실행하면, 그만큼의 작업을 역순으로 되돌릴 수 있습니다.
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/XDhpsiwG6Xc) 
-
 ## **2\. 옵션 사용**
 
-* UNDO 명령어 실행 후, 다음 옵션을 선택할 수 있습니다
+- UNDO 명령어 실행 후, 다음 옵션을 선택할 수 있습니다
 
 1\) Control
 
-- UNDO 동작 방식을 제어합니다.  
-- *None* : 모든 UNDO 기능 해제  
-- *All* : 전체 UNDO 가능하도록 설정  
-- *One* : 가장 최근 명령만 취소 가능
+- UNDO 동작 방식을 제어합니다.
+- _None_ : 모든 UNDO 기능 해제
+- _All_ : 전체 UNDO 가능하도록 설정
+- _One_ : 가장 최근 명령만 취소 가능
 
 2\) Number
 
@@ -42,12 +38,11 @@ import { Image } from 'astro:assets';
 
 4\) Begin / End
 
-- `BEGIN` : UNDO 그룹 시작  
-- `END` : UNDO 그룹 종료  
+- `BEGIN` : UNDO 그룹 시작
+- `END` : UNDO 그룹 종료
 - 그룹화된 여러 작업을 한 번에 취소할 수 있음
 
 5\) Mark / Back
 
-- `MARK` : 특정 시점에 되돌아오기 위한 표시  
+- `MARK` : 특정 시점에 되돌아오기 위한 표시
 - `BACK` : MARK 지점으로 되돌림
-

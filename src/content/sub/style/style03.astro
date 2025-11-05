@@ -1,0 +1,57 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+<section id="group16" class="style03">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3>
+        원하는 스타일로&nbsp;<span>치수스타일 생성</span>&nbsp;및&nbsp;
+        <span>수정</span>
+      </h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방법 1</dt>
+        <dd>명령어 입력창&nbsp;&nbsp;>&nbsp;&nbsp;Command : DIMSTYLE</dd>
+      </dl>
+      <dl>
+        <dt>방법 2</dt>
+        <dd>
+          명령어
+          전체보기&nbsp;&nbsp;>&nbsp;&nbsp;치수/연산&nbsp;&nbsp;>&nbsp;&nbsp;
+          <img src={`${IMAGE_BASE_PATH}/ico/ico_size.svg`}  alt="" />&nbsp;&nbsp;치수 스타일
+          작성 / 번경&nbsp;&nbsp;>&nbsp;&nbsp;치수 스타일 작성 / 편집
+        </dd>
+      </dl>
+      <dl>
+        <dt>방법 3</dt>
+        <dd>
+          상단바&nbsp;&nbsp;>&nbsp;&nbsp;치수 스타일&nbsp;&nbsp;>&nbsp;&nbsp;치수
+          스타일 상세
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+     <picture>
+        <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/style/style_03.png`} />
+        <source
+          media="(min-resolution: 140dpi)"
+          srcset={`${IMAGE_BASE_PATH}/style/2x_style_03.png`}
+        />
+        <img class="bg-img" src={`${IMAGE_BASE_PATH}/style/style_03.png`} alt=" " />
+      </picture>
+      <div class="ex-wrap">
+        <img src={`${IMAGE_BASE_PATH}/style/style_03.svg`} alt="" />
+      </div>
+    </div>
+  </div>
+</section>

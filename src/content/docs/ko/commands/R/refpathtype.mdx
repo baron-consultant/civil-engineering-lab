@@ -2,31 +2,28 @@
 title: REFPATHTYPE
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 [image1]: ../../../../../assets/images/commands/refpathtype/image1.png
 [image2]: ../../../../../assets/images/commands/refpathtype/image2.png
 
-* 도면에 참조 파일을 삽입할 때, 절대 경로 / 상대 경로 / 경로 없음 중 어떤 방식으로 저장할지 제어합니다.
+- 도면에 참조 파일을 삽입할 때, 절대 경로 / 상대 경로 / 경로 없음 중 어떤 방식으로 저장할지 제어합니다.
 
 ![][image1]
 
-## **1\. 경로 유형 설정하기**
+## **1\. 경로 유형 설정하기** [**시연 영상**](https://youtu.be/ER_IvusSgaw)
 
 1\) 명령창에 “REFPATHTYPE” 명령어를 실행합니다.  
 2\) 값(옵션)을 입력합니다.
 
 - 0 : 절대 경로  
-  참조 파일의 전체 경로(C:\\Project\\Xref\\file.dwg)로 저장  
+  참조 파일의 전체 경로(C:\\Project\\Xref\\file.dwg)로 저장
 - 1 : 상대 경로  
-  현재 도면이 저장된 위치를 기준으로 상대적인 경로로 저장 (..\\Xref\\file.dwg)  
+  현재 도면이 저장된 위치를 기준으로 상대적인 경로로 저장 (..\\Xref\\file.dwg)
 - 2 : 경로 없음  
   파일 이름만 저장 (file.dwg)
 
-3\) 엔터 또는 스페이스 키를 누릅니다.  
+3\) ENTER 또는 SPACE BAR를 누릅니다.  
 4\) 이후 삽입되는 참조 파일의 경로 방식이 지정됩니다.  
-    참고 : 설정된 경로 방식은 외부 파일 삽입 후 “XREF” 명령어에서 확인 가능합니다.  
+ 참고 : 설정된 경로 방식은 외부 파일 삽입 후 “XREF” 명령어에서 확인 가능합니다.  
 ![][image2]
-
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/ER_IvusSgaw) 

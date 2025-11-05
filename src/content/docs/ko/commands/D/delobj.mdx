@@ -2,8 +2,7 @@
 title: DELOBJ
 ---
 
-import { Icon } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 [image1]: ../../../../../assets/images/commands/delobj/image1.png
 [image2]: ../../../../../assets/images/commands/delobj/image2.png
@@ -12,58 +11,48 @@ import { Image } from 'astro:assets';
 [image5]: ../../../../../assets/images/commands/delobj/image5.png
 [image6]: ../../../../../assets/images/commands/delobj/image6.png
 
+- 2D 객체를 사용하여 3D 객체를 생성할때 원본 유지 여부를 설정합니다.
+- DELOBJ 명령어 확인을 위해 3D 객체를 생성하여 확인할 수 있습니다.
+- 원활한 확인을 위해 도면에 X,Y,Z축이 다 보이도록 뷰큐브를 설정해야합니다.
 
-* 2D 객체를 사용하여 3D 객체를 생성할때 원본 유지 여부를 설정합니다.  
-* DELOBJ 명령어 확인을 위해 3D 객체를 생성하여 확인할 수 있습니다.  
-* 원활한 확인을 위해 도면에 X,Y,Z축이 다 보이도록 뷰큐브를 설정해야합니다.  
-- DELOBJ \= 0 : 원본 유지하기  
-- DELOBJ \= 1 : 원본 삭제하기
+* DELOBJ \= 0 : 원본 유지하기
+* DELOBJ \= 1 : 원본 삭제하기
 
 ![][image1]
 
-## **1\. 2D 객체를 사용하여 3D 객체를 생성하기**
+## **1\. 2D 객체를 사용하여 3D 객체를 생성하기** [**시연 영상**](https://youtu.be/llBEshm_B_I)
 
 1\) 도면에 X,Y,Z축이 다 보이도록 우측 상단에 있는 뷰큐브를 설정합니다.  
 2\) 닫힌 객체를 생성하기 위해 명령어 창에 “CIRCLE”을 실행하여 마우스 클릭으로 생성합니다.  
 3\) 명령어 창에 “EXTRUDE”를 실행합니다.  
-4\) 닫힌 객체인 원을 선택하고 엔터키나 스페이스바를 입력합니다.  
+4\) 닫힌 객체인 원을 선택하고 ENTER나 SPACE BAR를 입력합니다.  
 5\) 높이 지정을 위해 마우스 클릭후 Secont point를 Z축으로 마우스 커서를 위치시키고 클릭합니다.  
 ![][image2]  
 ![][image3]  
 ![][image4]
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/llBEshm_B_I) 
-
-## **2\. 2D 객체를 유지하여 3D 객체를 생성하기**
+## **2\. 2D 객체를 유지하여 3D 객체를 생성하기** [**시연 영상**](https://youtu.be/K-4IjhMIGVg)
 
 1\) 명령어 창에 “DELOBJ”를 실행합니다.  
-2\) 값을 0으로 입력하고 엔터키나 스페이스바를 입력합니다.  
+2\) 값을 0으로 입력하고 ENTER나 SPACE BAR를 입력합니다.  
 3\) 도면에 X,Y,Z축이 다 보이도록 우측 상단에 있는 뷰큐브를 설정합니다.  
 4\) 닫힌 객체를 생성하기 위해 명령어 창에 “CIRCLE”을 실행하여 마우스 클릭으로 생성합니다.  
 5\) 명령어 창에 “EXTRUDE”를 실행합니다.  
-6\) 닫힌 객체인 원을 선택하고 엔터키나 스페이스바를 누릅니다.  
+6\) 닫힌 객체인 원을 선택하고 ENTER나 SPACE BAR를 누릅니다.  
 7\) 높이 지정을 위해 마우스 클릭후 Secont point를 Z축으로 마우스 커서를 위치시키고 클릭합니다.  
 8\) 원 객체가 유지되어 있는지 확인하기 위해 명령어 창에 “MOVE”를 실행합니다.  
-9\) 생성된 3D 객체를 선택하고 엔터키나 스페이스바를 입력합니다.  
+9\) 생성된 3D 객체를 선택하고 ENTER나 SPACE BAR를 입력합니다.  
 10\) base point를 마우스로 클릭하고 이동할 Second point를 마우스로 클릭합니다.  
 ![][image5]
 
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/K-4IjhMIGVg) 
-
-## **3\. 2D 객체를 삭제하여 3D 객체를 생성하기**
+## **3\. 2D 객체를 삭제하여 3D 객체를 생성하기** [**시연 영상**](https://youtu.be/u7UkfEB-AbA)
 
 1\) 명령어 창에 “DELOBJ”를 실행합니다.  
-2\) 값을 1로 입력하고 엔터키나 스페이스바를 입력합니다.  
+2\) 값을 1로 입력하고 ENTER나 SPACE BAR를 입력합니다.  
 3\) 도면에 X,Y,Z축이 다 보이도록 우측 상단에 있는 뷰큐브를 설정합니다.  
 4\) 닫힌 객체를 생성하기 위해 명령어 창에 “CIRCLE”을 실행하여 마우스 클릭으로 생성합니다.  
 5\) 명령어 창에 “EXTRUDE”를 실행합니다.  
-6\) 닫힌 객체인 원을 선택하고 엔터키나 스페이스바를 누릅니다.  
+6\) 닫힌 객체인 원을 선택하고 ENTER나 SPACE BAR를 누릅니다.  
 7\) 높이 지정을 위해 마우스 클릭후 Secont point를 Z축으로 마우스 커서를 위치시키고 클릭합니다.  
 8\) 원 객체가 삭제되어 있는지 확인합니다.  
 ![][image6]
-
-[**<Icon name="youtube" class="emoji"/> 시연 영상 보기**](https://youtu.be/u7UkfEB-AbA) 
-
-
-
-

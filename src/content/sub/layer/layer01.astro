@@ -1,0 +1,63 @@
+---
+import { IMAGE_BASE_PATH } from '../config';
+---
+
+
+<section id="group20" class="layer01">
+  <!-- 타이틀 -->
+  <div class="page-tit-wrap">
+    <div class="tit-box">
+      <span class="page-tail"></span>
+      <h3>
+        각각의&nbsp;<span>레이어</span>를 생성하여&nbsp;
+        <span>색상, 선 종류, 선 가중치, 투명도, 출력</span>&nbsp;등을
+        레이어별로&nbsp;
+        <span>관리</span>
+      </h3>
+      <span class="page-tail"></span>
+    </div>
+    <div class="tip-box">
+      <h4 class="tip-tit">How to use</h4>
+      <dl>
+        <dt>방식 1</dt>
+        <dd>명령어 입력창&nbsp;&nbsp;>&nbsp;&nbsp;Command : LAYER</dd>
+      </dl>
+      <dl>
+        <dt>방식 2</dt>
+        <dd>
+          명령어
+          전체보기&nbsp;&nbsp;>&nbsp;&nbsp;레이어&nbsp;&nbsp;>&nbsp;&nbsp;<img
+            src={`${IMAGE_BASE_PATH}/ico/ico_layer.svg`}
+            alt=""
+          />
+          &nbsp;&nbsp;레이어 관리&nbsp;&nbsp;>&nbsp;&nbsp;layer
+        </dd>
+      </dl>
+      <dl>
+        <dt>방식 3</dt>
+        <dd>
+          상단 바&nbsp;&nbsp;>&nbsp;&nbsp;선
+          스타일&nbsp;&nbsp;>&nbsp;&nbsp;선스타일 상세
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- // 타이틀 -->
+  <div class="contents">
+    <div class="inner">
+      <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/layer/layer_01.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/layer/2x_layer_01.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/layer/layer_01.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/layer/layer_01.svg`} alt="" />
+    </div>
+     
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+---
+import { IMAGE_BASE_PATH, VIDEO_BASE_PATH } from '../config';
+import VideoModal from './../../../components/VideoModal.astro';
+
+const videoModals = [
+  { id: 'modal-add', videoSrc: `${VIDEO_BASE_PATH}/video/atrbBlock_add.mp4` },
+];
+---
+
+<section  id="group23" class="block03">
+<!-- 타이틀 -->
+<div class="page-tit-wrap">
+  <div class="tit-box">
+    <span class="page-tail"></span>
+    <h3>
+      블록의&nbsp;<span>문자내용를 변경</span>해가며 사용 할 수 있는&nbsp;
+      <span>속성블록</span>을&nbsp;<span>생성</span>하고&nbsp;<span>관리</span>
+    </h3>
+    <span class="page-tail"></span>
+  </div>
+  <div class="tip-box">
+    <h4 class="tip-tit">How to use</h4>
+    <dl>
+      <dt>방식 1</dt>
+      <dd>명령어 입력창&nbsp;&nbsp;>&nbsp;&nbsp;Command : BLOCK</dd>
+    </dl>
+    <dl>
+      <dt>방식 2</dt>
+      <dd>
+        명령어
+        전체보기&nbsp;&nbsp;>&nbsp;&nbsp;블록&nbsp;&nbsp;>&nbsp;&nbsp;<img
+          src={`${IMAGE_BASE_PATH}/ico/ico_block.svg`}
+          alt=""
+        />&nbsp;&nbsp;블록 만들기&nbsp;&nbsp;>&nbsp;&nbsp;블록 통합 관리창
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<!-- // 타이틀 -->
+<div class="contents">
+  <div class="inner">
+    <picture>
+      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/block/block_03.png`} />
+      <source
+        media="(min-resolution: 140dpi)"
+        srcset={`${IMAGE_BASE_PATH}/block/2x_block_03.png`}
+      />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/block_03.png`} alt=" " />
+    </picture>
+    <div class="ex-wrap">
+      <img src={`${IMAGE_BASE_PATH}/block/block_03.svg`} alt="" />
+    </div>
+    <!-- 링크 -->
+      <ul>
+        <li>
+          <button type="button" class="link-add" data-modal="modal-add">
+            <span class="blind">속성블록 추가하기</span>
+          </button>
+        </li>
+      </ul>
+      <!-- // 링크 -->
+  </div>
+</div>
+
+  <!-- 모달들 -->
+  {videoModals.map(modal => (
+    <VideoModal id={modal.id} videoSrc={modal.videoSrc} />
+  ))}
+</section>
+
+<script>
+  import { initModalController } from './../../../lib/modalController';
+  
+  // 초기 로드
+  initModalController();
+  
+  // Astro 페이지 전환 시에도 재실행
+  document.addEventListener('astro:page-load', () => {
+    initModalController();
+  });
+</script>
