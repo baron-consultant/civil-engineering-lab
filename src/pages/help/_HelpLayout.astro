@@ -31,7 +31,9 @@ const homePath = '/eg-bim_guide/help/';
 <body>
    <div class={`wrap ${pageClass ? `page-${pageClass}` : ''}`}>
     <div class="nav-wrap" transition:persist transition:name="sidebar">
-      <header class="header"><h1>이용가이드</h1></header>
+      <header class="header">
+        <h1>이용가이드</h1>
+      </header>
       <Sidebar activeMenu={activeMenu} activeGroup={activeGroup} />
     </div>
 
@@ -66,13 +68,39 @@ const homePath = '/eg-bim_guide/help/';
   };
 
   /* ------------------------------
-    검색창 표시 여부
+    현재 탭이 commands인지 확인
   ------------------------------ */
-  function updateSearchBar() {
-    const searchbarWrapper = $('.searchbar-wrapper');
-    if (!searchbarWrapper) return;
-    const show = window.location.pathname.includes('/ko/commands/');
-    searchbarWrapper.style.display = show ? 'block' : 'none';
+  function isCommandsTab() {
+    const activeTabContent = $('.tab-content.active');
+    return activeTabContent?.classList.contains('grid-layout');
+  }
+
+  /* ------------------------------
+    메뉴 상태 복원 (updateSidebar 호출 전)
+  ------------------------------ */
+  function restoreMenuStateBeforeUpdate() {
+    const activeTabBtn = $('.tab-button.active');
+    const tabId = activeTabBtn?.dataset.tab;
+    
+    // grimmi 탭이고 저장된 상태가 있으면 복원
+    if (tabId === 'grimmi') {
+      const savedState = sessionStorage.getItem(`menuState_${tabId}`);
+      if (savedState) {
+        try {
+          const openMenus = JSON.parse(savedState);
+          openMenus.forEach(toggleId => {
+            const depth02 = document.getElementById(toggleId);
+            const parentLi = depth02?.closest('.depth01 > li');
+            if (depth02 && parentLi && !depth02.classList.contains('single')) {
+              depth02.classList.remove('d-none');
+              parentLi.classList.add('active');
+            }
+          });
+        } catch (e) {
+          console.warn('Failed to restore menu state:', e);
+        }
+      }
+    }
   }
 
   /* ------------------------------
@@ -101,8 +129,20 @@ const homePath = '/eg-bim_guide/help/';
     if (!matchedLink) return;
 
     requestAnimationFrame(() => {
-      // 모든 active 제거
-      $$('.depth02 li.active, .depth03 li.active, .depth01 > li.active').forEach(li => li.classList.remove('active'));
+      // 🔹 먼저 저장된 메뉴 상태 복원 (grimmi 탭용)
+      restoreMenuStateBeforeUpdate();
+
+      const isCommands = isCommandsTab();
+
+      // 🔹 depth02, depth03의 active는 항상 제거 (현재 선택된 페이지만 표시)
+      $$('.depth02 li.active, .depth03 li.active').forEach(li => li.classList.remove('active'));
+
+      // 🔹 commands 탭일 경우에만 depth01 active 제거 (하나만 열림)
+      if (isCommands) {
+        $$('.depth01 > li.active').forEach(li => li.classList.remove('active'));
+        $$('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
+      }
+      // grimmi 탭일 경우 depth01 active 상태 유지 (여러 개 열림 가능)
       
       // 매칭된 링크의 li만 활성화
       const li = matchedLink.closest('li');
@@ -111,7 +151,10 @@ const homePath = '/eg-bim_guide/help/';
       // 부모 depth01 > li 활성화
       const parent = matchedLink.closest('.depth01 > li');
       parent?.classList.add('active');
-      parent?.querySelector('.depth02')?.classList.remove('d-none');
+      const parentDepth02 = parent?.querySelector('.depth02');
+      if (parentDepth02 && !parentDepth02.classList.contains('single')) {
+        parentDepth02.classList.remove('d-none');
+      }
 
       // 탭 활성화
       const tabContent = matchedLink.closest('.tab-content');
@@ -136,14 +179,12 @@ const homePath = '/eg-bim_guide/help/';
   const initLayout = () => {
     syncHeight();
     updateSidebar();
-    updateSearchBar();
   };
 
   window.addEventListener('resize', syncHeight);
   window.addEventListener('popstate', () => { 
     toggleSearchResults(false); 
     updateSidebar();
-    updateSearchBar();
    });
   document.addEventListener('astro:page-load', initLayout);
   document.addEventListener('astro:before-preparation', e => {
@@ -163,7 +204,29 @@ const homePath = '/eg-bim_guide/help/';
   });
 
   initLayout();
+
+ window.addEventListener("DOMContentLoaded", () => {
+    const btnHome = document.getElementById("btn-home");
+    if (!btnHome) return;
+
+    const aOrigin = "https://eg-bim.co.kr/egbim1/index.php";
+
+    btnHome.addEventListener("click", () => {
+      
+      try {
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage({ type: "focus-request" }, aOrigin);
+          
+        } else {
+          
+          window.open(aOrigin, "_blank", "noopener");
+        }
+      } catch (err) {
+       
+        console.warn("창 포커스 실패, 새창으로 열기", err);
+        window.open(aOrigin, "_blank", "noopener");
+      }
+    });
+  });
 })();
 </script>
-</body>
-</html>

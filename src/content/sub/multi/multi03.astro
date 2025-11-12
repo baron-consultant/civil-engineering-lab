@@ -35,16 +35,24 @@ import { IMAGE_BASE_PATH } from '../config';
 
 <div class="contents">
   <div class="inner">
-     <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/multi/multi_03.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/multi/2x_multi_03.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/multi/multi_03.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/multi/multi_03.svg`} alt="" />
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/multi/3x_multi_03.png`} alt=" " />
+    <div class="blind">
+       <dl>
+          <dt>2D 작업화면</dt>
+          <dd>VPORTS 명령어를 이용해 뷰포트 구성 및 뷰 스타일 설정 가능</dd>
+ 
+          <dt>듀얼모드 동시 작업</dt>
+          <dd>3D Space 지원으로 2D와 3D 동시 작업</dd>
+          <dd>3D Space 창 닫기→ 초기 평면 뷰로 복귀</dd>
+ 
+          <dt>3D SPACE</dt>
+          <dd>기존 작업화면과 동일하게 모든 기능 사용 가능</dd>
+ 
+          <dt>뷰 방향 및 비주얼 스타일 설정</dt>
+          <dd>선택한 뷰포트에서만 활성화</dd>
+ 
+          <dt>뷰 방향 및 비주얼 스타일 설정</dt>
+        </dl>
     </div>
   </div>
 </div>

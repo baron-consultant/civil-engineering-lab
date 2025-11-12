@@ -81,7 +81,7 @@ const contentClass = type === 'mdx' ? 'sl-markdown-content' : 'markdown-content'
 const fullTitle = type === 'mdx' ? `명령어-${pageTitle}` : pageTitle;
 ---
 
-<BaseLayout title={fullTitle} activeMenu={activeMenu} showBackButton={type !== 'markdown'} pageClass={pageClass}>
+<BaseLayout title={fullTitle} activeMenu={activeMenu} pageClass={pageClass}>
   <div class={contentClass}>
        <!-- ✅ pageTitle은 MDX일 때만 표시 -->
     {type === 'mdx' && pageTitle && <h1 class="page-title">{pageTitle}</h1>}

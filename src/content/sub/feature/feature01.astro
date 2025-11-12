@@ -39,18 +39,31 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/feature/feature_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/feature/2x_feature_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/feature/feature_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/feature/feature_01.svg`} alt="" />
-    </div>
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/feature/3x_feature_01.png`} alt=" " />
+    <div class="blind">
+          <dl>
+            <dt>속성Bar(속성바)</dt>
+            <dd>선택된 객체의 주요 속성정보가 표시되며 수정 가능</dd>
 
+            <dt>속성창</dt>
+
+            <dt>Quick Select</dt>
+            <dd>선택된 객체를 조건으로 필터링하여 원하는 객체만 선택</dd>
+
+            <dt>기본정보</dt>
+            <dd>모든 객체가 가지고 있는 기본 특성</dd>
+
+            <dt>형상정보</dt>
+            <dd>선택된 객체의 종류에 따른 크기, 면적, 길이, 각도 등의 형상 정보 표</dd>
+
+            <dt>위치정보</dt>
+            <dd>선택된 객체의 종류에 따른 시종점 및 정점 등의 좌표 정보 표시</dd>
+
+            <dt>다중 선택</dt>
+            <dd>같은 종류의 객체를 다중 선택 시 객체 수 표시</dd>
+            <dd>다른 종류의 객체를 다중 선택 시 목록으로 표시 * 다른 종류의 객체를 다중 선택 시</dd> 
+          </dl>
+        </div>
   </div>
 </div>
 </section>

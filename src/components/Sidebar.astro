@@ -62,10 +62,14 @@ function getFirstLinkForTab(tab: any): string {
   return '#';
 }
 ---
-<div class="lnb-container">
-  <!-- 탭 메뉴 -->
-  <div class="sidebar-wrap">
+
+<!-- 탭 메뉴 -->
+<div class="sidebar-wrap">
+    <div class="searchbar-wrapper" >
+      <SearchBar />
+    </div>
     <div class="sidebar-tabs">
+      <span class="tab-btn-bg"></span>
       {sidebarTabs.map(tab => (
         <button 
           class={`tab-button ${activeTab === tab.id ? 'active' : ''}`}
@@ -77,13 +81,9 @@ function getFirstLinkForTab(tab: any): string {
         </button>
       ))}
     </div>
-    
-    <!-- SearchBar를 sidebar-tabs 아래로 이동 (B탭일 때만 표시) -->
-    <div class="searchbar-wrapper" data-show-on-tab="commands" >
-      <SearchBar />
-    </div>
+  
   </div>
-
+<div class="lnb-container">
   <!-- 탭 컨텐츠 -->
   {sidebarTabs.map(tab => (
     <div 
@@ -119,6 +119,9 @@ function getFirstLinkForTab(tab: any): string {
                         {item.children.map((child) => (
                           <li class={isActive(child.id) ? 'active' : ''}>
                             <a href={child.href || '#'} data-page={child.id}>
+                              {child.children && (
+                                <i class="ico-line"></i>
+                              )} 
                               <span>{child.label}</span>
                             </a>
                             
@@ -155,7 +158,6 @@ function getFirstLinkForTab(tab: any): string {
     </div>
   ))}
 </div>
-
 <script>
 import { navigate } from 'astro:transitions/client';
 
@@ -187,9 +189,59 @@ function restoreSidebarScroll() {
     sidebar.scrollTop = parseFloat(savedScroll);
   }
 }
-  /* ------------------------------
-    중앙으로 스크롤시켜주는 함수
-  ------------------------------ */
+
+/* ------------------------------
+  메뉴 열림 상태 저장 (grimmi 탭용)
+------------------------------ */
+function saveMenuState() {
+  const activeTabBtn = document.querySelector('.sidebar-tabs .tab-button.active');
+  const tabId = activeTabBtn?.dataset.tab;
+  
+  // grimmi 탭만 상태 저장
+  if (tabId === 'grimmi') {
+    const openMenus = [];
+    document.querySelectorAll('.tab-content.active .depth01 > li.active').forEach(li => {
+      const toggleLink = li.querySelector('a[data-toggle]');
+      if (toggleLink) {
+        const toggleId = toggleLink.getAttribute('data-toggle');
+        if (toggleId) openMenus.push(toggleId);
+      }
+    });
+    sessionStorage.setItem(`menuState_${tabId}`, JSON.stringify(openMenus));
+  }
+}
+
+/* ------------------------------
+  메뉴 열림 상태 복원 (grimmi 탭용)
+------------------------------ */
+function restoreMenuState() {
+  const activeTabBtn = document.querySelector('.sidebar-tabs .tab-button.active');
+  const tabId = activeTabBtn?.dataset.tab;
+  
+  // grimmi 탭만 상태 복원
+  if (tabId === 'grimmi') {
+    const savedState = sessionStorage.getItem(`menuState_${tabId}`);
+    if (savedState) {
+      try {
+        const openMenus = JSON.parse(savedState);
+        openMenus.forEach(toggleId => {
+          const depth02 = document.getElementById(toggleId);
+          const parentLi = depth02?.closest('.depth01 > li');
+          if (depth02 && parentLi && !depth02.classList.contains('single')) {
+            depth02.classList.remove('d-none');
+            parentLi.classList.add('active');
+          }
+        });
+      } catch (e) {
+        console.warn('Failed to restore menu state:', e);
+      }
+    }
+  }
+}
+
+/* ------------------------------
+  중앙으로 스크롤시켜주는 함수
+------------------------------ */
 function scrollActiveDepth02IntoView() {
   const sidebar = document.querySelector('.nav-wrap');
   if (!sidebar) return;
@@ -204,15 +256,15 @@ function scrollActiveDepth02IntoView() {
   const targetScroll =
     activeItem.offsetTop - visibleHeight / 2 + activeItem.offsetHeight / 2;
 
-  // 하단 기준값 (현재 스크롤 영역의 bottom - 160px)
   const thresholdBottom = sidebarRect.bottom - 160;
-const thresholdTop = sidebarRect.top + 280; // 상단 여유 280px
-if (itemRect.top < thresholdTop || itemRect.bottom > thresholdBottom) {
-  sidebar.scrollTo({
-    top: targetScroll,
-    behavior: 'smooth',
-  });
-}
+  const thresholdTop = sidebarRect.top + 280;
+  
+  if (itemRect.top < thresholdTop || itemRect.bottom > thresholdBottom) {
+    sidebar.scrollTo({
+      top: targetScroll,
+      behavior: 'smooth',
+    });
+  }
 }
 
 /* ------------------------------
@@ -221,12 +273,19 @@ if (itemRect.top < thresholdTop || itemRect.bottom > thresholdBottom) {
 function initializeSidebar() {
   const tabButtons = document.querySelectorAll('.sidebar-tabs .tab-button'); 
   const tabContents = document.querySelectorAll('.tab-content');
-  const searchbarWrapper = document.querySelector('.searchbar-wrapper');
 
   let isNavigating = false;
 
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
+
+  /* ------------------------------
+    현재 탭이 commands인지 확인
+  ------------------------------ */
+  function isCommandsTab() {
+    const activeTabContent = $('.tab-content.active');
+    return activeTabContent?.classList.contains('grid-layout');
+  }
 
   /* ------------------------------
     URL 기반 초기 탭 활성화
@@ -241,51 +300,62 @@ function initializeSidebar() {
     탭 활성화 공통 함수
   ------------------------------ */
   function activateTab(tabId) {
+    // 현재 탭 상태 저장
+    saveMenuState();
+    saveSidebarScroll();
+
     tabButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabId));
     tabContents.forEach(content => content.classList.toggle('active', content.dataset.tabContent === tabId));
 
-    if (searchbarWrapper) {
-      searchbarWrapper.style.display = searchbarWrapper.dataset.showOnTab === tabId ? 'block' : 'none';
-    }
+    // 새 탭 상태 복원 (약간의 지연으로 DOM이 업데이트된 후 실행)
+    requestAnimationFrame(() => {
+      restoreMenuState();
+      setTimeout(() => {
+        restoreSidebarScroll();
+      }, 50);
+    });
   }
 
   /* ------------------------------
     링크 클릭 시 depth 메뉴 활성화
   ------------------------------ */
-function activateDepthMenu(targetPath) {
-  const activeTabContent = $('.tab-content.active');
-  const isGridLayout = activeTabContent?.classList.contains('grid-layout');
+  function activateDepthMenu(targetPath, skipMenuStateRestore = false) {
+    const isCommands = isCommandsTab();
 
-  // 🔹 모든 메뉴 초기화
-  $$('.depth01 > li').forEach(li => li.classList.remove('active'));
-  $$('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
-  $$(`.depth02 li, .depth03 li`).forEach(li => li.classList.remove('active'));
+    // 🔹 활성 표시 초기화
+    $(`.depth02 li, .depth03 li`).forEach(li => li.classList.remove('active'));
 
-  // 🔹 클릭된 메뉴만 활성화
-  const targetAnchor = $$(`a[href]`).find(a => new URL(a.href, location.origin).pathname === targetPath);
-  if (!targetAnchor) return;
+    // 🔹 commands 탭일 경우에만 모든 메뉴 닫기
+    if (isCommands) {
+      $('.depth01 > li').forEach(li => li.classList.remove('active'));
+      $('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
+    }
+    // 🔹 grimmi 탭이고 메뉴 상태 복원을 건너뛰지 않는 경우에만 메뉴 닫기
+    else if (!skipMenuStateRestore) {
+      // 링크 직접 클릭 시에만 현재 페이지 메뉴만 활성화
+    }
 
-  const parentLi = targetAnchor.closest('.depth01 > li');
-  const parentDepth02 = targetAnchor.closest('.depth02');
+    // 🔹 클릭된 메뉴만 활성화
+    const targetAnchor = $(`a[href]`).find(a => new URL(a.href, location.origin).pathname === targetPath);
+    if (!targetAnchor) return;
 
-  // B 탭(=grid-layout)인 경우 → 나머지 전부 닫고 클릭한 메뉴만 열기
-  if (isGridLayout) {
-    // 모든 depth02 닫기
-    $$('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
-    // 클릭한 depth02만 열기
-    if (parentDepth02) parentDepth02.classList.remove('d-none');
+    const parentLi = targetAnchor.closest('.depth01 > li');
+    const parentDepth02 = targetAnchor.closest('.depth02');
+
     if (parentLi) parentLi.classList.add('active');
-  } else {
-    // 일반 탭은 기존처럼 활성화만 처리
-    if (parentLi) parentLi.classList.add('active');
-    if (parentDepth02) parentDepth02.classList.remove('d-none');
+    if (parentDepth02 && !parentDepth02.classList.contains('single')) {
+      parentDepth02.classList.remove('d-none');
+    }
+
+    // 🔹 활성 표시
+    targetAnchor.parentElement?.classList.add('active');
+
+    // grimmi 탭이면 상태 저장
+    if (!isCommands) {
+      saveMenuState();
+    }
   }
 
-  // 🔹 활성 표시
-  targetAnchor.parentElement?.classList.add('active');
-}
-
-  
   /* ------------------------------
     탭 버튼 클릭 처리
   ------------------------------ */
@@ -298,7 +368,16 @@ function activateDepthMenu(targetPath) {
       const lastVisited = sessionStorage.getItem(`lastVisited_${tabId}`) || defaultLink;
 
       activateTab(tabId);
-      activateDepthMenu(lastVisited);
+      
+      // 🔹 탭 전환 시에는 활성 표시만 업데이트 (메뉴 상태는 유지)
+      requestAnimationFrame(() => {
+        const targetAnchor = $(`a[href]`).find(a => new URL(a.href, location.origin).pathname === lastVisited);
+        if (targetAnchor) {
+          // depth02, depth03 활성 표시만 업데이트
+          $(`.depth02 li, .depth03 li`).forEach(li => li.classList.remove('active'));
+          targetAnchor.parentElement?.classList.add('active');
+        }
+      });
 
       isNavigating = true;
       requestAnimationFrame(() => {
@@ -306,7 +385,6 @@ function activateDepthMenu(targetPath) {
       });
     });
   });
-
 
   /* ------------------------------
     depth 메뉴 토글
@@ -322,82 +400,93 @@ function activateDepthMenu(targetPath) {
       const depth02 = toggleId ? document.getElementById(toggleId) : null;
 
       if (depth02 && !depth02.classList.contains('single')) {
-        const activeTabContent = $('.tab-content.active');
-        const isGridLayout = activeTabContent?.classList.contains('grid-layout');
+        const isCommands = isCommandsTab();
 
-        if (isGridLayout) {
-          // 🔹 B탭일 경우: 모든 메뉴 닫고 클릭한 메뉴만 열기
-          $$('.depth01 > li').forEach(li => li.classList.remove('active'));
-          $$('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
-          parentLi.classList.add('active');
-          depth02.classList.remove('d-none');
+        if (isCommands) {
+          // 🔹 Commands 탭: 하나만 열림 (아코디언 방식)
+          const isCurrentlyOpen = parentLi.classList.contains('active') && !depth02.classList.contains('d-none');
+          
+          if (isCurrentlyOpen) {
+            // 같은 메뉴 재클릭 시 닫기
+            parentLi.classList.remove('active');
+            depth02.classList.add('d-none');
+          } else {
+            // 다른 메뉴 클릭 시: 모든 메뉴 닫고 클릭한 메뉴만 열기
+            $$('.depth01 > li').forEach(li => li.classList.remove('active'));
+            $$('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
+            parentLi.classList.add('active');
+            depth02.classList.remove('d-none');
+          }
         } else {
-          // 🔹 일반 탭은 기존처럼 토글
+          // 🔹 Grimmi 탭: 여러 메뉴 동시 펼침 가능 (토글 방식)
           depth02.classList.toggle('d-none');
           parentLi?.classList.toggle('active');
+          
+          // 상태 저장
+          saveMenuState();
         }
       }
     });
-
   });
-
 
   /* ------------------------------
     링크 클릭 시 lastVisited 저장
   ------------------------------ */
-$$('.depth02 a, .depth03 a').forEach(link => {
-  link.addEventListener('click', function(e) {
-    const href = this.getAttribute('href');
-    if (!href || href === '#') {
-      e.preventDefault();
-      return;
-    }
+  $$('.depth02 a, .depth03 a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || href === '#') {
+        e.preventDefault();
+        return;
+      }
 
-    // ✅ 현재 스크롤 위치 저장
-    saveSidebarScroll();
+      // ✅ 현재 스크롤 위치 저장
+      saveSidebarScroll();
+      // ✅ 메뉴 상태 저장
+      saveMenuState();
 
-    const activeTabBtn = $('.sidebar-tabs .tab-button.active');
-    if (activeTabBtn) {
-      sessionStorage.setItem(
-        `lastVisited_${activeTabBtn.dataset.tab}`,
-        new URL(href, location.origin).pathname
-      );
-    }
+      const activeTabBtn = $('.sidebar-tabs .tab-button.active');
+      if (activeTabBtn) {
+        sessionStorage.setItem(
+          `lastVisited_${activeTabBtn.dataset.tab}`,
+          new URL(href, location.origin).pathname
+        );
+      }
 
-    activateDepthMenu(new URL(href, location.origin).pathname);
+      activateDepthMenu(new URL(href, location.origin).pathname);
+    });
   });
-});
-
 
   // 초기 탭 설정 실행
   setInitialTab();
 }
 
-
-
 initializeSidebar();
+
 document.addEventListener('astro:page-load', () => {
   initializeSidebar();
-  restoreSidebarScroll();         // 이전 스크롤 위치 복원
+  restoreMenuState();          // 메뉴 상태 복원
+  restoreSidebarScroll();      // 이전 스크롤 위치 복원
   setTimeout(() => {
     scrollActiveDepth02IntoView(); // 선택된 메뉴 중앙 배치
-  }, 100); // 살짝 지연을 줘야 DOM 위치가 잡힌 후 자연스럽게 이동됨
+  }, 100);
 });
 
 /* ------------------------------
   🔙 뒤로가기(popstate) 처리
 ------------------------------ */
-/* ------------------------------
-  🔙 뒤로가기(popstate) 처리 + 부드러운 닫힘 + 스크롤 복원
------------------------------- */
 window.addEventListener('popstate', () => {
   const currentPath = window.location.pathname;
-  const sidebar = document.querySelector('.nav-wrap');
   const activeTabContent = document.querySelector('.tab-content.active');
-  const isGridLayout = activeTabContent?.classList.contains('grid-layout');
+  const isCommands = activeTabContent?.classList.contains('grid-layout');
 
   // 🔹 스크롤 복원
   restoreSidebarScroll();
+
+  // 🔹 grimmi 탭이면 저장된 메뉴 상태 먼저 복원
+  if (!isCommands) {
+    restoreMenuState();
+  }
 
   // 🔹 현재 메뉴 찾기
   const currentAnchor = [...document.querySelectorAll('a[href]')].find(a =>
@@ -405,29 +494,22 @@ window.addEventListener('popstate', () => {
   );
   if (!currentAnchor) return;
 
-  // 🔹 depth 초기화 + 부드럽게 닫기
-  document.querySelectorAll('.depth01 > li.active').forEach(li => li.classList.remove('active'));
-  document.querySelectorAll('.depth02:not(.single)').forEach(ul => {
-    if (!ul.classList.contains('d-none')) {
-       ul.classList.add('d-none');
-    }
-  });
+  // 🔹 활성 표시 초기화
+  document.querySelectorAll('.depth02 li, .depth03 li').forEach(li => li.classList.remove('active'));
+
+  // 🔹 commands 탭일 경우에만 모든 메뉴 닫기
+  if (isCommands) {
+    document.querySelectorAll('.depth01 > li.active').forEach(li => li.classList.remove('active'));
+    document.querySelectorAll('.depth02:not(.single)').forEach(ul => ul.classList.add('d-none'));
+  }
 
   // 🔹 현재 메뉴만 열기
   const parentLi = currentAnchor.closest('.depth01 > li');
   const parentDepth02 = currentAnchor.closest('.depth02');
 
-  if (isGridLayout) {
-    // commands 탭일 경우: 나머지 전부 닫고 클릭한 depth02만 열기
-    document.querySelectorAll('.depth01 > li').forEach(li => li.classList.remove('active'));
-    document.querySelectorAll('.depth02:not(.single)').forEach(depth => depth.classList.add('d-none'));
-
-    parentLi?.classList.add('active');
-    parentDepth02?.classList.remove('d-none');
-  } else {
-    // 일반 탭이면 단순히 열기
-    parentLi?.classList.add('active');
-    parentDepth02?.classList.remove('d-none');
+  parentLi?.classList.add('active');
+  if (parentDepth02 && !parentDepth02.classList.contains('single')) {
+    parentDepth02.classList.remove('d-none');
   }
 
   currentAnchor.parentElement?.classList.add('active');
@@ -435,6 +517,4 @@ window.addEventListener('popstate', () => {
   // 🔹 활성 메뉴 중앙 배치
   setTimeout(scrollActiveDepth02IntoView, 400);
 });
-
-
 </script>

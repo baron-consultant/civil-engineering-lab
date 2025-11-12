@@ -16,30 +16,59 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/customize/customize_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/customize/2x_customize_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/customize_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/customize/customize_01.svg`} alt="" />
-    </div>
-
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/3x_customize_01.png`} alt=" " />
       <!-- 링크 -->
       <ul>
         <li>
           <a class="link-prfall" href="/eg-bim_guide/help/customize03">
             <span class="blind">보조기능 전체보기</span>
+            <div class="blind">그리드·객체스냅 등 보조기능 설정(토글 버튼으로 ON/OFF 모드)</div>
           </a>
         </li>
 
         <li>
           <a class="link-cmdall" href="/eg-bim_guide/help/command01">
             <span class="blind">명령어 전체보기</span>
+            <div class="blind">EG-BIM의 모든 명령어 보기</div>
           </a>
+        </li>
+        <li class="blind">
+          <dl>
+            <dt>보조기능 아이콘바</dt>
+            <dd>그리드·객체스냅 등 보조기능 설정(아이콘 색상으로 ON/OFF 모드)</dd>
+            <dd>최대 6개 명령 등록 가능(총 15종 제공)</dd>
+            <dd>우클릭 시 아이콘 삭제 </dd>
+ 
+            <dt>보조기능 아이콘 등록</dt>
+            <dd>보조기능 아이콘바로 드래그&드롭</dd>
+ 
+            <dt>아이콘바 길이 조절</dt> 
+ 
+            <dt>명령어 아이콘바</dt>
+            <dd>그룹별 최대 16개 아이콘 등록 가능</dd>
+            <dd>우클릭 시 아이콘 삭제</dd>
+ 
+            <dt>기본 그룹</dt>
+            <dd>같은 그룹의 명령어만 등록 가능</dd>
+            <dd>삭제 및 이름 변경 불가</dd>
+ 
+            <dt>아이콘 및 그룹 이동</dt>
+            <dd>원하는 위치로 드래그&드롭</dd>
+ 
+            <dt>명령어 아이콘 등록</dt>
+            <dd>같은 그룹의 명령어 등록 시 대표 아이콘 등록</dd>
+            <dd>명령어 아이콘 바로 드래그&드롭</dd>
+ 
+            <dt>명령어 아이콘 추가</dt>
+            <dd>아이콘 추가를 위한 명령어 전체보기 팝업</dd>
+ 
+            <dt>사용자 그룹 생성</dt>
+            <dd>모든 그룹의 명령어 등록 가능</dd>
+            <dd>우클릭 시 그룹 삭제 및 이름 변경</dd>
+ 
+            <dt>그룹 추가</dt>
+            <dd>클릭 시 사용자 그룹 생성</dd>
+          </dl> 
         </li>
       </ul>
       <!-- // 링크 -->

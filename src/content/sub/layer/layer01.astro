@@ -46,18 +46,48 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/layer/layer_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/layer/2x_layer_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/layer/layer_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/layer/layer_01.svg`} alt="" />
-    </div>
-     
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/layer/3x_layer_01.png`} alt=" " />
+        <div class="blind">
+          <dl>
+            <dt>레이어 검색</dt>
+
+            <dt>모든 레이어 그룹</dt>
+
+            <dt>레이어 그룹</dt>
+            <dd>레이어 설정 : 더블클릭 시 레이어명 수정, 현재 작업 레이어 설정 (라디오버튼 클릭)</dd>
+            <dd>레이어 그룹 설정 : 다중 선택 가능</dd>
+
+            <dt>레이어 그룹 설정</dt>
+
+            <dt>새로운 레이어 추가</dt>
+
+            <dt>그룹 추가</dt>
+
+            <dt>레이어 스타일 세트 추가</dt>
+            <dd>최대 3세트, 다양한 스타일 설정 가능</dd>
+
+            <dt>레이어 상세 항목</dt>
+            <dd>각 명칭 클릭 시 순서 재정렬</dd>
+
+            <dt>레이어 삭제 및 분리</dt>
+            <dd>우클릭 시 명령 실행</dd>
+            <dd>Delete(레이어 삭제) : 해당 레이어에 속한 객체가 없을 경우 삭제</dd>
+            <dd>Force Delete(레이어 강제 삭제) : 레이어 삭제, 속한 객체는 0 레이어로 변경</dd>
+            <dd>Force Delete With Records(객체만 삭제) : 레이어 유지, 해당 레이어에 속한 객체 모두 삭제</dd>
+            <dd>Isolate Selected Layers(해당 레이어 객체 분리) : 해당 레이어의 객체만 분리되어 보여짐</dd>
+
+            <dt>레이어 스타일 설정</dt>
+            <dd>색상 / 선스타일 / 선가중치 / 투명도 : 값 지정 가능(클릭 시 수정)</dd> 
+            <dd>선가중치(LineWeight) 입력 범위 : 0.00, 0.05, 0.09, 0.13, 0.15, 0.18, 0.20 0.25, 0.30, 0.35, 0.40, 0.50, 0.53, 0.60, 0.70, 0.80, 0.90, 1.00, 1.06, 1.20, 1.40, 1.58, 2.00, 2.11</dd> 
+            <dd>투명도(Transparency) 입력 범위 : 0~90  / 투명도 20% / 투명도 50% / 투명도 90% </dd> 
+
+            <dt>레이어 표시상태 조정</dt>
+            <dd>작업화면 표시 여부 : ON / OFF</dd>
+            <dd>동결/해제 : 불필요한 레이어를 동결해 작업 속도 향상</dd> 
+            <dd>잠금/해제 : 잠금 시 해당 레이어에 있는 객체는 수정 불가능(페이드값으로 선명도 조절 가능) </dd> 
+            <dd>출력 여부 : ON / OFF</dd> 
+          </dl>
+        </div>
     </div>
   </div>
 </section>

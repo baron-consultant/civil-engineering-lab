@@ -25,50 +25,45 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/command/command_02.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/command/2x_command_02.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/command_02.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/command/command_02.svg`} alt="" />
-    </div>
-
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/3x_command_02.png`} alt=" " />
       <!-- 링크 -->
-      <ul>
-        <li>
-          <a class="link-systm" href="javascript:selectImg('group5')">
-            <span class="blind">디스플레이/마우스</span>
-          </a>
-        </li>
+      <div class="blind">
+        <dl>
+          <dt>EL 구하기</dt>
+          <dd>도면작업 시 필요한 EL값 계산</dd>
 
-        <li>
-          <a class="link-prfall" href="javascript:selectImg('group12')">
-            <span class="blind">보조기능</span>
-          </a>
-        </li>
+          <dt>비탈면 그리기 및 경사표기 하기</dt>
+          <dd>비탈면 or 교량 구조물 등의 앞성토 그리는 작업 시 사용</dd>
 
-        <li>
-          <a class="link-cmdall" href="javascript:selectImg('group11')">
-            <span class="blind">명령어 구성</span>
-          </a>
-        </li>
+          <dt>시설물 및 차선 그리기</dt>
+          <dd>횡단보도, 테이퍼 등 도로 시설물 그리기 작업 시 사용</dd>
 
-        <li>
-          <a class="link-cven" href="javascript:selectImg('group13')">
-            <span class="blind">선형/횡단</span>
-          </a>
-        </li>
+          <dt>시설물 및 차선 그리기</dt>
+          <dd>횡단보도, 테이퍼 등 도로 시설물 그리기 작업 시 사용</dd>
 
-        <li>
-          <a class="link-shortcut" href="javascript:selectImg('group7')">
-            <span class="blind">단축키</span>
-          </a>
-        </li>
-      </ul>
+          <dt>현황 수정 및 표고점 생성하기</dt>
+          <dd>표고점, 등고선 등 현황 수정과 생성 시 사용</dd>
+
+          <dt>평면선형 측점 및 거리 표시하기</dt>
+          <dd>측점 생성, 선형 측점 조회 등 평면선형 작업 시 사용</dd>
+
+          <dt>비탈면 그리기 및 경사표기 하기</dt>
+          <dd>비탈면 or 교량 구조물 등의 앞성토 그리는 작업 시 사용</dd>
+
+          <dt>횡단면도 작성하기</dt>
+          <dd>쌓기, 깎기부 비탈면 등 횡단면도 그리기 작업 시 사용</dd>
+
+          <dt>선형 그리기</dt>
+          <dd>도로 설계에서 사용되는 완화 곡선, 접선 등 선형을 편리하게 그릴 때 사용</dd>
+
+          <dt>종단선형 작성 및 계획고 찾기</dt>
+          <dd>도로의 종단 선형을 계산하고 그리는 작업 시 사용</dd>
+
+          <dt>측구 설치하기</dt>
+          <dd>V형 측구와 산마루 측구 생성</dd>
+        </dl>
+
+      </div>
       <!-- // 링크 -->
     </div>
   </div>

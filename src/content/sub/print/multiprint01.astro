@@ -28,25 +28,35 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/multiprint/multiprint_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/multiprint/2x_multiprint_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/multiprint/multiprint_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/multiprint/multiprint_01.svg`} alt="" />
-    </div>
-
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/multiprint/3x_multiprint_01.png`} alt=" " />
     <!-- 링크 -->
       <ul>
         <li>
           <a class="link-print" href="/eg-bim_guide/help/multiprint02">
             <span class="blind">다중 인쇄창 화면 구성</span>
+            <dl class="blind"> 
+              <dt>출력 옵션 설정</dt>
+              <dd>인쇄창에서 설정된 출력 옵션 표시</dd>
+              <dd>다중 선택으로 출력 옵션 변경</dd>
+
+              <dt>인쇄 미리보기</dt>
+            </dl>
           </a>
         </li>
+
+        <li class="blind">
+          <dl>
+            <dt>출력 폴더 선택</dt>
+            <dd>(■)폴더 내 일부 도면이 선택됨</dd>
+            <dd>(✓)폴더 내 전체 도면이 선택됨</dd>
+
+            <dt>출력 상태</dt>
+
+            <dt>출력 파일택</dt>
+            <dd>체크박스를 클릭하여 출력할 파일 선택</dd>
+            <dd>선택한 파일 수만큼 미리보기 페이지 생성</dd>
+          </dl>
+      </li>
       </ul>
       <!-- // 링크 -->
     

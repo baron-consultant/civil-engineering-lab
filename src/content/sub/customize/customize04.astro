@@ -28,17 +28,28 @@ import { IMAGE_BASE_PATH } from '../config';
 
 <div class="contents">
   <div class="inner">
-      <picture>
-        <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/customize/customize_04.png`} />
-        <source
-          media="(min-resolution: 140dpi)"
-          srcset={`${IMAGE_BASE_PATH}/customize/2x_customize_04.png`}
-        />
-        <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/customize_04.png`} alt=" " />
-      </picture>
-      <div class="ex-wrap">
-        <img src={`${IMAGE_BASE_PATH}/customize/customize_04.svg`} alt="" />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/3x_customize_04.png`} alt=" " />
+      <div class="blind">
+        <dl>
+          <dt>명령어 검색</dt>
+          <dd>영문 명령어  or 별칭으로 검색</dd>
+ 
+          <dt>명령어 그룹 선택</dt>
+ 
+          <dt>명령어 선택</dt>
+ 
+          <dt>별칭</dt>
+          <dd>영문 or 숫자 / 영문 + 숫자 조합 가능</dd>
+          <dd>명령어당 최대 2개 지정</dd>
+          <dd>우클릭 시 별칭 제거</dd>
+ 
+          <dt>단축키</dt>
+          <dd>조합키(CTRL·ALT·SHIFT) + 영문 or 숫자 / 기능키(F1~F12)로 설정</dd>
+          <dd>명령어당 최대 1개 지정</dd>
+          <dd>우클릭 시 단축키 제거</dd>
+        </dl>
       </div>
   </div>
 </div>
 </section>
+ 

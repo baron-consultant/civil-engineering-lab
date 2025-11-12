@@ -41,17 +41,46 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-     <picture>
-        <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/style/style_03.png`} />
-        <source
-          media="(min-resolution: 140dpi)"
-          srcset={`${IMAGE_BASE_PATH}/style/2x_style_03.png`}
-        />
-        <img class="bg-img" src={`${IMAGE_BASE_PATH}/style/style_03.png`} alt=" " />
-      </picture>
-      <div class="ex-wrap">
-        <img src={`${IMAGE_BASE_PATH}/style/style_03.svg`} alt="" />
-      </div>
+     <img class="bg-img" src={`${IMAGE_BASE_PATH}/style/3x_style_03.png`} alt=" " />
+      <div class="blind">
+          <dl>
+            <dt>문자 스타일 LIST</dt>
+            <dd>기본 2가지 글꼴 제공 (Standard[Arial], Dotum[돋움])</dd>
+            <dd>우클릭 시 문자 스타일 제거</dd>
+
+            <dt>문자 스타일 선택</dt>
+
+            <dt>없는 글꼴 표시</dt>
+            <dd>(!)현재 없는 글꼴, 화면상 정상 표시 안됨을 안내</dd>
+
+            <dt>문자 스타일 추가 </dt>
+
+            <dt>문자 스타일값 입력</dt>
+            <dd>문자 스타일명과 글꼴 표시 및 수정</dd>
+            <dd>문자 크기 상세 설정능</dd>
+
+            <dt>치수 스타일 수정</dt>
+            <dd>자리 맞추기 : 높낮이가 다른 문자의 높이 기준 설정</dd>
+            <dd>꾸밈 형식 : 기울기와 문자 굵기 설정</dd>
+            <dd>문자 스케일 : 뷰포트 맞춰 문자 형상의 스케일 조정 가능</dd>
+            <dd>문자 방향 : 문자의 방향을 설정</dd>
+            <dd>큰 글꼴 : 아시아권에서 많이 사용하는 문자 지원, 캐드 전용 폰트인 .SHX 폰트를 쓸때 활성화</dd>
+
+            <dt>문자 스타일 수정</dt>
+            <dd>수정 &rarr; 취소/적용</dd>
+
+            <dt>글꼴 검색</dt>
+
+            <dt>글꼴 선택</dt>
+            <dd>현재 선택된 스타일에 적용 할 글꼴을 선택</dd>
+
+            <dt>사용 중인 글꼴</dt>
+            <dd>문자 스타일 LIST에 등록되어 있는 글꼴 (●) 표시</dd>
+
+            <dt>글꼴 그룹</dt>
+            <dd>10가지 글꼴 그룹으로 구분하여 제공</dd>
+          </dl>
+        </div>
     </div>
   </div>
 </section>

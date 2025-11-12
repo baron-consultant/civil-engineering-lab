@@ -32,16 +32,30 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-        <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/customize/customize_02.png`} />
-        <source
-          media="(min-resolution: 140dpi)"
-          srcset={`${IMAGE_BASE_PATH}/customize/2x_customize_02.png`}
-        />
-        <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/customize_02.png`} alt=" " />
-      </picture>
-      <div class="ex-wrap">
-        <img src={`${IMAGE_BASE_PATH}/customize/customize_02.svg`} alt="" />
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/3x_customize_02.png`} alt=" " />
+      <div class="blind">
+        <dl>
+          <dt>작업화면 디스플레이</dt>
+        </dl>
+         <dl>
+          <dt>마우스 기능 설정</dt>
+          <dd>휠 스크롤 : 화면의 확대/축소량 설정</dd>
+          <dd>휠 클릭 : 화면 초점 이동 or 객체스냅 선택 적용</dd>
+          <dd>왼쪽/오른쪽 클릭 : 객체 선택·명령 진행 시 기본·편집 메뉴 or 마지막 명령 반복 선택</dd>
+ 
+          <dt>도면공간</dt>
+          <dd>새 도면공간(Layout) 생성 시 뷰포트창 자동 생성 여부 선택</dd>
+ 
+          <dt>파일 보안 및 저장</dt>
+          <dd>도면 형식 및 저장 버전 선택</dd>
+          <dd>프록시 객체 알림 및 표시 설정</dd>
+ 
+          <dt>자동 저장 및 백업</dt>
+          <dd>프로그램 다운에 대비한 저장 간격·경로 지정으로 백업 및 임시파일 관리</dd>
+ 
+          <dt>프로그램 종료 시 파일 설정</dt>
+          <dd>여러 파일 열림 상태에서 창 닫기 시 옵션 활성화 여부</dd>
+        </dl>
       </div>
     </div>
   </div>

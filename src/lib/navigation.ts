@@ -5,8 +5,10 @@ export const navigation = [
     directory: "interface",
     type: "component" as const,
     items: [
+      { slug: "information", title: "로그인/로그아웃" },
       { slug: "interface01", title: "메인화면구성" },
-      { slug: "interface02", title: "홈메뉴" },
+      { slug: "interface02", title: "기본기능" },
+      { slug: "interface03", title: "사용자 설정 백업 & 복원" },
     ],
   },
   {

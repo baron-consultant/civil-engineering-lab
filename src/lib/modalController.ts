@@ -16,6 +16,7 @@ export function initModalController() {
     if (target) {
       const modalId = target.getAttribute("data-modal");
       if (modalId) openModal(modalId);
+      document.querySelector(".nav-wrap")?.classList.add("open");
     }
 
     // 모달 닫기 버튼 클릭
@@ -23,12 +24,14 @@ export function initModalController() {
     if (closeBtn) {
       const modal = closeBtn.closest(".modal") as HTMLElement;
       if (modal) closeModal(modal);
+      document.querySelector(".nav-wrap")?.classList.remove("open");
     }
 
     // 모달 외부 클릭
     const modalEl = (e.target as HTMLElement).closest(".modal");
     if (modalEl && e.target === modalEl) {
       closeModal(modalEl);
+      document.querySelector(".nav-wrap")?.classList.remove("open");
     }
   });
 

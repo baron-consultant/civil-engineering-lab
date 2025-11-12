@@ -28,17 +28,22 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-       <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/floorplan/floorplan_03.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/floorplan/2x_floorplan_03.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/floorplan/floorplan_03.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/floorplan/floorplan_03.svg`} alt="" />
-    </div>
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/floorplan/3x_floorplan_03.png`} alt=" " />
+    <div class="blind">
+          <dl>
+            <dt>도면정보 항목 선택</dt>
+            <dd>도곽에 있는 도면정보 항목들을 표시</dd>
+            <dd>원하는 정보를 체크하여 도면정보 항목 편집(예 : 고정 항목, 편집 가능 항목)</dd>
+
+            <dt>수정 중인 항목 선택창에 표시</dt>
+            <dd>도면정보 항목 선택창에서도 수정하고자 하는 항목 선택 가능</dd>
+
+            <dt>수정 종료</dt>
+
+            <dt>도면정보 항목</dt>
+            <dd>중간 저장 / 수정 중 취소</dd>
+          </dl>
+      </div>
     </div>
   </div>
 </section>

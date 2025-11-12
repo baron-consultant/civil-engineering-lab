@@ -36,24 +36,29 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/block/block_05.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/block/2x_block_05.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/block_05.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/block/block_05.svg`} alt="" />
-    </div>
-
+   <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/3x_block_05.png`} alt=" " />
      <!-- 링크 -->
     <ul>
       <li>
         <a class="link-block" href="/eg-bim_guide/help/block01">
           <span class="blind">통합블록창(BLOCK)</span>
+          <div class="blind">통합블록창을 실행하여 블록 생성 및 삽입/수정, 관리</div>
         </a>
+      </li>
+       <li class="blind">
+          <dl>
+            <dt>그룹별 블록 LIST</dt>
+            <dd>크게 5개 분야로 구분 (설계일반, 측량및지반조사, 도로, 토목구조, 상하수도)</dd>
+
+            <dt>블록 선택</dt>
+            <dd>원하는 블록을 클릭하여 선택</dd>
+            <dd>SHIFT/CTRL 키로 다중 선택 및 선택 해제 함</dd>
+
+            <dt>선택한 블록 미리보기</dt>
+
+            <dt>선택 블록 적용</dt>
+            <dd>선택 블록을 통합블록창(BLOCK)에 등록, 화면에는 삽입되지 않음</dd>
+          </dl>
       </li>
     </ul>
         <!-- // 링크 -->

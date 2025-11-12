@@ -39,19 +39,45 @@ import { IMAGE_BASE_PATH } from '../config';
 
   <!-- // 타이틀 -->
   <div class="contents">
-    <div class="inner">
-      <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/style/style_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/style/2x_style_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/style/style_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/style/style_01.svg`} alt="" />
-    </div>
-      
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/style/3x_style_01.png`} alt=" " />
+      <div class="blind">
+          <dl>
+            <dt>건설 CALS 선꼴 확인</dt>
+            <dd>기본 선꼴과 5개 분야로 구분하여 분야별 표준 선꼴 제공</dd>
+
+            <dt>LIN 파일 불러오기</dt>
+
+            <dt>건설 CALS 선꼴 검색창</dt>
+
+            <dt>선꼴 선택</dt>
+            <dd>더블클릭으로 선택해 선스타일 LIST에 추가</dd>
+
+            <dt>기본정보</dt>
+            <dd>모든 객체가 가지고 있는 기본 특성</dd>
+
+            <dt>선 스타일 LIST에 추가</dt>
+
+            <dt>선 스타일  LIST</dt>
+            <dd>기본 3가지 선꼴 제공 (Continous, CENTER. HIDDEN)</dd>
+            <dd>우클릭 시 선 스타일 제거</dd>
+
+            <dt>선 스타일 선택</dt>
+
+            <dt>선꼴 수치 입력</dt>
+
+            <dt>블록 상세 설정</dt>
+
+            <dt>문자 상세 설정</dt>
+
+            <dt>선 스타일 수정</dt>
+            <dd>수정 &rarr; 취소/적용</dd>
+
+            <dt>스타일 선택</dt>
+            <dd>선꼴 : 선, 문자, 블록의 조합으로 선의 형상 선택</dd>
+            <dd>블록 : 선택한 선꼴에 블록이 포함된 경우 활성화</dd> 
+            <dd>문자스타일 : 선택한 선꼴에 문자가 포함된 경우 활성화, 현재 파일에서 사용 중인 문자스타일 로드</dd> 
+          </dl>
+        </div>
     </div>
   </div>
 </section>

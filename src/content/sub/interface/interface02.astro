@@ -2,7 +2,7 @@
 import { IMAGE_BASE_PATH } from '../config';
 ---
 
-<section id="group2" class="interface02">
+<section id="group2" class="interface01">
   <!-- 타이틀 -->
   <div class="page-tit-wrap">
     <div class="tit-box">
@@ -28,26 +28,81 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/interface/interface_02.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/interface/2x_interface_02.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/interface/interface_02.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/interface/interface_02.svg`} alt="" />
-    </div>
-      <!-- 링크 -->
-      <ul>
-        <li>
-          <a class="link-systm" href="javascript:selectImg('group5')"
-            ><span class="blind">기본특성 메뉴</span></a
-          >
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/interface/3x_interface_02.png`} alt=" " />
+      <!-- 텍스트 -->
+      <ul >
+        <li class="blind">
+          <dl>
+            <dt>홈메뉴</dt>
+            <dd>클릭 시 기본 특성 메뉴 ↔ 홈메뉴 변경</dd>
+
+            <dt>작업중인 파일</dt>
+            <dd>저장 : 현재 작업 중인 내용 저장</dd>
+            <dd>복사저장 : 다른 이름으로 파일을 복사하여 저장</dd>
+            <dd>
+                내보내기 : 다른 형식으로 내보내기(PDF, SVG 등)<br>
+                * 내보내기 가능한 파일형식<br>
+                Portable Document Format (*.pdf)<br>
+                Scalable Vector Graphics (*.svg)<br>
+                Bitmap file (*.bmp)<br>
+                Windows meta File (*.wmf)<br>
+                Enhanced Windows Meta File (*.emf)<br>
+                Design Web Format (*.dwf)<br>
+                Stereolithography (*.stl)<br>
+                COLLAborative Design Activity (*.dae)<br>
+                MicroStation Design File (*.dgn)<br>
+                Wavefront Object format (*.obj)
+            </dd>
+            <dd>도면묶기 : 외부참조 파일과 도면을 묶어 패키지로 만들기</dd>
+  
+            <dt>다른파일 열기</dt>
+            <dd>찾아열기 : PC or 네트워크 경로에서 저장된 파일을 찾아 열기</dd>
+            <dd>최근파일 : 최근 작업파일 표시(최대 10개)</dd>
+            <dd>새 파일 : 새 파일 생성</dd>
+
+            <dt>Open 된 파일</dt>
+
+            <dt>미리보기</dt>
+            <dd>최근파일에 마우스 오버 시 미리보기 확인</dd>
+
+            <dt>파일 손상 시</dt>
+            <dd>복구하기 : 손상된 도면 파일 복구</dd>
+            <dd>임시파일 : 자동저장된 임시파일 폴더 바로가기</dd>
+  
+            <dt>사용자 설정</dt>
+            <dd>Display&Mouse : 디스플레이 환경 및 마우스 설정</dd>
+            <dd>저장하기 : 현재 사용자가 설정한 환경값 저장(화면, 마우스, 단축키 등)</dd>
+            <dd>불러오기 : 이전에 저장한 사용자 설정값을 불러와 적용</dd>
+  
+            <dt>궁금하면</dt>
+            <dd>설명보기 : 프로그램 이용가이드 보기</dd>
+            <dd>문의하기 : 이지빔 홈페이지 FAQ 이동</dd>
+            <dd>S/W 정보 : 라이센스 및 버전 정보 확인</dd>
+
+          </dl>
         </li>
+        <li>
+          <a class="link-userset" href="/eg-bim_guide/help/interface03" >
+            <span class="blind">홈메뉴</span>
+            <div class="blind">열기, 저장 등의 파일 관련 메뉴 모음</div>
+          </a>
+        </li>
+        <li class="blind">
+          <dl >
+            <dt>궁금하면</dt>
+            <dd>설명보기 : 프로그램 이용가이드 보기</dd>
+            <dd>문의하기 : 이지빔 홈페이지 FAQ 이동</dd>
+          </dl>
+        </li>
+        <li>
+          <a class="link-sw" href="/eg-bim_guide/help/information" >
+            <span class="blind">S/W 정보</span>
+            <div class="blind">라이센스 및 버전 정보 확인</div>
+          </a>
+        </li>
+        
       </ul>
-      <!-- // 링크 -->
+      <!-- // 텍스트 -->
     </div>
   </div>
 </section>

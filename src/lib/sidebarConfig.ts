@@ -29,23 +29,51 @@ export const grimmiTab: SidebarTab = {
   label: "가이드",
   icon: "ico-grimmy",
   groups: [
+      {
+      title: "공통",
+      icon: "ico-ggurumi",
+      items: [
+        {
+          id: "common",
+          label: "",
+          children: [
+            {
+              id: "information",
+              label: "로그인/로그아웃",
+              href: `${BASE_PATH}/information`,
+            },
+          ],
+        },
+      ]
+      },
     {
       title: "그리미",
       icon: "ico-grimmy",
       items: [
         {
-          id: "interface",
-          label: "인터페이스",
+          id: "main",
+          label: "",
           children: [
             {
-              id: "interface01",
+              id: "interface03",
               label: "메인화면구성",
               href: `${BASE_PATH}/interface01`,
             },
+          ],
+        },
+        {
+          id: "interface",
+          label: "홈메뉴",
+          children: [
+            {
+              id: "interface01",
+              label: "기본기능",
+              href: `${BASE_PATH}/interface02`,
+            },
             {
               id: "interface02",
-              label: "홈메뉴",
-              href: `${BASE_PATH}/interface02`,
+              label: "사용자 설정 백업 & 복원",
+              href: `${BASE_PATH}/interface03`,
             },
           ],
         },
@@ -263,6 +291,15 @@ export const grimmiTab: SidebarTab = {
   ],
 };
 
+// 🔹 폴더명을 표시용 라벨로 변환하는 함수
+function formatFolderLabel(folderName: string): string {
+  // 하이픈(-)으로 시작하면 ".etc"로 표시
+  if (folderName.startsWith('_')) {
+    return 'etc.';
+  }
+  return folderName;
+}
+
 // docs 명령어 문서 생성
 export async function generateDocsTab(): Promise<SidebarTab> {
   try {
@@ -316,7 +353,7 @@ export async function generateDocsTab(): Promise<SidebarTab> {
 
     const items: MenuItem[] = sortedFolders.map((folder) => ({
       id: `commands-${folder}`,
-      label: folder,
+      label: formatFolderLabel(folder), // 🔹 폴더명 변환 적용
       children: grouped[folder].sort((a, b) => (a.order || 0) - (b.order || 0)),
     }));
 

@@ -25,16 +25,17 @@ import { IMAGE_BASE_PATH } from '../config';
 
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/multi/multi_02.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/multi/2x_multi_02.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/multi/multi_02.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/multi/multi_02.svg`} alt="" />
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/multi/3x_multi_02.png`} alt=" " />
+    <div class="blind">
+       <dl>
+          <dt>듀얼모드 동시 작업(Layout 공간)</dt>
+          <dd>Model 공간 & Layout 공간 / Layout 공간 & Layout 공간 동시 작업</dd>
+          <dd>화면 밖으로 드래그&드롭하여 Layout 공간 생성</dd>
+ 
+          <dt>Layout 탭 분리</dt>
+          <dd>Layout 탭이 분리되어 Layout 공간이 별도로 생성됨</dd>
+          <dd>기존 작업화면과 동일하게 모든 기능 사용 가능</dd>
+        </dl>
     </div>
   </div>
 </div>

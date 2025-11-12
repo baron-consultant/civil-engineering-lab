@@ -40,24 +40,55 @@ const videoModals = [
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/block/block_03.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/block/2x_block_03.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/block_03.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/block/block_03.svg`} alt="" />
-    </div>
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/3x_block_03.png`} alt=" " />
     <!-- 링크 -->
       <ul>
         <li>
           <button type="button" class="link-add" data-modal="modal-add">
             <span class="blind">속성블록 추가하기</span>
+            <div class="blind">
+              속성블록으로 지정할 속성문자와 객체를 선택 후 기준점 지정
+              * ATTDEF : 속성문자 만들기
+            </div>
           </button>
         </li>
+        
+        <li class="blind">
+          <dl>
+            <dt>속성 블록 LIST</dt>
+            <dd>현재 파일에 사용 가능한 속성블록의 LIST</dd>
+            <dd>속성블록의 이름과 설명으로 구성</dd>
+
+            <dt>속성 블록 선택</dt>
+            <dd>클릭으로 표시 여부 설정</dd>
+            <dd>마우스 우클릭으로 삭제</dd>
+
+            <dt>속성 블록 삽입</dt>
+            <dd>1) 더블클릭 시 작업화면에 추가</dd>
+            <dd>2) 작업화면에 드래그&드롭</dd>
+
+            <dt>선택한 블록 미리보기</dt>
+
+            <dt>선택한 속성블록 기본속성 수정</dt>
+            <dd>클릭 시 속성블록 기본속성 수정 가능</dd>
+            <dd>이름 : 속성블록의 이름</dd>
+            <dd>설명 : 속성블록에 대한 설명</dd>
+            <dd>레이어 : 속성블록이 속한 레이어</dd>
+            <dd>색상 : 속성블록을 구성하는 객체의 색상</dd>
+
+            <dt>설정</dt>
+            <dd>삽입 시 블록 분해 허용 : 삽입 후 Explode 명령어 허용 여부 설정</dd>
+            <dd>뷰포트 스케일에 맞는 배율 적용(주석배율 적용) : 뷰포트 스케일에 맞게 블록 형상에 대한 스케일 조정 가능</dd>
+            <dd>외부참조 추가 시 삽입점 화면에서 직접지정 : 체크 해제시 0,0,0 좌표로 블록 삽입</dd>
+
+            <dt>속성블록 속성값 설정</dt>
+            <dd>태그 : 속성을 식별하는 꼬리표</dd>
+            <dd>프롬프트 : 문자값의 내용에 대한 설명</dd>
+            <dd>문자값 : 보여지는 문자내용에 해당하는 값</dd>
+            <dd>클릭 시 속성블록 속성값 수정 가능</dd>
+
+          </dl>
+      </li>
       </ul>
       <!-- // 링크 -->
   </div>

@@ -28,25 +28,27 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-        <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/floorplan/floorplan_02.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/floorplan/2x_floorplan_02.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/floorplan/floorplan_02.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/floorplan/floorplan_02.svg`} alt="" />
-    </div>
+        <img class="bg-img" src={`${IMAGE_BASE_PATH}/floorplan/3x_floorplan_02.png`} alt=" " />
 
       <!-- 링크 -->
       <ul>
         <li>
           <a class="link-select" href="/eg-bim_guide/help/floorplan03">
             <span class="blind">도면정보 항목 선택</span>
+            <div class="blind">도면정보 수정 시작과 함께 활성화. 도곽의 정보들 중 화면에 표출할 항목을 선택</div> 
           </a>
         </li>
+
+         <li class="blind">
+          <dl>
+            <dt>도면정보 항목</dt>
+            
+            <dt>도면정보 수정</dt>
+            <dd>도면정보 항목을 클릭하여 정보 수정</dd>
+            <dd>도면번호와 같은 일련번호가 포함된 항목은 수정 칸의 우측 하단(■)을 드래그하여 엑셀처럼 일괄 수정</dd>
+            <dd>수정한 도면정보는 도면에 자동 적용</dd>
+          </dl>
+      </li>
       </ul>
       <!-- // 링크 -->
     </div>

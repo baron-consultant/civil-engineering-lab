@@ -3,7 +3,7 @@ import { IMAGE_BASE_PATH } from '../config';
 ---
 
 
-<section id="group1" class="interface01">
+<section id="group1" class="mainview">
 <!-- 타이틀 -->
 <div class="page-tit-wrap">
   <div class="tit-box">
@@ -17,42 +17,52 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/interface/interface_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/interface/2x_interface_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/interface/interface_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/interface/interface_01.svg`} alt="" />
-    </div>
-         <!-- 링크 -->
-   <ul>
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/interface/3x_interface_01.png`} alt=" " />
+    <!-- 링크 -->
+    <ul>
       <li>
         <a class="link-homemenu" href="/eg-bim_guide/help/interface02" >
         <span class="blind">홈메뉴</span>
+        <div class="blind">열기, 저장 등의 파일 관련 메뉴 모음</div>
       </a>
       </li>
-      <li>
+       <li class="blind">
+          <dl>
+            <dt>파일탭</dt>
+            <dd>새 파일 생성, 열기·닫기</dd>
+            <dd>Open 된 파일 리스트 확인·미리보기</dd>
+            <dt>새도면(New)</dt>
+            <dt>열기(open)</dt>
+          </dl>
+       </li>
+      <li> 
         <a class="link-propsbar" href="/eg-bim_guide/help/feature01" >
-          <span class="blind">속성바</span>
+          <span class="blind">속성Bar(속성바)</span>
+          <div class="blind">선택된 객체의 주요 속성정보 확인</div>
         </a>
       </li>
 
       <li>
         <a class="link-mainprops" href="/eg-bim_guide/help/feature01">
           <span class="blind">속성창</span>
+          <div class="blind">선택된 객체의 모든 속성정보 확인</div>
         </a>
       </li>
 
       <li>
         <a class="link-filetab" href="/eg-bim_guide/help/multi01">
-          <span class="blind">파일 탭 분리</span>
+          <span class="blind">파일 탭 분리(듀얼모드 동시 작업)</span>
+          <div class="blind">작업도면과 참고도면을 동시에 보면서 작업 가능(화면 밖으로 드래그&드롭)</div>
         </a>
       </li>
-
+      <li class="blind">
+          <dl>
+            <dt>기본 특성 메뉴</dt>
+            <dd>그리기 모드 : 객체 생성 시 특성별 설정된 값으로 생성</dd>
+            <dd>선택 객체 : 객체 선택 시 특성 표시, 변경</dd>
+            <dd>특성별 상세보기창에서 레이어·스타일의 생성, 관리</dd>
+          </dl>
+       </li>
       <li>
         <a class="link-layer" href="/eg-bim_guide/help/layer01">
           <span class="blind">레이어 상세</span>
@@ -90,32 +100,69 @@ import { IMAGE_BASE_PATH } from '../config';
           <span class="blind">꾸러미</span>
         </a>
       </li>
+
+      <li class="blind">
+          <dl>
+            <dt>창이동</dt>
+            <dd>창 이동·확대·축소</dd>
+          </dl>
+       </li>
       <li>
         <a  class="link-layouttab" href="/eg-bim_guide/help/multi02">
-          <span class="blind">layout 탭 분리</span>
+          <span class="blind">layout 탭 분리(듀얼모드 동시 작업)</span>
+          <div class="blind">Model 공간과 Layout 공간을 동시에 보면서 작업 가능(화면 밖으로 드래그&드롭)</div>
         </a>
       </li>
       <li>
-        <a class="link-setbar" href="/eg-bim_guide/help/customize01">
+        <a class="link-mainprf" href="/eg-bim_guide/help/customize03" >
           <span class="blind">보조기능 전체보기</span>
         </a>
       </li>
       <li>
-        <a class="link-cmdbar" href="/eg-bim_guide/help/customize01">
+        <a class="link-setbar" href="/eg-bim_guide/help/customize01">
           <span class="blind">보조기능 아이콘바</span>
+          <ul class="blind">
+            <li>그리드·객체스냅 등 보조기능 설정(아이콘 색상으로 ON/OFF 모드)</li>
+            <li>최대 6개 명령 등록 가능(총 15종 제공)</li>
+            <li>보조기능 전체보기에서 드래그&드롭으로 아이콘 추가</li>
+          </ul>
+          
         </a>
       </li>
       <li>
-        <a class="link-cmdall" href="/eg-bim_guide/help/customize01" >
-          <span class="blind">명령어 아이콘바</span>
+        <a class="link-cmdbar" href="/eg-bim_guide/help/customize01">
+           <span class="blind">명령어 아이콘바</span>
+          <div class="blind">아이콘 클릭 시 명령어 실행, 사용자가 원하는 명령어로 편집 가능</div>
         </a>
       </li>
 
+       <li class="blind">
+          <dl>
+            <dt>명령어 입력창</dt>
+            <dd>명령어를 입력하고 입력한 명령의 진행 과정 표시</dd>
+ 
+            <dt>명령어 History(히스토리)</dt>
+            <dd>파일 오픈 시점부터 History 확인</dd>
+          </dl>
+       </li>
       <li>
-        <a class="link-mainprf" href="/eg-bim_guide/help/customize01" >
+        <a class="link-cmdall" href="/eg-bim_guide/help/command01" >
           <span class="blind">명령어 전체보기</span>
         </a>
       </li>
+       <li class="blind">
+          <dl>
+            <dt>작업공간 탭</dt>
+            <dd>Model 공간과 Layout 공간의 화면 전환</dd>
+
+            <dt>명령어 아이콘 추가</dt>
+            <dd>명령어 전체보기에서 드래그&드롭으로 아이콘 추가(그룹별 최대 16개)</dd>
+ 
+            <dt>그룹 추가</dt>
+            <dd>사용자 그룹 추가 (기본 제공 12개 그룹 외)</dd>
+          </dl>
+       </li>
+      
      
     </ul>
     <!-- // 링크 -->

@@ -30,38 +30,61 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/floorplan/floorplan_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/floorplan/2x_floorplan_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/floorplan/floorplan_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/floorplan/floorplan_01.svg`} alt="" />
-    </div>
-      
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/floorplan/3x_floorplan_01.png`} alt=" " />
 
       <!-- 링크 -->
       <ul>
         <li>
           <a class="link-atrb-block" href="/eg-bim_guide/help/floorplan02">
             <span class="blind">도면정보수정</span>
+             <div class="blind">도면명, 도면번호 등 정보 수정</div>
           </a>
         </li>
 
         <li>
-          <a class="link-multi-print" href="/eg-bim_guide/help/multiprint02">
+          <a class="link-multi-print" href="/eg-bim_guide/help/multiprint01">
             <span class="blind">다중출력</span>
+             <div class="blind">출력 옵션 설정 및 여러 도면 일괄 출력</div>
           </a>
         </li>
 
         <li>
           <a class="link-main" href="/eg-bim_guide/help/interface01">
             <span class="blind">그리미 열기</span>
+             <div class="blind">도면 작업공간 실행</div>
           </a>
         </li>
+
+        <li class="blind">
+          <dl>
+            <dt>사용자 지정 폴더</dt>
+
+            <dt>사용자 지정 폴더 추가</dt>
+            <dd>사용자 지정 폴더로 드래그&드롭</dd>
+
+            <dt>파일 탐색기</dt>
+
+            <dt>도면 찾기</dt>
+            <dd>선택된 폴더 내에서 도면 검색</dd>
+            <dd>도면명, 도면번호 등 표시된 도면정보 내에서 키워드 검색</dd>
+
+            <dt>도면정보</dt>
+            <dd>파일명, 도면명, 도면번호 등 건설 CALS 기준의 도면정보 제공</dd>
+            <dd>열림 : 현재 그리미에 실행 중인 파일 표시</dd>
+            <dd>우클릭 시 이동, 복사, 삽입, 삭제 및 열기 명령 실행</dd>
+            <dd>더블클릭 시 그리미에서 해당 도면 실행</dd>
+
+            <dt>미리보기 화면 분리</dt>
+
+            <dt>미리보기 크기 조절</dt> 
+
+            <dt>화면 확장</dt>
+
+            <dt>미리보기</dt>
+            <dd>선택된 폴더 내 도면파일 미리보기</dd>
+            <dd>열림 : 현재 그리미에서 실행 중인 파일 표시</dd>
+          </dl>
+      </li>
       </ul>
       <!-- // 링크 -->
     </div>

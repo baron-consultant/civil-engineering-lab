@@ -47,70 +47,98 @@ const videoModals = [
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-        <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/customize/customize_03.png`} />
-        <source
-          media="(min-resolution: 140dpi)"
-          srcset={`${IMAGE_BASE_PATH}/customize/2x_customize_03.png`}
-        />
-        <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/customize_03.png`} alt=" " />
-      </picture>
-      <div class="ex-wrap">
-        <img src={`${IMAGE_BASE_PATH}/customize/customize_03.svg`} alt="" />
-      </div>
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/customize/3x_customize_03.png`} alt=" " />
       <!-- 링크 -->
       <ul>
         <li>
           <button type="button" class="link-grid" data-modal="modal-grid">
             <span class="blind">그리드</span>
+            <div class="blind">작업화면에 선이나 점으로 표시되는 직사각형 패턴</div>
           </button>
         </li>
 
         <li>
           <button type="button" class="link-grip" data-modal="modal-grip">
             <span class="blind">그립 표시 설정</span>
+            <div class="blind">
+              객체 선택 시 그립점 표시 여부.
+              그립점의 형상 및 표시 개수 설정.
+              그립점 선택 시 실행 가능한 명령 표시 여부
+            </div>
           </button>
         </li>
 
+        <li class="blind">
+          <dl>
+            <dt>객체스냅 추적</dt>
+            <dd>스냅점으로부터 직교 방향의 가이드 라인 표시</dd>
+ 
+            <dt>뷰큐브 표시</dt>
+            <dd>작업화면 우상단에 뷰 방향을 조절하는 뷰큐브 표시 여부</dd>
+          </dl>
+        </li>
         <li>
           <button type="button" class="link-ortho" data-modal="modal-ortho">
             <span class="blind">직교모드</span>
+            <div class="blind">명령어 실행 중에 커서 이동을 수평 및 수직으로 제한</div>
           </button>
+        </li>
+
+         <li class="blind">
+          <dl>
+            <dt>선 가중치</dt>
+            <dt>그리드 스냅</dt>
+            <dd>커서 움직임을 설정된 스냅 간격으로 잡아주는 기능</dd>
+          </dl>
         </li>
 
         <li>
           <button type="button" class="link-iso" data-modal="modal-iso">
             <span class="blind">등각 투영 작업 모드</span>
+            <div class="blind">2D 평면에 3D 형상처럼 그리기. 투영된 모드로 작업공간은 평면.</div>
           </button>
+        </li>
+
+         <li class="blind">
+          <dl>
+            <dt>명령어 자동완성</dt>
+            <dd>명령어 입력 시 연관 명령어 리스트 표시 및 리스트에서 선택된 명령어 자동 입력</dd>
+            <dt>커서 좌표값 표시</dt>
+          </dl>
         </li>
 
         <li>
           <button type="button" class="link-overlap" data-modal="modal-overlap">
             <span class="blind">중복객체 리스트 박스</span>
+            <div class="blind">여러 객체가 겹쳐있을 경우 객체 종류를 표시해 객체만 구별하여 선택</div>
           </button>
         </li>
 
         <li>
           <button type="button" class="link-osnap" data-modal="modal-osnap">
             <span class="blind">객체 스냅</span>
+            <div class="blind">객체의 끝, 중간, 중심같은 특정 지점을 잡아주는 기능</div>
           </button>
         </li>
 
         <li>
           <button type="button" class="link-dynamic" data-modal="modal-dynamic">
             <span class="blind">동적 입력</span>
+            <div class="blind">명령어 입력 및 진행 시 십자선 커서 부근에 명령어, 좌표, 거리 등을 실시간 표시</div>
           </button>
         </li>
 
         <li>
           <button type="button" class="link-angle" data-modal="modal-angle">
             <span class="blind">극좌표 추적</span>
+            <div class="blind">기준점으로부터 원하는 각도 위치를 잡아 가이드라인 표시</div>
           </button>
         </li>
 
         <li>
           <button type="button" class="link-efct" data-modal="modal-efct">
             <span class="blind">선택 효과 설정</span>
+            <div class="blind">객체 선택 시 커서 시작 방향에 따른 선택 영역 색상 선택, 객체 선택 전, 커서가 객체 근처로 갔을 때의 표시</div>
           </button>
         </li>
       </ul>

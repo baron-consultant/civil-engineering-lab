@@ -35,17 +35,64 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/block/block_04.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/block/2x_block_04.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/block_04.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/block/block_04.svg`} alt="" />
-    </div>
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/3x_block_04.png`} alt=" " />
+
+    <div class="blind">
+          <dl>
+            <dt>외부참조 추가하기</dt>
+            <dd>탐색기에서 외부참조 파일 선택 후 삽입점 지정 * 삽입 가능한 외부참조 파일 형식
+              Standard Drawing File (*.dwg)
+              GRIMI Drawing File (*.grm)
+              Drawing Exchange Format (*.dxf)
+              Drawing Template (*.dwt)
+              PDF Files (*.pdf)
+              DGN Files (*.dgn)
+              Image Files (*.gif, *.jpg, *.jpeg, *.png, *.tif, *.tiff, *.wbmp, *.wmf, *.emf, *.j2k, *.jp2, *.jpg, *.bmp, *.)
+            </dd>
+
+            <dt>외부참조 선택</dt>
+            <dd>클릭으로 표시 여부 설정</dd>
+            <dd>마우스 우클릭으로 분리·열기</dd>
+
+            
+            <dt>외부참조 삽입</dt>
+            <dd>1) 더블클릭 시 작업화면에 추가</dd>
+            <dd>2) 작업화면에 드래그&드롭</dd>
+
+            <dt>외부참조 LIST</dt>
+            <dd>현재 파일에 사용 가능한 외부참조의 LIST</dd>
+            <dd>외부참조 파일 이름과 파일형식 표시</dd>
+
+            <dt>외부참조 미리보기</dt>
+
+            <dt>외부참조 파일정보</dt>
+            <dd>이름 : 외부참조 파일 이름(수정 가능)</dd>
+            <dd>종류 : 외부참조 파일 형식</dd>
+            <dd>크기 : 외부참조 파일 용량</dd>
+            <dd>날짜 : 외부참조 파일 생성 날짜</dd>
+            <dd>설정 : 체크 해제시 0,0,0 좌표로 삽입</dd>
+
+            <dt>연결방식 및 경로</dt>
+            <dd>연결방식 :  “명령어 전체보기 > 블록 > 다른파일을 블록으로 연결 > 연결방식 *XRFTYPE ”에서 설정</dd>
+            <dd>다중 연결 : 다른 파일에 외부참조 될 때도 유지(부착)</dd>
+            <dd>현재 파일 : 현재 도면에만 연결(중첩)</dd>
+            <dd>경로유형 - 절대경로 : 최상위 폴더부터 해당파일까지 모든 경로
+             - 상대경로 : 현재파일의 폴더를 기준 현재 파일까지 경로
+             - 경로없음 : 파일경로 사라짐
+            </dd>
+            <dd>
+              경로 - 현재 참조된 파일의 위치를 보여주며, 경로 변경도 가능
+- 새로고침 버튼 클릭 시 파일 변경사항 업데이트 
+            </dd>
+
+            <dt>외부참조 보기 설정</dt>
+            <dd>가시성 : Raster Image 처리 여부 설정</dd>
+            <dd>화면이동시 Raster Image 처리</dd>
+            <dd>테두리 표시 : 이미지의 테두리 표시 여부 *파일 형식이 이미지 및 pdf 파일인 경우</dd>
+            <dd>출력 : 출력시 테두리 표시 여부 * IMAGEFRAME : 이미지 테두리 옵션 설정</dd>
+            <dd>페이드 : 불투명도 수치를 조절 및 주로 외부참조 객체임을 표시</dd>
+          </dl>
+      </div>
   </div>
 </div>
 </section>

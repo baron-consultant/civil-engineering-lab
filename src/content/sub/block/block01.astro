@@ -35,36 +35,47 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/block/block_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/block/2x_block_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/block_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/block/block_01.svg`} alt="" />
-    </div>
-
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/block/3x_block_01.png`} alt=" " />
     <!-- 링크 -->
     <ul>
       <li>
         <a class="link-block" href="/eg-bim_guide/help/block02">
           <span class="blind">블록</span>
+          <div class="blind">
+            객체 반복 사용 시 반복 객체 블록화
+            동일 이름 블록은 수정 시 일괄 반영
+          </div>
         </a>
       </li>
 
       <li>
         <a class="link-atrbBlock" href="/eg-bim_guide/help/block03">
           <span class="blind">속성블록</span>
+          <div class="blind">
+            속성문자가 포함된 블록으로 같은 블록이라도 블록별 개별 속성값 설정 가능
+          </div>
         </a>
       </li>
 
       <li>
         <a class="link-ref" href="/eg-bim_guide/help/block04">
           <span class="blind">외부참조</span>
+           <div class="blind">
+            외부파일(DWG, PDF, JPG 등)을 현재 파일에 연결해 블록으로 사용
+            외부참조된 원본 수정 시 현재 파일에 반영
+          </div>
         </a>
+      </li>
+      <li class="blind">
+          <dl>
+            <dt>블록 검색</dt>
+
+            <dt>블록 속성정보</dt>
+            <dd>기본 속성정보(미리보기 창, 블록 이름, 설명, 레이어 등)와 블록 삽입 시 설정 및 뷰포트 스케일 설정 등 블록 기본 설정 가능</dd>
+
+            <dt>블록 단위</dt>
+            <dd>도면에 삽입되는 단위 지정. 블록, 속성블록, 외부참조에 공통 적용</dd>
+          </dl>
       </li>
     </ul>
     <!-- // 링크 -->

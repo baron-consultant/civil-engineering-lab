@@ -40,17 +40,37 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/style/style_02.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/style/2x_style_02.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/style/style_02.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/style/style_02.svg`} alt="" />
-    </div>
+   <img class="bg-img" src={`${IMAGE_BASE_PATH}/style/3x_style_02.png`} alt=" " />
+    <div class="blind">
+          <dl>
+            <dt>치수 스타일  LIST</dt>
+            <dd>기본 2가지 스타일 제공 (Standard, ISO-25)</dd>
+            <dd>우클릭 시 치수 스타일 제거</dd>
+
+            <dt>치수 스타일 선택</dt>
+
+            <dt>치수 스타일 추가</dt>
+
+            <dt>설정 미리보기</dt>
+            <dd>설정값 변화에 따른 형상 미리보기</dd>
+            <dd>마우스 휠로 확대, 축소, 초점 이동 가능</dd>
+
+            <dt>치수 스타일 수정</dt>
+            <dd>수정 &rarr; 취소/적용</dd>
+
+            <dt>스케일 설정</dt>
+            <dd>치수 스케일 : 치수 형상 크기 조절을 위한 스케일값 입력</dd> 
+            <dd>치수전체 : 치수 형상 크기를 치수 스케일값을 적용해 조정</dd> 
+            <dd>도면공간 : 모형 공간과 도면공간(Layout) 사이의 축척을 기준으로 결정</dd> 
+            <dd>뷰포트 스케일 맞춤 : 뷰포트에 맞게 치수 형상에 대한 스케일 조정 가능</dd> 
+            <dd>측정 스케일 : 치수 측정값에 적용할 스케일값 입력</dd>
+
+            <dt>치수 스타일 상세 설정</dt>
+            <dd>치수 단위 : 1차, 2차 치수 단위 등 상세 설정</dd>
+            <dd>치수 문자 : 치수 형상에 표시되는 치수문자 상세 설정</dd>
+            <dd>치수 형상 : 화살촉, 치수선 길이 등 치수 형상 상세 설정</dd>
+          </dl>
+        </div>
   </div>
 </div>
 </section>

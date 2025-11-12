@@ -30,16 +30,35 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/multiprint/multiprint_02.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/multiprint/2x_multiprint_02.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/multiprint/multiprint_02.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/multiprint/multiprint_02.svg`} alt="" />
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/multiprint/3x_multiprint_02.png`} alt=" " />
+    
+    <div class="blind">
+      <dl>
+        <dt>프린터/플로터</dt>
+        <dd>프린터 : 프린터 및 플로터 선택</dd>
+        <dd>파일출력 : PDF, JPG, PNG 중 선택</dd>
+
+        <dt>용지</dt>
+        <dd>용지 방향 선택</dd>
+        <dd>기기별 출력 가능한 용지 리스트</dd>
+        <dd>사용자 용지 설정</dd>
+
+        <dt>플롯 스타일</dt>
+        <dd>레이어 플롯 스타일 or 플롯 스타일(CTB) 선택 적용</dd>
+        <dd>초기화 버튼 클릭 시 레이어 플롯 스타일로 변경</dd>
+
+        <dt>용지 여백</dt>
+        <dd>여백값을 클릭하여 사용자가 수정값 입력 or Center 버튼 클릭시 용지 중심으로 자동 맞춤 가능부</dd>
+
+        <dt>출력 페이지 표시</dt>
+        <dd>출력영역을 도곽맞춤 선택 후 전체출력 체크 시 페이지 수 표시</dd>
+
+        <dt>용지 크기</dt>
+        <dd>사용자 용지 0 x 0(mm) 경우에만 크기 조절 가능</dd>
+
+        <dt>인쇄 미리보기</dt>
+        <dd>설정 변경 시 새로고침 버튼을 눌러 변경사항 반영</dd>
+      </dl>
     </div>
   </div>
 </div>

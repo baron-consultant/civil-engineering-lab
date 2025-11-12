@@ -30,18 +30,7 @@ import { IMAGE_BASE_PATH } from '../config';
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/command/command_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/command/2x_command_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/command_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/command/command_01.svg`} alt="" />
-    </div>
-
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/3x_command_01.png`} alt=" " />
       <!-- 링크 -->
       <ul>
         <li>
@@ -55,6 +44,28 @@ import { IMAGE_BASE_PATH } from '../config';
             <span class="blind">구조/배근</span>
           </a>
         </li>
+        <li class="blind">
+          <dl>
+            <dt>명령어 그룹</dt>
+            <dd>기능별로 구분하여 12개 그룹으로 구성</dd>
+
+            <dt>해당 명령어의  옵션창</dt>
+
+            <dt>명령어 옵션 설정</dt>
+            <dd>* 옵션 선택 및 컨트롤바 조절 예시</dd>
+
+            <dt>단축키 수정</dt>
+            <dd>좌·우클릭 시 별칭 및 단축키 수정</dd>
+
+            <dt>명령어 실행</dt>
+            <dd>명령어 클릭</dd>
+            <dd>입력창에 입력 시 적용</dd>
+
+            <dt>명령어 아이콘 등록</dt>
+            <dd>명령어 아이콘 바로 드래그&드롭</dd>
+          </dl>
+        </li>
+       
       </ul>
       <!-- // 링크 -->
     </div>

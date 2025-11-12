@@ -30,25 +30,42 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/multi/multi_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/multi/2x_multi_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/multi/multi_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/multi/multi_01.svg`} alt="" />
-    </div>
-
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/multi/3x_multi_01.png`} alt=" " />
     <!-- 링크 -->
     <ul>
+      <li class="blind">
+        <dl>
+          <dt>듀얼모드 동시 작업(읽기전용창)</dt>
+          <dd>읽기전용창과 작업창을 각각 띄워 참고 도면 확인과 작업 도면 편집을 동시에 작업</dd>
+          <dd>화면 밖으로 드래그&드롭하여 읽기전용창 생성</dd>
+ 
+          <dt>레이어</dt>
+          <dd>레이어 표시 상태 조정</dd>
+ 
+          <dt>뷰</dt>
+          <dd>화면 확대, 축소, 초점 이동 등 뷰 조정</dd>
+ 
+          <dt>조회</dt>
+          <dd>거리, 면적, 각도 조회 및 객체특성 조회</dd>
+ 
+          <dt>작업환경 설정</dt>
+          <dd>그리드 표시 및 객체스냅 조정</dd>
+ 
+          <dt>레이어</dt>
+          <dd>레이어 확인 및 레이어 표시상태 조정</dd>
+ 
+          <dt>Read Only 파일 탭</dt>
+          <dd>Read Only 파일 리스트 확인</dd>
+          <dd>창 종료 시 작업화면으로 복귀</dd>
+        </dl>
+      </li>
       <li>
         <a class="link-props" href="/eg-bim_guide/help/feature01">
           <span class="blind">속성창</span>
+          <div class="blind">선택된 객체의 모든 속성정보 확인</div>
         </a>
       </li>
+     
     </ul>
     <!-- // 링크 -->
   </div>

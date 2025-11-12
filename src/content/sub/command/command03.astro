@@ -34,24 +34,39 @@ const videoModals = [
   <!-- // 타이틀 -->
   <div class="contents">
     <div class="inner">
-      <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/command/command_03.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/command/2x_command_03.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/command_03.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/command/command_03.svg`} alt="" />
-    </div>
-
+      <img class="bg-img" src={`${IMAGE_BASE_PATH}/command/3x_command_03.png`} alt=" " />
       <!-- 링크 -->
       <ul>
         <li>
           <button class="link-rebar"  type="button" data-modal="modal-rebar">
             <span class="blind">철근 상세도 만들기</span>
+            <div class="blind">
+              1. 만들기 방식 선택
+              2. 철근상세 선택 : 미리보기에서 철근상세를 선택하여 철근제원표에 추가
+              3. 철근제원 입력 : a. 철근별 제원을 직접 입력(저장 파일을 불러와 사용 가능) b. 입력된 제원은 파일로 저장 가능
+              4. 철근상세도 넣기(명령어 실행) : 명령어 클릭, 입력창에 입력 시 적용
+            </div>
           </button>
+        </li>
+         <li class="blind">
+          <dl>
+            <dt>도면축척 설정하기</dt>
+            <dd>철근, 마킹블록 및 재료표 등의 크기가 도면축척에 맞게 생성되도록 값을 먼저 입력</dd>
+
+            <dt>철근마킹블록 넣기</dt>
+            <dd>점 철근 및 선 철근에 대한 철근 마킹 블록 작성</dd>
+            <dd>철근 C.T.C 표시 및 철근상세 표기 가능</dd>
+
+            <dt>철근배근도 그리기</dt>
+
+            <dt>철근 길이 조회 및 마킹블록 수정</dt>
+
+            <dt>건설CALS 표준레이어 불러오기</dt>
+            <dd>리스트에 원하는 레이어를 체크 후 적용하기 버튼으로 레이어창에 체크 항목을 추가</dd>
+
+            <dt>철근재료표 만들기</dt>
+            <dd>철근제원 및 재료표의 상세 옵션 설정 확인 후 작성</dd>
+          </dl>
         </li>
 
       </ul>

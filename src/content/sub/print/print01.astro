@@ -36,18 +36,46 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <picture>
-      <source media="(max-resolution: 139dpi)" srcset={`${IMAGE_BASE_PATH}/print/print_01.png`} />
-      <source
-        media="(min-resolution: 140dpi)"
-        srcset={`${IMAGE_BASE_PATH}/print/2x_print_01.png`}
-      />
-      <img class="bg-img" src={`${IMAGE_BASE_PATH}/print/print_01.png`} alt=" " />
-    </picture>
-    <div class="ex-wrap">
-      <img src={`${IMAGE_BASE_PATH}/print/print_01.svg`} alt="" />
-    </div>
+    <img class="bg-img" src={`${IMAGE_BASE_PATH}/print/3x_print_01.png`} alt=" " />
+    <div class="blind">
+          <dl>
+            <dt>페이지 설정</dt>
+            <dd>미리 지정한 페이지 설정값 or 이전 플롯값 사용</dd>
 
+            <dt>프린터/플로터</dt>
+            <dd>프린터 : 프린터 및 플로터 선택</dd>
+            <dd>파일출력 : PDF, JPG, PNG 중 선택</dd>
+
+            <dt>용지</dt>
+            <dd>용지 방향 선택</dd>
+            <dd>기기별 출력 가능한 용지 리스트</dd>
+            <dd>사용자 용지 설정</dd>
+
+            <dt>출력 영역</dt>
+            <dd>도곽맞춤 : 도곽영역 자동인식</dd>
+            <dd>도곽지정 : 사용자도곽 추가</dd>
+            <dd>영역지정 : 원하는 영역 지정</dd>
+            <dd>모든 객체영역 : 모든 객체를 포함하는 영역</dd>
+            <dd>전체출력 : 도곽 모두 출력</dd>
+            <dd>용지맞춤 : 용지맞춤 및 스케일 입력</dd>
+
+            <dt>플롯 스타일</dt>
+            <dd>레이어 플롯 스타일 or 플롯 스타일(CTB) 선택 적용</dd>
+            <dd>초기화 버튼 클릭 시 레이어 플롯 스타일로 변경</dd>
+
+            <dt>실시간 미리보기</dt>
+            <dd>인쇄 설정 변경시 변경사항에 대한 실시간 미리보기 사용 여부</dd>
+
+            <dt>용지 여백</dt>
+            <dd>여백값을 클릭하여 사용자가 수정값 입력 or Center 버튼 클릭시 용지 중심으로 자동 맞춤 가능부</dd>
+
+            <dt>출력 페이지 표시</dt>
+            <dd>출력영역을 도곽맞춤 선택 후 전체출력 체크 시 페이지 수 표시</dd>
+
+            <dt>용지 크기</dt>
+            <dd>사용자 용지 0 x 0(mm) 경우에만 크기 조절 가능</dd>
+          </dl>
+      </div>
   </div>
 </div>
 </section>
