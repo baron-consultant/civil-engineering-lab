@@ -4,10 +4,10 @@ const imageCache = new Map();
 export function resolveImagePath(src) {
   if (!src) return src;
   if (src.startsWith("@img/")) {
-    return src.replace("@img/", "/eg-bim_guide/images/");
+    return src.replace("@img/", "/civil-engineering-lab/images/");
   }
   if (src.startsWith("../assets/images/")) {
-    return src.replace("../assets/images/", "/eg-bim_guide/images/");
+    return src.replace("../assets/images/", "/civil-engineering-lab/images/");
   }
   return src;
 }

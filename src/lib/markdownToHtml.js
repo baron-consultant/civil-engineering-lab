@@ -12,7 +12,7 @@ export async function markdownToHtml(raw) {
     // 🔹 참조 스타일 이미지 정의를 저장
     .replace(
       /\[([^\]]+)\]:\s*\.\.\/.*assets\/images\/(.+)/g,
-      (_, ref, path) => `[${ref}]: /eg-bim_guide/images/${path}`
+      (_, ref, path) => `[${ref}]: /civil-engineering-lab/images/${path}`
     )
     // 🔹 참조 스타일 이미지 사용 시 클래스 추가
     .replace(

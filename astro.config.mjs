@@ -8,7 +8,7 @@ import starlightThemeNova  from 'starlight-theme-nova';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://baron-consultant.github.io',
-	base: '/eg-bim_guide/',
+	base: '/civil-engineering-lab/',
 	integrations: [
 		starlight({
 			title: '',

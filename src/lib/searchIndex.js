@@ -83,7 +83,7 @@ export async function generateSearchData() {
         content: plain.slice(0, 500),
         fullContent: plain,
         fullLower: text,
-        url: `/eg-bim_guide/help/${slug}`,
+        url: `/civil-engineering-lab/help/${slug}`,
         category: 'mdx',
         type: 'mdx'
       };
@@ -103,7 +103,7 @@ export async function generateSearchData() {
         content: '',
         fullContent: '',
         fullLower: '',
-        url: `/eg-bim_guide/help${route.path}`,
+        url: `/civil-engineering-lab/help${route.path}`,
         category: 'menu',
         type: 'menu'
       };
@@ -132,7 +132,7 @@ export async function generateSearchData() {
       content: text.slice(0, 500),
       fullContent: text,
       fullLower: text.toLowerCase(),
-      url: `/eg-bim_guide/help/${fileName}`,
+      url: `/civil-engineering-lab/help/${fileName}`,
       category: 'astro-file',
       type: 'astro-file'
     };

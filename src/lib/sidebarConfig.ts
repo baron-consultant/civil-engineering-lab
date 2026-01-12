@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 
-const BASE_PATH = "/eg-bim_guide/help";
+const BASE_PATH = "/civil-engineering-lab/help";
 
 export interface MenuItem {
   id: string;

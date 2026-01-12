@@ -535,7 +535,7 @@ select::-ms-expand {
 }
 .btn-back .ico-back {
   aspect-ratio: 1/1;
-  background-image: url(/eg-bim_guide/help/images/ico/ico_arrow_back.svg);
+  background-image: url(/civil-engineering-lab/help/images/ico/ico_arrow_back.svg);
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;

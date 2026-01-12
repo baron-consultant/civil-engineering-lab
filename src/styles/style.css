@@ -279,7 +279,7 @@ html body {
   line-height: 30px;
 }
 .nav-group .depth01 > li .ico-arrow {
-  background-image: url(/eg-bim_guide/help/images/ico/ico_arrow_dn.svg);
+  background-image: url(/civil-engineering-lab/help/images/ico/ico_arrow_dn.svg);
   cursor: pointer;
   display: inline-block;
   height: 14px;
@@ -807,8 +807,8 @@ html body {
 }
 .page-tit-wrap:has(.tip-box) .tit-box .page-tail:after,
 .page-tit-wrap:has(.tip-box) .tit-box .page-tail:before {
-  -webkit-mask-image: url(/eg-bim_guide/help/images/mask_page_tail.svg);
-  mask-image: url(/eg-bim_guide/help/images/mask_page_tail.svg);
+  -webkit-mask-image: url(/civil-engineering-lab/help/images/mask_page_tail.svg);
+  mask-image: url(/civil-engineering-lab/help/images/mask_page_tail.svg);
   -webkit-mask-position: left center;
   mask-position: left center;
   -webkit-mask-repeat: no-repeat;
