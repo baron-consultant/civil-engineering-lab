@@ -1,0 +1,68 @@
+name: Contents Merge
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "콘텐츠 브랜치 이름 (예: featureX-content)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  cherry-pick-content:
+    runs-on: ubuntu-latest
+    env:
+      PAT_TOKEN: ${{ secrets.CONTENT_PUSH_TOKEN }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch target branch
+        run: |
+          BRANCH="${{ inputs.branch }}"
+          git fetch origin "${BRANCH}:${BRANCH}"
+          git show-ref --verify "refs/heads/${BRANCH}"
+
+      - name: Ensure only src/content changes
+        run: |
+          BRANCH="${{ inputs.branch }}"
+          CHANGED=$(git diff --name-only origin/main.."${BRANCH}")
+          if [ -z "${CHANGED}" ]; then
+            echo "No changes between origin/main and ${BRANCH}"
+            exit 0
+          fi
+
+          echo "${CHANGED}"
+
+          # Fail if any file is outside src/content
+          OUTSIDE=$(echo "${CHANGED}" | grep -v '^src/content/' || true)
+          if [ -n "${OUTSIDE}" ]; then
+            echo "Found non-content changes:"
+            echo "${OUTSIDE}"
+            exit 1
+          fi
+
+      - name: Cherry-pick content commits onto main
+        run: |
+          BRANCH="${{ inputs.branch }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Cherry-pick all commits that are in BRANCH but not in main
+          git cherry-pick origin/main.."${BRANCH}"
+
+      - name: Push to main
+        run: |
+          if [ -z "${PAT_TOKEN}" ]; then
+            echo "CONTENT_PUSH_TOKEN secret is not set."
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git push origin HEAD:main

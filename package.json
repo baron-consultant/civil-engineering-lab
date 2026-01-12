@@ -7,6 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "lint": "biome check .",
+    "format": "biome format .",
     "astro": "astro"
   },
   "dependencies": {
@@ -16,5 +18,8 @@
     "remark-gemoji": "^8.0.0",
     "sharp": "^0.34.2",
     "starlight-theme-nova": "^0.9.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.11"
   }
 }
