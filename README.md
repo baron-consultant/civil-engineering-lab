@@ -1,9 +1,9 @@
 # Civil Engineering Lab Guide
 
-Astro + Starlight 기반의 토목/건설 CAD 도움말 사이트입니다. GitHub Pages에 `/civil-engineering-lab/` 베이스로 배포하며, 현재는 `dist/`를 함께 커밋해 정적 결과물을 직접 관리합니다.
+Astro + Starlight 기반의 토목/건설 엔지니어링 정보 사이트입니다.
 
 ## 요구 사항
-- Node.js 18+ (LTS 권장)
+- Node.js 24+ (LTS 권장)
 - npm
 
 ## 설치
@@ -26,7 +26,6 @@ npm install
 - `src/lib`: 사이드바, 마크다운, 검색 관련 유틸.
 - `src/styles`: 전역 스타일과 테마 커스터마이즈.
 - `src/assets`, `public`: 이미지/아이콘 등 정적 자산.
-- `dist`: `npm run build` 결과물(GitHub Pages에 푸시).
 
 ## 네비게이션/목차
 - 사이드바는 `src/content/docs` 하위의 상위 디렉터리(Civil DX, 기반기술, 설계, 시공, guides, reference)를 자동으로 그룹화합니다. 동일 구조로 문서를 추가하면 네비게이션에 바로 반영됩니다.
@@ -45,10 +44,7 @@ npm install
 - 콘텐츠 전용 머지는 `.github/workflows/contents-merge.yml` (수동 `workflow_dispatch`, `CONTENT_PUSH_TOKEN` 필요)을 사용하며 `src/content/` 변경만 허용됩니다. main으로 직접 push는 제한되어 있습니다.
 
 ## 배포 플로우(GitHub Pages)
-1. `npm run build`로 정적 사이트 생성.
-2. `dist/`를 포함해 커밋/푸시하면 GitHub Pages가 `/civil-engineering-lab/` 경로로 제공.
-3. Actions 기반 자동 배포로 전환하기 전까지는 `dist/`를 항상 최신 상태로 유지하세요.
+ Actions 기반 자동 배포 `.github/workflows/deploy.yml` 참조.
 
 ## 참고
-- 경로 프리픽스는 `/civil-engineering-lab`을 사용합니다. 하드코딩 대신 `src/lib/sidebarConfig.ts`의 `BASE_PATH` 등 헬퍼를 우선 사용하세요.
 - 빌드 시 일부 `.eot` 폰트·마스크 아이콘 경고가 발생할 수 있습니다. 실제 에셋 경로를 확인하거나 불필요하면 참조를 제거하세요.
