@@ -12,7 +12,7 @@ npm install
 ```
 
 ## 스크립트
-- `npm run dev`: 로컬 개발 서버(기본 http://localhost:4321) 실행. 베이스 경로가 `/civil-engineering-lab/`이므로 링크·에셋 경로를 확인하세요.
+- `npm run dev`: 로컬 개발 서버(기본 http://localhost:4321) 실행. 베이스 경로는 `/`입니다.
 - `npm run build`: 정적 산출물 생성. 결과는 `dist/`에 저장되며 현재는 저장소에 커밋합니다.
 - `npm run preview`: 빌드 결과를 로컬에서 검증.
 - `npm run lint`: Biome 기반 린트(`biome check .`).

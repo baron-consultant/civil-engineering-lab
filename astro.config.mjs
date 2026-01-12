@@ -51,6 +51,7 @@ export default defineConfig({
         Sidebar: "./src/components/ContextualSidebar.astro",
       },
       customCss: ["./src/styles/custom.css"],
+      pagefind: true,
     }),
   ],
 });

@@ -104,7 +104,7 @@ export async function generateSearchData() {
         content: '',
         fullContent: '',
         fullLower: '',
-        url: `/civil-engineering-lab/help${route.path}`,
+        url: `/help${route.path}`,
         category: 'menu',
         type: 'menu'
       };
@@ -133,7 +133,7 @@ export async function generateSearchData() {
       content: text.slice(0, 500),
       fullContent: text,
       fullLower: text.toLowerCase(),
-      url: `/civil-engineering-lab/help/${fileName}`,
+      url: `/help/${fileName}`,
       category: 'astro-file',
       type: 'astro-file'
     };

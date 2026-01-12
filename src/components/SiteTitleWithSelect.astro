@@ -1,6 +1,7 @@
 ---
 import { Logos } from "starlight-theme-nova/components/Logos";
 import type { Props } from "@astrojs/starlight/props";
+import fuzzyClient from "../scripts/fuzzy-search-client.ts?url";
 
 const { siteTitle, locale } = Astro.props; // Starlight props
 
@@ -110,3 +111,5 @@ for (const section of sections) {
         }
     }
 </style>
+
+<script type="module" src="/scripts/fuzzy-search-client.js"></script>
