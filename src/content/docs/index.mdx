@@ -1,5 +1,33 @@
 ---
-title: EG-BIM redirect
-layout: /src/layouts/RedirectLayout.astro
-redirect: /civil-engineering-lab/help/
+title: Welcome to Civil Engineering Lab
+description: Guide for Civil Engineering Tools and Labs
+template: splash
+hero:
+  tagline: Your hub for detailed documentation and guides.
+  image:
+    file: ../../assets/cell_temp.svg
+  actions:
+    - text: Get Started
+      link: /guides/getting-started/
+      icon: right-arrow
+      variant: primary
 ---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Next Steps
+
+<CardGrid stagger>
+	<Card title="Update Content" icon="pencil">
+		Edit `src/content/docs/index.mdx` to see this page change.
+	</Card>
+	<Card title="Add New Guides" icon="add-document">
+		Add Markdown or MDX files to `src/content/docs` to automatically generate new pages.
+	</Card>
+	<Card title="Configure Site" icon="setting">
+		Edit `astro.config.mjs` to change the site configuration.
+	</Card>
+	<Card title="Read the Docs" icon="open-book">
+		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	</Card>
+</CardGrid>

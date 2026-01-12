@@ -1,0 +1,112 @@
+---
+import { Logos } from "starlight-theme-nova/components/Logos";
+import type { Props } from "@astrojs/starlight/props";
+
+const { siteTitle, locale } = Astro.props; // Starlight props
+
+const sections = [
+    { label: "Civil DX", value: "/civil-dx/" },
+    { label: "기반기술", value: "/기반기술/" },
+    { label: "설계", value: "/설계/" },
+    { label: "시공", value: "/시공/" },
+];
+
+const currentPath = decodeURIComponent(Astro.url.pathname);
+let currentSection = "";
+
+// Determine current section
+for (const section of sections) {
+    if (currentPath.includes(section.value)) {
+        currentSection = section.value;
+        break;
+    }
+}
+---
+
+<div class="site-title-wrapper">
+    <!-- Logo/Title -->
+    <a href="/" class="site-title">
+        {
+            siteTitle &&
+                siteTitle.logoVisibleOnMobile !== false &&
+                siteTitle.logo && (
+                    <img
+                        class="logo mobile-only"
+                        src={siteTitle.logo.src}
+                        alt={siteTitle.logo.alt || "Logo"}
+                        width="32"
+                        height="32"
+                    />
+                )
+        }
+        <span class="title-text"
+            >{siteTitle ? siteTitle.textContent : "CivilEngineeringLab"}</span
+        >
+    </a>
+
+    <!-- Divider -->
+    <span class="divider">|</span>
+
+    <!-- Select Box -->
+    <select class="section-select" onchange="window.location.href=this.value">
+        <option value="" disabled selected={!currentSection}>섹션 선택</option>
+        {
+            sections.map((section) => (
+                <option
+                    value={section.value}
+                    selected={section.value === currentSection}
+                >
+                    {section.label}
+                </option>
+            ))
+        }
+    </select>
+</div>
+
+<style>
+    .site-title-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .title-text {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: var(--sl-color-text-accent);
+        text-decoration: none;
+    }
+    .site-title {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .divider {
+        color: var(--sl-color-gray-4);
+    }
+
+    .section-select {
+        background-color: var(--sl-color-bg-nav);
+        color: var(--sl-color-white);
+        border: 1px solid var(--sl-color-gray-5);
+        border-radius: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+    }
+
+    .section-select:hover {
+        border-color: var(--sl-color-gray-3);
+    }
+
+    /* Mobile handling */
+    @media (max-width: 50rem) {
+        .title-text {
+            font-size: 1rem;
+        }
+        .section-select {
+            max-width: 100px;
+        }
+    }
+</style>

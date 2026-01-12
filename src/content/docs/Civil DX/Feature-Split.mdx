@@ -1,0 +1,37 @@
+---
+title: Civil DX - 기능 (2분할)
+---
+
+import SplitCard from '../../../components/SplitCard.astro';
+
+# 주요 기능 소개
+
+<SplitCard>
+  <div slot="content">
+    ## 3D 모델링 자동화
+    
+    복잡한 선형 데이터를 기반으로 3D 모델을 자동으로 생성합니다.
+    
+    - 선형 정보 입력
+    - 단면 템플릿 적용
+    - 3D 솔리드 생성
+    
+    이 기능은 설계 시간을 획기적으로 단축시킵니다.
+  </div>
+  <div slot="media">
+    <img src="/civil-engineering-lab/assets/placeholders/img1.svg" alt="Model Automation" />
+  </div>
+</SplitCard>
+
+<SplitCard reverse>
+  <div slot="content">
+    ## 물량 산출 연동
+    
+    모델에서 직접 수량 산출서를 생성합니다.
+    
+    정확한 체적 기반 산출로 오차를 최소화하고, 설계 변경 시 실시간으로 물량이 업데이트됩니다.
+  </div>
+  <div slot="media">
+    <img src="/civil-engineering-lab/assets/placeholders/img2.svg" alt="Quantity Takeoff" />
+  </div>
+</SplitCard>

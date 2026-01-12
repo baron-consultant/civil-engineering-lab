@@ -1,0 +1,19 @@
+---
+title: 기반기술 - 실험 (그리드)
+---
+
+import GridGallery from '../../../components/GridGallery.astro';
+import GridItem from '../../../components/GridItem.astro';
+
+# 실험실 갤러리
+
+<GridGallery>
+  <GridItem title="알고리즘 A">
+    <img slot="media" src="/civil-engineering-lab/assets/placeholders/img1.svg" />
+    <div slot="content">성능 최적화 테스트 결과</div>
+  </GridItem>
+  <GridItem title="알고리즘 B">
+    <img slot="media" src="/civil-engineering-lab/assets/placeholders/img2.svg" />
+    <div slot="content">병렬 처리 효율 분석</div>
+  </GridItem>
+</GridGallery>

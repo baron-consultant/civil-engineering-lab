@@ -1,0 +1,22 @@
+---
+
+---
+
+<div class="grid-gallery">
+    <slot />
+</div>
+
+<style>
+    .grid-gallery {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    @media (min-width: 40rem) {
+        .grid-gallery {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>

@@ -29,6 +29,7 @@
       rgba(18, 60, 47, 0) 16.66%
     ),
     linear-gradient(180deg, #123328, rgba(18, 51, 40, 0));
+  --topbar-height: 90px;
   --border-gra-tail: linear-gradient(180deg, #209f79, transparent);
   --border-gra-depth: linear-gradient(180deg, #237D62, rgba(19, 74, 57, 0) 100%);
   --border-gra-depth02: linear-gradient(180deg, rgba(19, 74, 57, 0) 50%, #237D62 100%);
@@ -104,11 +105,11 @@ html body {
   background: var(--bg-gra-nav);
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - var(--topbar-height));
   width: 250px;
   overflow: visible;
   position: fixed;
-  top: 0;
+  top: var(--topbar-height);
   z-index: 9;
 }
 .nav-wrap.open {
@@ -120,7 +121,7 @@ html body {
   left: 0;
   margin-top: 195px;
   width: 250px;
-  max-height: calc(100vh - 195px);
+  max-height: calc(100vh - var(--topbar-height) - 195px);
   overflow: auto;
 }
 

@@ -1,5 +1,24 @@
 ---
 import { IMAGE_BASE_PATH } from '../config';
+import LoginCarousel from '../../../components/LoginCarousel.astro';
+
+const slides = [
+  {
+    image: `${IMAGE_BASE_PATH}/interface/3x_information.png`,
+    title: '로그인 화면',
+    body: '아이디/비밀번호 입력 후 실행하며 오프라인 인증 유지 기간을 확인합니다.',
+  },
+  {
+    image: `${IMAGE_BASE_PATH}/interface/3x_information.png`,
+    title: '회원가입 및 비밀번호 재설정',
+    body: '홈페이지에서 계정을 만들거나 비밀번호를 재설정한 뒤 인증을 갱신합니다.',
+  },
+  {
+    image: `${IMAGE_BASE_PATH}/interface/3x_information.png`,
+    title: '로그아웃',
+    body: '열린 도면을 모두 닫은 뒤 로그아웃하고 라이선스 만료일을 확인합니다.',
+  },
+];
 ---
 
 
@@ -30,7 +49,7 @@ import { IMAGE_BASE_PATH } from '../config';
 <!-- // 타이틀 -->
 <div class="contents">
   <div class="inner">
-    <img class="bg-img" src={`${IMAGE_BASE_PATH}/interface/3x_information.png`} alt=" " />
+    <LoginCarousel slides={slides} />
 
     <div class="blind">
       <dl>

@@ -1,0 +1,40 @@
+---
+title: Civil DX - 갤러리 (그리드)
+---
+
+import GridGallery from '../../../components/GridGallery.astro';
+import GridItem from '../../../components/GridItem.astro';
+
+# 프로젝트 갤러리
+
+다양한 적용 사례를 소개합니다.
+
+<GridGallery>
+  <GridItem title="도로 설계">
+    <img slot="media" src="/civil-engineering-lab/assets/placeholders/img1.svg" />
+    <div slot="content">
+      고속도로 IC 선형 검토 및 모델링 사례입니다.
+    </div>
+  </GridItem>
+  
+  <GridItem title="터널 해석">
+    <img slot="media" src="/civil-engineering-lab/assets/placeholders/img2.svg" />
+    <div slot="content">
+      NATM 터널 지보재 배치 자동화 및 안정성 검토.
+    </div>
+  </GridItem>
+  
+  <GridItem title="교량 시공">
+    <img slot="media" src="/civil-engineering-lab/assets/placeholders/img3.svg" />
+    <div slot="content">
+      PSC 거더 교량의 가설 공법 시뮬레이션.
+    </div>
+  </GridItem>
+  
+  <GridItem title="철도 노선">
+    <img slot="media" src="/civil-engineering-lab/assets/placeholders/img4.svg" />
+    <div slot="content">
+      고속철도 노반 및 궤도 부설 계획 검토.
+    </div>
+  </GridItem>
+</GridGallery>
