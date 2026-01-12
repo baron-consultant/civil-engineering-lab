@@ -1,6 +1,10 @@
 ---
 title: Getting Started
 description: A guide in my new Starlight site.
+sidebar:
+  order: 1
+prev: false
+next: false
 ---
 
 Welcome to your new Starlight site!

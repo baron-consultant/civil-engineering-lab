@@ -16,13 +16,14 @@ export default defineConfig({
 			logo: {
 				src: './src/assets/cell_temp.svg',
 			},
-			defaultLocale: 'ko',
+			defaultLocale: 'root',
 			locales: {
-				ko: {
+				root: {
 					label: 'Korean',
-					lang: 'ko-KR'
+					lang: 'ko-KR',
 				},
 			},
+			pagination: true,
 			social: [
 				{
 					icon: 'seti:info',
@@ -30,20 +31,14 @@ export default defineConfig({
 					href: 'https://civilengineeringlab.org',
 				},
 			],
-			// sidebar: [
-			// 	{
-			// 		label: 'EG-BIM 시작하기',
-			// 		autogenerate: { directory: 'guides' },
-			// 	},
-			// 	{
-			// 		label: '기본 기능',
-			// 		autogenerate: { directory: 'BasicFeatures' },
-			// 	},
-			// 	{
-			// 		label: '명령어',
-			// 		autogenerate: { directory: 'commands', collapsed: true },
-			// 	},
-			// ],
+			sidebar: [
+				{ label: 'Civil DX', autogenerate: { directory: 'Civil DX' } },
+				{ label: '기반기술', autogenerate: { directory: '기반기술' } },
+				{ label: '설계', autogenerate: { directory: '설계' } },
+				{ label: '시공', autogenerate: { directory: '시공' } },
+				{ label: 'Guides', autogenerate: { directory: 'guides' } },
+				{ label: 'Reference', autogenerate: { directory: 'reference', collapsed: true } },
+			],
 			plugins: [
 				starlightThemeNova({
 

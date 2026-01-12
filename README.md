@@ -26,6 +26,10 @@ npm install
 - `src/assets`, `public`: 이미지/아이콘 등 정적 자산.
 - `dist`: `npm run build` 결과물(GitHub Pages에 푸시).
 
+## 네비게이션/목차
+- 사이드바는 `src/content/docs` 하위의 상위 디렉터리(Civil DX, 기반기술, 설계, 시공, guides, reference)를 자동으로 그룹화합니다. 동일 구조로 문서를 추가하면 네비게이션에 바로 반영됩니다.
+- 본문 목차는 `##` 이상의 헤더가 있을 때 자동 생성되므로 깊이 있는 헤더 구조를 유지하세요.
+
 ## 배포 플로우(GitHub Pages)
 1. `npm run build`로 정적 사이트 생성.
 2. `dist/`를 포함해 커밋/푸시하면 GitHub Pages가 `/civil-engineering-lab/` 경로로 제공.

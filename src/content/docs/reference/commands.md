@@ -1,6 +1,10 @@
 ---
 title: Command Reference
 description: List of available commands.
+sidebar:
+  order: 1
+prev: false
+next: false
 ---
 
 # Commands
