@@ -53,50 +53,13 @@ const cleanText = (text = "") =>
     .replace(/\s{2,}/g, " ")
     .trim();
 
-const formatText = (text = "") => escapeHtml(cleanText(text));
-
-const enhanceResults = (resultsList, term, overrides) => {
-  if (!resultsList || term.length < 2) return [];
-  const items = Array.from(
-    resultsList.querySelectorAll("li.pagefind-ui__result"),
-  );
-  if (!items.length) return [];
-
-  const entries = items.map((li) => {
-    const title =
-      li.querySelector(".pagefind-ui__result-title")?.innerText?.trim() ?? "";
-    const excerpt =
-      li.querySelector(".pagefind-ui__result-excerpt")?.innerText?.trim() ??
-      "";
-    const href = li.querySelector("a")?.href ?? "";
-    return { title, excerpt, href, li };
-  });
-
-  const fuse = new Fuse(entries, getFuseOptions(overrides));
-  const results = fuse.search(term);
-  if (!results.length) return [];
-
-  // DOM 재구성 (스코어 숨김, 하이라이트 포함)
-  resultsList.innerHTML = results
-    .map(
-      (r) => `
-      <li class="pagefind-ui__result fuzzy-enhanced">
-        <div class="pagefind-ui__result-inner">
-          <p class="pagefind-ui__result-title">
-            <a class="pagefind-ui__result-link" href="${r.item.href}">
-              ${highlightText(r.item.title || r.item.href, term)}
-            </a>
-          </p>
-          <p class="pagefind-ui__result-excerpt">${highlightText(
-            r.item.excerpt || "",
-            term,
-          )}</p>
-        </div>
-      </li>
-    `,
-    )
-    .join("");
-  return results;
+const boldMatches = (text = "", query = "") => {
+  const safe = escapeHtml(cleanText(text));
+  const q = query.trim();
+  if (!q) return safe;
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`(${escaped})`, "gi");
+  return safe.replace(re, "<strong>$1</strong>");
 };
 
 const loadPagefind = async () => {
@@ -250,6 +213,27 @@ const attachObserver = async () => {
       });
   };
 
+  let lastFallbackQuery = "";
+  let lastFallbackAt = 0;
+
+  const listObserver = new MutationObserver(() => {
+    const hasResults =
+      resultsList.querySelectorAll("li.pagefind-ui__result").length > 0;
+    if (hasResults) return;
+    const q = input.value.trim();
+    if (q.length < 2) return;
+
+    const now = Date.now();
+    if (lastFallbackQuery === q && now - lastFallbackAt < 500) return;
+
+    lastFallbackQuery = q;
+    lastFallbackAt = now;
+    runFuzzyFromConsole(q).catch((err) =>
+      console.error("[fuzzy] fallback run error", err),
+    );
+  });
+  listObserver.observe(resultsList, { childList: true, subtree: true });
+
   input.addEventListener("input", () => {
     window.setTimeout(run, 100);
   });
@@ -260,8 +244,20 @@ const attachObserver = async () => {
   }
 };
 
-const renderFallbackList = (resultsList, ranked) => {
+const renderFallbackList = (resultsList, ranked, query) => {
   if (!resultsList) return;
+  clearPagefindMessages();
+
+  if (!ranked.length) {
+    resultsList.innerHTML = `
+      <div class="pagefind-ui__message fuzzy-empty">
+        입력한 검색어에 대한 fuzzy 결과를 찾지 못했습니다.
+      </div>
+    `;
+    console.info("[fuzzy] 결과 없음");
+    return;
+  }
+
   resultsList.innerHTML = ranked
     .map(
       (r) => `
@@ -269,10 +265,13 @@ const renderFallbackList = (resultsList, ranked) => {
         <div class="pagefind-ui__result-inner">
           <p class="pagefind-ui__result-title">
             <a class="pagefind-ui__result-link" href="${r.href}">
-              ${formatText(r.title || r.href)}
+              ${boldMatches(r.title || r.href, query)}
             </a>
           </p>
-          <p class="pagefind-ui__result-excerpt">${formatText(r.excerpt || "")}</p>
+          <p class="pagefind-ui__result-excerpt">${boldMatches(
+            r.excerpt || "",
+            query,
+          )}</p>
         </div>
       </li>
     `,
@@ -293,10 +292,9 @@ const runFuzzyFromConsole = async (term, overrides) => {
     console.info("[fuzzy] fuzzy_search가 비활성화되어 실행하지 않습니다.");
     return [];
   }
-  if (resultsList) resultsList.innerHTML = "";
   const ranked = await headlessFuzzy(query, overrides);
   if (resultsList) {
-    renderFallbackList(resultsList, ranked);
+    renderFallbackList(resultsList, ranked, query);
   }
   return ranked;
 };
@@ -334,6 +332,7 @@ const attachConsoleHelper = () => {
 };
 
 const boot = () => {
+  resetFuseOptions();
   // dialog 내부가 렌더된 이후에 붙이기 위해 약간의 지연
   window.setTimeout(attachObserver, 300);
   window.setTimeout(attachConsoleHelper, 100);
@@ -343,3 +342,8 @@ if (typeof window !== "undefined") {
   window.addEventListener("astro:page-load", boot);
   document.addEventListener("DOMContentLoaded", boot);
 }
+const clearPagefindMessages = () => {
+  document
+    .querySelectorAll(".pagefind-ui__message, .pagefind-ui__result-group")
+    .forEach((el) => el.remove());
+};
