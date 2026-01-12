@@ -1,8 +1,8 @@
 //https://starlight.astro.build/getting-started/
 
 // @ts-check
-import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import { defineConfig } from "astro/config";
 import starlightThemeNova from "starlight-theme-nova";
 
 // https://astro.build/config

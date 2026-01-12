@@ -69,21 +69,22 @@ function getAstroFiles(dir) {
  * 전체 검색 데이터 생성
  * ------------------------------- */
 export async function generateSearchData() {
-  // ① MDX
-  const allDocs = await getCollection('docs', e => e.id.startsWith('ko/commands/'));
+  // ① Docs 전부
+  const allDocs = await getCollection('docs');
   const mdxSearchData = await Promise.all(
     allDocs.map(async (doc) => {
       const plain = await extractPlainText(doc.body);
       const text = plain.toLowerCase();
-      const slug = doc.id.replace(/\.mdx?$/, '');
+      const slugPath = (doc.slug || doc.id).replace(/^ko\//, '');
+      const url = `/${slugPath}${slugPath.endsWith('/') ? '' : '/'}`;
       return {
-        id: slug,
-        title: doc.data.title || slug,
-        titleLower: (doc.data.title || slug).toLowerCase(),
+        id: slugPath,
+        title: doc.data.title || slugPath,
+        titleLower: (doc.data.title || slugPath).toLowerCase(),
         content: plain.slice(0, 500),
         fullContent: plain,
         fullLower: text,
-        url: `/civil-engineering-lab/help/${slug}`,
+        url,
         category: 'mdx',
         type: 'mdx'
       };

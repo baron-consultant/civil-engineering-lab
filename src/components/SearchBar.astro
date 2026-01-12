@@ -1,4 +1,5 @@
 ---
+import Fuse from "fuse.js";
 import { generateSearchData } from '../lib/searchIndex.js';
 const searchData = await generateSearchData(); // 서버에서 생성
 ---
@@ -46,6 +47,17 @@ document.addEventListener('astro:page-load', () => new SearchManager(searchData)
 class SearchManager {
   constructor(searchData) {
     this.data = searchData;
+    this.fuse = new Fuse(searchData, {
+      includeScore: true,
+      threshold: 0.6,
+      ignoreLocation: true,
+      minMatchCharLength: 1,
+      distance: 200,
+      keys: [
+        { name: "title", weight: 0.65 },
+        { name: "fullContent", weight: 0.35 },
+      ],
+    });
     this.input = document.getElementById('search-input');
     this.clearBtn = document.getElementById('search-clear-btn');
     this.dropdown = document.getElementById('search-history-dropdown');
@@ -60,6 +72,7 @@ class SearchManager {
     this.resultsFocusIndex = -1;
     this.currentResultItems = [];
     this.debounceTimer = null;
+    this.debug = this.isDebugEnabled();
 
     if (!this.input || !this.clearBtn || !this.dropdown || !this.historyList) return;
 
@@ -78,6 +91,10 @@ class SearchManager {
 
   normalize(str) {
     return str.replace(/&nbsp;|[\s]+/g, ' ').toLowerCase();
+  }
+
+  normalizeLoose(str) {
+    return this.normalize(str).replace(/\s+/g, '');
   }
 
   onFocus() {
@@ -116,15 +133,32 @@ class SearchManager {
   }
 
   performSearch(queryRaw) {
-    const query = queryRaw.trim().toLowerCase();
+    const query = queryRaw.trim();
     if (query.length < 2) return this.clearResults();
     // 🔹 검색 히스토리에 추가
-      this.saveToHistory(queryRaw);
+    this.saveToHistory(query);
 
-    // 그룹화
-    const matched = this.data.filter(d =>
-      this.normalize(d.title).includes(query) || this.normalize(d.fullContent).includes(query)
-    );
+    const queryLoose = this.normalizeLoose(query);
+    const fuseResults = this.fuse.search(query);
+    const fuzzyMatched = fuseResults.map(r => ({ ...r.item, score: r.score ?? 0 }));
+
+    // 단순 포함(공백 제거) fallback
+    const simpleMatched = this.data
+      .filter(d => {
+        const titleLoose = this.normalizeLoose(d.title);
+        const contentLoose = this.normalizeLoose(d.fullContent || '');
+        return titleLoose.includes(queryLoose) || contentLoose.includes(queryLoose);
+      })
+      .map(d => ({ ...d, score: 0.8 })); // fuzz보다 낮은 우선순위지만 결과 보강
+
+    // 병합 & dedup by url
+    const merged = [...fuzzyMatched, ...simpleMatched];
+    const seen = new Set();
+    const matched = merged.filter(item => {
+      if (seen.has(item.url)) return false;
+      seen.add(item.url);
+      return true;
+    });
 
     // type별 그룹화
     const grouped = matched.reduce((acc, item) => {
@@ -132,13 +166,18 @@ class SearchManager {
       return acc;
     }, {});
 
-    // 각 그룹 최대 50개 제한
-    Object.keys(grouped).forEach(k => grouped[k] = grouped[k].slice(0, 50));
+    // 각 그룹 최대 50개 제한 + 점수로 정렬
+    Object.keys(grouped).forEach(k => {
+      grouped[k] = grouped[k]
+        .sort((a, b) => a.score - b.score)
+        .slice(0, 50);
+    });
 
     // flatten
     const finalResults = Object.values(grouped).flat();
-    this.renderResults(finalResults, queryRaw);
+    this.renderResults(finalResults, query);
     this.hideDropdown();
+    this.logDebugResults(finalResults, query);
   }
 
   executeSearch(queryRaw) {
@@ -147,11 +186,11 @@ class SearchManager {
     this.performSearch(queryRaw);
   }
 
-renderResults(results, query) {
-  this.currentQuery.textContent = query;
-  this.resultsFocusIndex = -1;
+  renderResults(results, query) {
+    this.currentQuery.textContent = query;
+    this.resultsFocusIndex = -1;
 
-  if (!results.length) {
+    if (!results.length) {
     this.resultsList.innerHTML = `
       <div class="no-results">
         <div class="no-results-text">
@@ -189,8 +228,13 @@ renderResults(results, query) {
   `;
   */
 
+  const debugBadge = this.debug
+    ? '<span class="result-badge badge-score">DEBUG: score 표시</span>'
+    : '';
+
   this.resultsCount.innerHTML = `
     가이드 <strong>${countPage} 건</strong> / 명령어 <strong>${countCommand} 건</strong>
+    ${debugBadge}
   `;
 
   // 🔹 HTML 조립
@@ -226,6 +270,9 @@ renderResults(results, query) {
       ? '<span class="result-badge badge-command">명령어</span>'
       : '<span class="result-badge badge-page">가이드</span>';
     const urlWithQuery = `${item.url}?search=${encodeURIComponent(query)}`;
+    const scoreBadge = this.debug && typeof item.score === 'number'
+      ? `<span class="result-badge badge-score">score: ${item.score.toFixed(3)}</span>`
+      : '';
 
     return `
       <div class="search-result-item" tabindex="-1" data-type="${item.type}">
@@ -233,6 +280,7 @@ renderResults(results, query) {
           <div class="result-title">
             <span class="title-text">${titleHtml}</span>
             ${typeBadge}
+            ${scoreBadge}
           </div>
           <div class="result-preview">${this.createPreview(item.fullContent, query)}</div>
         </a>
@@ -343,6 +391,20 @@ renderResults(results, query) {
     if (urlQuery) { this.input.value = urlQuery; this.updateClearButton(); this.executeSearch(urlQuery); }
   }
 
+  isDebugEnabled() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('search_debug') === '1') {
+      localStorage.setItem('searchDebug', '1');
+      return true;
+    }
+    const stored = localStorage.getItem('searchDebug');
+    return stored === '1';
+  }
+
+  logDebugResults(_results, _query) {
+    // 콘솔 디버그 제거
+  }
+
   onKeydown(e) {
     const value = this.input.value.trim();
     if (e.key==='Escape'){this.hideDropdown(); this.hideResults(); this.historyFocusIndex=-1; this.resultsFocusIndex=-1; return;}
@@ -371,3 +433,12 @@ renderResults(results, query) {
   }
 }
 
+if (typeof window !== 'undefined') {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('search_debug') === '1' || localStorage.getItem('searchDebug') === '1') {
+    document.body.insertAdjacentHTML(
+      'afterbegin',
+      '<div style="position:fixed;top:0;right:0;padding:6px 10px;background:#111;color:#fff;font-size:12px;z-index:9999;">SEARCH DEBUG ON</div>'
+    );
+  }
+}
