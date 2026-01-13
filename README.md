@@ -13,7 +13,7 @@ npm install
 
 ## 스크립트
 - `npm run dev`: 로컬 개발 서버(기본 http://localhost:4321) 실행. 베이스 경로는 `/`입니다.
-- `npm run build`: 정적 산출물 생성. 결과는 `dist/`에 저장되며 현재는 저장소에 커밋합니다.
+- `npm run build`: 정적 산출물 생성. 결과는 `dist/`에 저장되며 현재는 저장소에 커밋합니다. **빌드 전에 `npm run format` → `npm run lint` 순으로 실행하는 것을 기본 절차로 합니다.**
 - `npm run preview`: 빌드 결과를 로컬에서 검증.
 - `npm run lint`: Biome 기반 린트(`biome check .`).
 - `npm run format`: Biome 포맷(`biome format .`).

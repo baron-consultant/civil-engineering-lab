@@ -1,0 +1,43 @@
+---
+import TableOfContentsList from "./TableOfContentsList.astro";
+
+const { toc } = Astro.locals.starlightRoute ?? {};
+const filteredItems = (toc?.items ?? []).filter((item) => item.slug !== "_top");
+const title = Astro.locals.t("tableOfContents.onThisPage");
+---
+
+{
+	filteredItems.length > 0 && (
+		<starlight-toc data-min-h={toc?.minHeadingLevel} data-max-h={toc?.maxHeadingLevel}>
+			<nav aria-labelledby="starlight__on-this-page">
+				<h1 id="starlight__on-this-page">
+					<a href="#_top">{title}</a>
+				</h1>
+				<TableOfContentsList toc={filteredItems} />
+			</nav>
+		</starlight-toc>
+	)
+}
+
+<script src="./starlight-toc.ts"></script>
+
+<style>
+	@layer starlight.core {
+		h1#starlight__on-this-page {
+			margin: 0 0 0.75rem;
+			font-size: var(--sl-text-h1, var(--sl-text-3xl, 2.25rem));
+			line-height: 1.25;
+			font-weight: 700;
+		}
+
+		h1#starlight__on-this-page a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		h1#starlight__on-this-page a:hover,
+		h1#starlight__on-this-page a:focus-visible {
+			text-decoration: underline;
+		}
+	}
+</style>

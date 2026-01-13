@@ -39,6 +39,10 @@ export default defineConfig({
         { label: "Guides", autogenerate: { directory: "guides" } },
         { label: "Reference", autogenerate: { directory: "reference", collapsed: true } },
       ],
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 4,
+      },
       plugins: [
         starlightThemeNova({
           // nav: [
@@ -49,6 +53,8 @@ export default defineConfig({
       components: {
         SiteTitle: "./src/components/SiteTitleWithSelect.astro",
         Sidebar: "./src/components/ContextualSidebar.astro",
+        TableOfContents: "./src/components/CustomTableOfContents.astro",
+        MobileTableOfContents: "./src/components/CustomMobileTableOfContents.astro",
       },
       customCss: ["./src/styles/custom.css"],
       pagefind: true,
