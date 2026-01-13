@@ -26,13 +26,13 @@ jobs:
       - name: Fetch target branch
         run: |
           BRANCH="${{ inputs.branch }}"
-          git fetch origin "${BRANCH}:${BRANCH}"
-          git show-ref --verify "refs/heads/${BRANCH}"
+          git fetch origin "${BRANCH}"
+          git show-ref --verify "refs/remotes/origin/${BRANCH}"
 
       - name: Ensure only src/content changes
         run: |
           BRANCH="${{ inputs.branch }}"
-          CHANGED=$(git diff --name-only origin/main.."${BRANCH}")
+          CHANGED=$(git diff --name-only origin/main.."origin/${BRANCH}")
           if [ -z "${CHANGED}" ]; then
             echo "No changes between origin/main and ${BRANCH}"
             exit 0
@@ -55,7 +55,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Cherry-pick all commits that are in BRANCH but not in main
-          git cherry-pick origin/main.."${BRANCH}"
+          git cherry-pick origin/main.."origin/${BRANCH}"
 
       - name: Push to main
         run: |
