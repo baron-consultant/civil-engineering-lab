@@ -1,0 +1,291 @@
+---
+title: 기본 개념(슬라이드)
+sidebar:
+  order: 2
+---
+
+{/* 스타일 커스텀: 슬라이드 레이아웃 적용 */}
+<style>{`
+  /* 1. 기본 폭 제한 해제 */
+  :root { --sl-content-width: 100% !important; }
+  .sl-container { max-width: 100% !important; padding: 0 !important; }
+  .sl-markdown-content { max-width: 100% !important; padding-top: 0 !important; }
+  .sl-markdown-content > h1 { display: none; }
+
+  /* 2. 전체 레이아웃 (Grid: 상단 - 본문 - 하단) */
+  .slide-layout {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 15px;
+    height: calc(100vh - 70px);
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow: hidden;
+    background-color: #fff;
+  }
+
+  /* 3. 본문 2분할 (좌: 1 / 우: 1) */
+  .content-split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* 표 내용을 고려해 좌측을 조금 더 넓게 */
+    gap: 25px;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  /* [좌측 패널] 테이블 */
+  .left-panel {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    height: 100%;
+  }
+  .table-scroll { overflow-y: auto; height: 100%; }
+  
+  .custom-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .custom-table th {
+    padding: 12px 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+    color: #333;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f1f3f5;
+  }
+  /* 헤더 포인트 색상 */
+  .th-bim { color: #006aff !important; background-color: #e3f2fd; }
+  .th-dx { color: #FF7F00 !important; background-color: #fff3e0; }
+
+  .custom-table td {
+    padding: 10px 8px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    color: #333;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .highlight-bim { color: #006aff; font-weight: bold; }
+  .highlight-dx { color: #FF7F00; font-weight: bold; }
+
+  /* [우측 패널] 상하 배치 */
+  .right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 박스 간격 */
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px; 
+  }
+
+  /* 우측 상단: 정의 카드 리스트 */
+  .top-section {
+    background: #fff;
+    /* border: 1px solid #eee; */
+    border-radius: 8px;
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+  }
+
+  /* 정의 카드 스타일 */
+  .def-card {
+    border: 1px solid #ddd;
+    border-left-width: 5px;
+    border-radius: 4px;
+    padding: 12px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .def-card h3 {
+    margin: 0 0 6px 0 !important;
+    font-size: 1rem !important;
+    font-weight: 700;
+  }
+  .def-card p {
+    margin: 0 !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+    color: #444;
+  }
+
+  /* 우측 하단: 이미지 박스 */
+  .bottom-section {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1; /* 남은 공간 차지 */
+  }
+  .bottom-section img {
+    max-height: 220px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  /* [하단] 결론 바 */
+  .footer-bar {
+    background: #f5f5f5;
+    border-left: 5px solid #006064;
+    border-radius: 4px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    color: #333;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+  }
+`}</style>
+
+<div className="slide-layout">
+
+  {/* 1. 상단 제목 */}
+  <div style={{ borderBottom: '2px solid #333', paddingBottom: '10px' }}>
+    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', margin: 0, color: '#131313' }}>기본 개념</h1>
+  </div>
+
+  {/* 2. 메인 콘텐츠 (좌우 2분할) */}
+  <div className="content-split">
+
+    {/* [왼쪽 패널] BIM vs DX 비교표 */}
+    <div className="left-panel">
+      <div className="table-scroll">
+        <table className="custom-table">
+          <colgroup>
+            <col width="22%" />
+            <col width="12%" />
+            <col width="66%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th className="th-bim">BIM</th>
+              <th>구분</th>
+              <th className="th-dx">DX</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Only 3D</strong></td>
+              <td style={{textAlign: 'center'}}><strong>BIM/DX</strong></td>
+              <td className="highlight-dx"><strong>BIM &lt;&lt; DX</strong> (ENG. + Management 포함)</td>
+            </tr>
+            <tr>
+              <td><strong>모델 제작용 상용 S/W</strong><br/>[Civil 3D, Revit, Navisworks 등]</td>
+              <td style={{textAlign: 'center'}}><strong>S/W</strong></td>
+              <td><strong>제작 및 운영</strong> (상용 + 전용 40~80개)<br/>[Rhino, Blender] + [EG-BIM 등]</td>
+            </tr>
+            <tr>
+              <td>기존 2D 설계방식 유지</td>
+              <td style={{textAlign: 'center'}}><strong>프로세스</strong></td>
+              <td><strong>근본적 문제의식</strong>을 통한 개선</td>
+            </tr>
+            <tr>
+              <td><strong>3D 모델 중심</strong><br/>기존 성과품 유지</td>
+              <td style={{textAlign: 'center'}}><strong>성과품</strong></td>
+              <td><strong>공학 정보 및 콘텐츠 연계</strong>에 집중<br/>도면, 수량, 시공계획 등 일식</td>
+            </tr>
+            <tr>
+              <td>3D 모델 이해 향상</td>
+              <td style={{textAlign: 'center'}}><strong>활용</strong></td>
+              <td><strong>설계/시공의 혁신</strong> (개념의 재정립)</td>
+            </tr>
+            <tr>
+              <td>분야별 단절</td>
+              <td style={{textAlign: 'center'}}><strong>확장성</strong></td>
+              <td><strong>전 생애주기</strong> 활용 시스템</td>
+            </tr>
+            <tr>
+              <td><strong>단순화(오류)</strong><br/>수동적/집단적 동질화</td>
+              <td style={{textAlign: 'center'}}><strong>수행개념</strong></td>
+              <td><strong>구체화(복잡)</strong><br/>적극적/구체적 실현 방안</td>
+            </tr>
+            <tr>
+              <td>소극적, 상용 기술 의존</td>
+              <td style={{textAlign: 'center'}}><strong>CIVIL+IT</strong></td>
+              <td><strong>적극적</strong>, 주체적인 기술 접목/융합</td>
+            </tr>
+            <tr>
+              <td>S/W 판매 정책 의존</td>
+              <td style={{textAlign: 'center'}}><strong>주체</strong></td>
+              <td><strong>자체 수행능력</strong> - 지속가능성 확보</td>
+            </tr>
+            <tr>
+              <td>평준화, 국내 중심</td>
+              <td style={{textAlign: 'center'}}><strong>발주처</strong></td>
+              <td><strong>차별화 및 경쟁력 확보</strong>, 해외 진출</td>
+            </tr>
+            <tr>
+              <td>소규모 팀 / 단순교육</td>
+              <td style={{textAlign: 'center'}}><strong>설계사</strong></td>
+              <td><strong>IT + CIVIL ENG 220명 운영</strong> + 기술 개발</td>
+            </tr>
+            <tr>
+              <td>국내 토목 소극적</td>
+              <td style={{textAlign: 'center'}}><strong>시공사</strong></td>
+              <td><strong>분야 확장 모델 및 시스템</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {/* [오른쪽 패널] 정의(상단) + 이미지(하단) */}
+    <div className="right-panel">
+      
+      {/* 1. 상단: 3가지 정의 (카드형) */}
+      <div className="top-section">
+        {/* 건설산업 */}
+        <div className="def-card" style={{ borderLeftColor: '#546e7a' }}>
+          <h3 style={{ color: '#455a64' }}>🏗️ 건설산업</h3>
+          <p>
+            다양한 기술을 융합하여 시설물을 완성하는 종합산업.<br/>
+            <strong>목표:</strong> 최단기간, 최소비용, 편리하고 안전한 고성능 시설물 완성.
+          </p>
+        </div>
+
+        {/* BIM */}
+        <div className="def-card" style={{ borderLeftColor: '#006aff' }}>
+          <h3 style={{ color: '#006aff' }}>💻 BIM (건설정보모델링)</h3>
+          <p>
+            생애주기 정보를 3D 모델 기반으로 통합.<br/>
+            건설정보 표준화 및 디지털 협업이 가능하게 하는 <strong>디지털전환 체계</strong>.
+          </p>
+        </div>
+
+        {/* DX */}
+        <div className="def-card" style={{ borderLeftColor: '#FF7F00' }}>
+          <h3 style={{ color: '#FF7F00' }}>🚀 DX (디지털 전환)</h3>
+          <p>
+            <strong>디지털 기술과 도구</strong>를 활용하여 새로운 가치를 창출하고, 산업생태계 및 업무수행 방식(Process)을 혁신하는 과정.
+          </p>
+        </div>
+      </div>
+
+      {/* 2. 하단: 이미지 박스 */}
+      <div className="bottom-section">
+        <img src="/assets/images/01.png" alt="디지털전환 그림" />
+        <div style={{ marginTop: '8px', fontSize: '0.8rem', color: '#888' }}>
+          [그림] 디지털 전환(DX)의 개념적 흐름
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  {/* 3. 하단 결론 바 */}
+  <div className="footer-bar">
+    <strong>BIM은 건설산업의 DX(디지털 전환)을 수행하는 과정에서 가장 기초가 되는 일부분이다.</strong>
+  </div>
+
+</div>
