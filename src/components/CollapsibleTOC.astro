@@ -1,0 +1,95 @@
+---
+import DefaultTableOfContents from '@astrojs/starlight/components/TableOfContents.astro';
+
+const props = Astro.props;
+---
+
+<div class="toc-wrapper">
+  <DefaultTableOfContents {...props} />
+</div>
+
+<button id="sidebar-toggle" aria-label="Toggle Sidebar">
+  <span class="icon">👉</span>
+</button>
+
+<script>
+  const toggleBtn = document.getElementById('sidebar-toggle');
+
+  if (toggleBtn) {
+    // [핵심 해결책] 
+    // 버튼을 사이드바 감옥에서 탈출시켜 'body' 태그 직속으로 옮깁니다.
+    // 그래야 사이드바가 사라져도 버튼은 살아남습니다.
+    document.body.appendChild(toggleBtn);
+
+    toggleBtn.addEventListener('click', () => {
+      // 1. body에 클래스 토글
+      document.body.classList.toggle('hide-right-sidebar');
+      
+      // 2. 아이콘 방향 변경
+      const icon = toggleBtn.querySelector('.icon');
+      if (icon) {
+        if (document.body.classList.contains('hide-right-sidebar')) {
+          icon.textContent = '👈'; // 돌아오기
+        } else {
+          icon.textContent = '👉'; // 넓게 보기
+        }
+      }
+    });
+  }
+</script>
+
+<style is:global>
+  /* [버튼 스타일] */
+  #sidebar-toggle {
+    position: fixed; /* 화면 기준 고정 */
+    top: 5rem;
+    right: 1.5rem;   /* 스크롤바 고려 위치 */
+    z-index: 9999;   /* 어떤 요소보다 위에 있게 아주 높게 설정 */
+    background-color: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+  
+  #sidebar-toggle:hover {
+    transform: scale(1.1);
+    background-color: var(--sl-color-gray-6);
+  }
+
+  /* =========================================
+     [레이아웃 강제 조정]
+     ========================================= */
+
+  /* 1. 우측 사이드바 영역 숨기기 */
+  body.hide-right-sidebar .right-sidebar,
+  body.hide-right-sidebar aside, 
+  body.hide-right-sidebar .right-sidebar-panel {
+    display: none !important;
+  }
+
+  /* 2. 화면 분할(Grid) 비율 재설정 (오른쪽 공간 삭제) */
+  @media (min-width: 72rem) {
+    body.hide-right-sidebar .sl-container {
+      grid-template-columns: var(--sl-sidebar-width) 1fr !important; 
+    }
+    body.hide-right-sidebar .page {
+      grid-template-columns: var(--sl-sidebar-width) 1fr !important;
+    }
+  }
+
+  /* 3. 본문 영역(main) 너비 100% 강제 */
+  body.hide-right-sidebar main,
+  body.hide-right-sidebar .main-pane {
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+</style>
