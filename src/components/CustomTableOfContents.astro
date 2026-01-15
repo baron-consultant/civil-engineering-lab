@@ -198,6 +198,19 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 			text-decoration: underline;
 		}
 
+		@media (max-width: 71.999rem) {
+			:global(.sidebar-collapsed .main-frame) {
+				padding-inline-start: 0 !important;
+			}
+
+			:global(.sidebar-collapsed .main-pane) {
+				margin-inline: auto !important;
+				width: min(100%, var(--sl-content-width)) !important;
+				max-width: var(--sl-content-width) !important;
+				padding-inline: clamp(1rem, 4vw, 2rem) !important;
+			}
+		}
+
 		@media (min-width: 72rem) and (max-width: 87.499rem) {
 			:global(.toc-collapsed .right-sidebar-container),
 			:global(.toc-collapsed .right-sidebar-panel) {

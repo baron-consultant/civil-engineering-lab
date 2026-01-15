@@ -59,6 +59,10 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 				inset-inline-start: var(--sl-content-inline-start, 0);
 			}
 		}
+		:global(.sidebar-collapsed) nav {
+			inset-inline-start: 11px !important;
+			inset-inline-end: 2px !important;
+		}
 		@media (min-width: 72rem) {
 			nav {
 				display: none !important;
