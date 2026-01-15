@@ -19,6 +19,9 @@ npm install
 - `npm run format`: Biome 포맷(`biome format .`).
 - `npm run astro -- <cmd>`: Astro CLI 직접 사용(예: `npm run astro -- check`).
 
+## UI 메모
+- 우측 목차는 데스크톱 해상도(기본 72rem, 약 1152px) 이상에서 표시되며, 목차 왼쪽 경계에 맞춘 토글 버튼(⟫/⟪)으로 접고 펼칠 수 있습니다.
+
 ## 프로젝트 구조
 - `src/content/docs`: MDX 문서(언어별 하위 폴더 포함, `ko` 사용).
 - `src/content/sub` & `src/pages/help`: 상세 도움말 콘텐츠 페이지.
