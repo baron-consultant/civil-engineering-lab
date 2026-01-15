@@ -38,7 +38,12 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 	const collapsedClass = "toc-collapsed";
 	const storageKey = "cel:toc-collapsed";
 
-	const applyState = (isCollapsed) => {
+	const isDesktopToc = () => window.innerWidth >= 1400;
+
+	let savedState = null;
+	let lastSidebarRect = null;
+
+	const applyState = (isCollapsed, { persist = true } = {}) => {
 		root.classList.toggle(collapsedClass, isCollapsed);
 
 		if (!toggleBtn) return;
@@ -49,16 +54,17 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 		const icon = toggleBtn.querySelector(".toggle-icon");
 		toggleBtn.setAttribute("aria-pressed", isCollapsed ? "true" : "false");
 		toggleBtn.setAttribute("aria-label", label);
-		if (icon) icon.textContent = isCollapsed ? "《" : "》";
+		if (icon) icon.textContent = isCollapsed ? "⟪" : "⟫";
 
-		try {
-			window.sessionStorage.setItem(storageKey, isCollapsed ? "1" : "0");
-		} catch (error) {
-			console.warn("Failed to persist TOC toggle state", error);
+		if (persist) {
+			savedState = isCollapsed ? "1" : "0";
+			try {
+				window.sessionStorage.setItem(storageKey, isCollapsed ? "1" : "0");
+			} catch (error) {
+				console.warn("Failed to persist TOC toggle state", error);
+			}
 		}
 	};
-
-	let lastSidebarRect = null;
 
 	const setTogglePosition = () => {
 		if (!toggleBtn) return;
@@ -88,15 +94,26 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 
 	if (toggleBtn) {
 		document.body.appendChild(toggleBtn);
-		let savedState = null;
 		try {
 			savedState = window.sessionStorage.getItem(storageKey);
 		} catch (error) {
 			console.warn("Failed to read TOC toggle state", error);
 		}
-		const initialCollapsed = savedState === "1";
-		setTogglePosition();
-		applyState(initialCollapsed);
+		const resolveState = () => {
+			if (!isDesktopToc()) return true;
+			if (savedState !== null) return savedState === "1";
+			return false;
+		};
+
+		const syncState = () => {
+			const desktop = isDesktopToc();
+			const nextState = resolveState();
+			const shouldPersist = desktop && savedState !== null;
+			applyState(nextState, { persist: shouldPersist });
+			setTogglePosition();
+		};
+
+		syncState();
 
 		toggleBtn.addEventListener("click", () => {
 			const nextState = !root.classList.contains(collapsedClass);
@@ -105,7 +122,7 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 		});
 
 		window.addEventListener("resize", () => {
-			window.requestAnimationFrame(setTogglePosition);
+			window.requestAnimationFrame(() => syncState());
 		});
 	}
 </script>
@@ -181,7 +198,20 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 			text-decoration: underline;
 		}
 
-		@media (min-width: 72rem) {
+		@media (min-width: 72rem) and (max-width: 87.499rem) {
+			:global(.toc-collapsed .right-sidebar-container),
+			:global(.toc-collapsed .right-sidebar-panel) {
+				display: none !important;
+			}
+
+			:global(.toc-collapsed [data-has-sidebar][data-has-toc] .main-pane) {
+				--sl-content-margin-inline: auto;
+				width: calc(100% - var(--sl-sidebar-width));
+				max-width: calc(100% - var(--sl-sidebar-width));
+			}
+		}
+
+		@media (min-width: 87.5rem) {
 			:global(.toc-collapsed .right-sidebar-container),
 			:global(.toc-collapsed .right-sidebar-panel) {
 				display: none !important;

@@ -39,6 +39,12 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 
 <style>
 	@layer starlight.core {
+		:global(mobile-starlight-toc) {
+			display: block !important;
+			visibility: visible !important;
+			position: relative;
+		}
+
 		nav {
 			position: fixed;
 			z-index: var(--sl-z-index-toc);
@@ -46,10 +52,23 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 			inset-inline: 0;
 			border-top: 1px solid var(--sl-color-gray-5);
 			background-color: var(--sl-color-bg-nav);
+			display: block !important;
 		}
 		@media (min-width: 50rem) {
 			nav {
 				inset-inline-start: var(--sl-content-inline-start, 0);
+			}
+		}
+		@media (min-width: 72rem) {
+			nav {
+				display: none !important;
+			}
+		}
+		@media (max-width: 87.499rem) {
+			:global([data-has-toc] mobile-starlight-toc nav) {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
 			}
 		}
 

@@ -1,0 +1,190 @@
+---
+const labelOpen = "사이드바 접기";
+const labelClosed = "사이드바 펼치기";
+---
+
+<button
+	type="button"
+	class="sidebar-toggle"
+	data-sidebar-toggle
+	data-label-open={labelOpen}
+	data-label-closed={labelClosed}
+	aria-pressed="false"
+>
+	<span class="toggle-icon" aria-hidden="true">⟫</span>
+</button>
+
+<script>
+	const root = document.documentElement;
+	const toggleBtn = document.querySelector("[data-sidebar-toggle]");
+	const collapsedClass = "sidebar-collapsed";
+	const storageKey = "cel:sidebar-collapsed";
+
+	const getDefaultCollapsed = () => {
+		const width = window.innerWidth;
+		if (width < 800) return true;
+		if (width < 1000) return true;
+		return false;
+	};
+
+	let savedState = null;
+
+	const applyState = (isCollapsed, { persist = true } = {}) => {
+		root.classList.toggle(collapsedClass, isCollapsed);
+
+		if (!toggleBtn) return;
+		const label = isCollapsed ? toggleBtn.dataset.labelClosed ?? "사이드바 펼치기" : toggleBtn.dataset.labelOpen ?? "사이드바 접기";
+		const icon = toggleBtn.querySelector(".toggle-icon");
+
+		toggleBtn.setAttribute("aria-pressed", isCollapsed ? "true" : "false");
+		toggleBtn.setAttribute("aria-label", label);
+		if (icon) icon.textContent = isCollapsed ? "⟫" : "⟪";
+		if (persist) {
+			savedState = isCollapsed ? "1" : "0";
+			try {
+				window.sessionStorage.setItem(storageKey, isCollapsed ? "1" : "0");
+			} catch (error) {
+				console.warn("Failed to persist sidebar toggle state", error);
+			}
+		}
+	};
+
+	const getToggleTop = () => {
+		const header = document.querySelector("header.header") ?? document.querySelector("header");
+		const headerRect = header?.getBoundingClientRect();
+		if (headerRect) return headerRect.bottom + 14;
+		return 22;
+	};
+
+	const setTogglePosition = () => {
+		if (!toggleBtn) return;
+		const isCollapsed = root.classList.contains(collapsedClass);
+		const sidebarPane = document.getElementById("starlight__sidebar");
+		const rect = sidebarPane?.getBoundingClientRect();
+		const sidebarWidth = parseFloat(getComputedStyle(root).getPropertyValue("--sl-sidebar-width") || "0") || 0;
+
+		const fallbackLeft = sidebarWidth > 0 ? sidebarWidth : 12;
+		const anchorLeft = rect && rect.width > 0 ? rect.right : fallbackLeft;
+		const top = Math.max(12, getToggleTop());
+
+		toggleBtn.style.left = `${anchorLeft}px`;
+		toggleBtn.style.top = `${top}px`;
+		toggleBtn.style.transform = "translate(-90%, 0)";
+	};
+
+	if (toggleBtn) {
+		document.body.appendChild(toggleBtn);
+
+		try {
+			savedState = window.sessionStorage.getItem(storageKey);
+		} catch (error) {
+			console.warn("Failed to read sidebar toggle state", error);
+		}
+
+		const resolveState = () => {
+			const width = window.innerWidth;
+			if (width < 800) return true;
+			if (savedState !== null) return savedState === "1";
+			return getDefaultCollapsed();
+		};
+
+		const initialCollapsed = resolveState();
+
+		applyState(initialCollapsed, { persist: savedState !== null });
+		setTogglePosition();
+
+		toggleBtn.addEventListener("click", () => {
+			const nextState = !root.classList.contains(collapsedClass);
+			applyState(nextState, { persist: true });
+			setTogglePosition();
+		});
+
+		window.addEventListener("resize", () => {
+			window.requestAnimationFrame(() => {
+				const nextState = resolveState();
+				const shouldPersist = savedState !== null && window.innerWidth >= 800;
+				applyState(nextState, { persist: shouldPersist });
+				setTogglePosition();
+			});
+		});
+	}
+</script>
+
+<style>
+	@layer starlight.core {
+		.sidebar-toggle {
+			position: fixed;
+			top: auto;
+			left: 12px;
+			transform: translate(-90%, 0);
+			z-index: calc(var(--sl-z-index-navbar) + 8);
+			display: none;
+			align-items: center;
+			justify-content: center;
+			width: 36px;
+			height: 40px;
+			padding: 0;
+			background: var(--sl-color-bg-sidebar);
+			border: 1px solid var(--sl-color-hairline);
+			border-right: 0;
+			border-radius: 0;
+			color: color-mix(in srgb, var(--sl-color-hairline-shade) 85%, var(--sl-color-text) 15%);
+			font-size: 0.95rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+		}
+
+		.sidebar-toggle:hover {
+			transform: translate(-90%, -1px);
+			background: var(--sl-color-bg);
+			border-color: var(--sl-color-hairline-shade);
+		}
+
+		.sidebar-toggle::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: auto;
+			right: 0;
+			width: 1px;
+			height: 100%;
+			background: var(--sl-color-hairline);
+		}
+
+		.sidebar-toggle:hover::before {
+			background: var(--sl-color-hairline-shade);
+		}
+
+		@media (min-width: 50rem) {
+			.sidebar-toggle {
+				display: inline-flex;
+			}
+
+			:global(.sidebar-collapsed [data-has-sidebar]) {
+				--sl-content-inline-start: 0 !important;
+			}
+
+			:global(.sidebar-collapsed nav.sidebar) {
+				transform: translateX(-100%);
+				visibility: hidden;
+				pointer-events: none;
+				width: 0;
+				border: 0;
+			}
+
+			:global(.sidebar-collapsed .sidebar-pane) {
+				display: none;
+			}
+
+			:global(.sidebar-collapsed .main-frame) {
+				padding-inline-start: 0 !important;
+			}
+
+			:global(.sidebar-collapsed .main-pane) {
+				width: 100% !important;
+				max-width: 100% !important;
+			}
+		}
+	}
+</style>
