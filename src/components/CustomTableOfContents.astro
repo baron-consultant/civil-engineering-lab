@@ -8,21 +8,162 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 
 {
 	filteredItems.length > 0 && (
-		<starlight-toc data-min-h={toc?.minHeadingLevel} data-max-h={toc?.maxHeadingLevel}>
-			<nav aria-labelledby="starlight__on-this-page">
-				<h1 id="starlight__on-this-page">
-					<a href="#_top">{title}</a>
-				</h1>
-				<TableOfContentsList toc={filteredItems} />
-			</nav>
-		</starlight-toc>
+		<>
+			<button
+				type="button"
+				class="toc-toggle"
+				data-toc-toggle
+				data-label-open="목차 숨기기"
+				data-label-closed="목차 펼치기"
+				aria-pressed="false"
+			>
+				<span class="toggle-icon" aria-hidden="true">⟫</span>
+			</button>
+			<starlight-toc data-min-h={toc?.minHeadingLevel} data-max-h={toc?.maxHeadingLevel}>
+				<nav aria-labelledby="starlight__on-this-page">
+					<h1 id="starlight__on-this-page">
+						<a href="#_top">{title}</a>
+					</h1>
+					<TableOfContentsList toc={filteredItems} />
+				</nav>
+			</starlight-toc>
+		</>
 	)
 }
 
 <script src="./starlight-toc.ts"></script>
+<script>
+	const root = document.documentElement;
+	const toggleBtn = document.querySelector("[data-toc-toggle]");
+	const collapsedClass = "toc-collapsed";
+	const storageKey = "cel:toc-collapsed";
+
+	const applyState = (isCollapsed) => {
+		root.classList.toggle(collapsedClass, isCollapsed);
+
+		if (!toggleBtn) return;
+
+		const openLabel = toggleBtn.dataset.labelOpen ?? "목차 숨기기";
+		const closedLabel = toggleBtn.dataset.labelClosed ?? "목차 펼치기";
+		const label = isCollapsed ? closedLabel : openLabel;
+		const icon = toggleBtn.querySelector(".toggle-icon");
+		toggleBtn.setAttribute("aria-pressed", isCollapsed ? "true" : "false");
+		toggleBtn.setAttribute("aria-label", label);
+		if (icon) icon.textContent = isCollapsed ? "《" : "》";
+
+		try {
+			window.sessionStorage.setItem(storageKey, isCollapsed ? "1" : "0");
+		} catch (error) {
+			console.warn("Failed to persist TOC toggle state", error);
+		}
+	};
+
+	let lastSidebarRect = null;
+
+	const setTogglePosition = () => {
+		if (!toggleBtn) return;
+		const isCollapsed = root.classList.contains(collapsedClass);
+		const sidebar = document.querySelector(".right-sidebar");
+
+		if (sidebar) {
+			const rectCandidate = sidebar.getBoundingClientRect();
+			if (rectCandidate.width > 0 && rectCandidate.height > 0) {
+				lastSidebarRect = rectCandidate;
+			}
+		}
+
+		const rect = lastSidebarRect;
+		const fallbackLeft = window.innerWidth - 12;
+		const anchorLeft = isCollapsed
+			? fallbackLeft
+			: rect
+				? rect.left
+				: fallbackLeft;
+		const topCenter =
+			rect && rect.height > 0 ? rect.top + rect.height / 2 : window.innerHeight / 2;
+
+		toggleBtn.style.left = `${anchorLeft}px`;
+		toggleBtn.style.top = `${topCenter}px`;
+	};
+
+	if (toggleBtn) {
+		document.body.appendChild(toggleBtn);
+		let savedState = null;
+		try {
+			savedState = window.sessionStorage.getItem(storageKey);
+		} catch (error) {
+			console.warn("Failed to read TOC toggle state", error);
+		}
+		const initialCollapsed = savedState === "1";
+		setTogglePosition();
+		applyState(initialCollapsed);
+
+		toggleBtn.addEventListener("click", () => {
+			const nextState = !root.classList.contains(collapsedClass);
+			applyState(nextState);
+			setTogglePosition();
+		});
+
+		window.addEventListener("resize", () => {
+			window.requestAnimationFrame(setTogglePosition);
+		});
+	}
+</script>
 
 <style>
 	@layer starlight.core {
+		.toc-toggle {
+			position: fixed;
+			top: 50%;
+			left: 12px;
+			transform: translate(-100%, -50%);
+			z-index: calc(var(--sl-z-index-navbar) + 10);
+			display: none;
+			align-items: center;
+			gap: 0.35rem;
+			padding: 0;
+			background: var(--sl-color-bg-sidebar);
+			border: 1px solid var(--sl-color-hairline);
+			border-right: 0;
+			border-radius: 0;
+			color: color-mix(in srgb, var(--sl-color-hairline-shade) 85%, var(--sl-color-text) 15%);
+			font-size: 0.95rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+			justify-content: center;
+			position: fixed;
+		}
+
+		.toc-toggle:hover {
+			transform: translate(-100%, calc(-50% - 1px));
+			background: var(--sl-color-bg);
+			border-color: var(--sl-color-hairline-shade);
+		}
+
+		.toc-toggle::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 1px;
+			height: 100%;
+			background: var(--sl-color-hairline);
+		}
+
+		.toc-toggle:hover::after {
+			background: var(--sl-color-hairline-shade);
+		}
+
+		@media (min-width: 72rem) {
+			.toc-toggle {
+				display: inline-flex;
+				justify-content: center;
+				width: 44px;
+				height: 64px;
+			}
+		}
+
 		h1#starlight__on-this-page {
 			margin: 0 0 0.75rem;
 			font-size: var(--sl-text-h1, var(--sl-text-3xl, 2.25rem));
@@ -38,6 +179,19 @@ const title = Astro.locals.t("tableOfContents.onThisPage");
 		h1#starlight__on-this-page a:hover,
 		h1#starlight__on-this-page a:focus-visible {
 			text-decoration: underline;
+		}
+
+		@media (min-width: 72rem) {
+			:global(.toc-collapsed .right-sidebar-container),
+			:global(.toc-collapsed .right-sidebar-panel) {
+				display: none !important;
+			}
+
+			:global(.toc-collapsed [data-has-sidebar][data-has-toc] .main-pane) {
+				--sl-content-margin-inline: auto;
+				width: calc(100% - var(--sl-sidebar-width));
+				max-width: calc(100% - var(--sl-sidebar-width));
+			}
 		}
 	}
 </style>
