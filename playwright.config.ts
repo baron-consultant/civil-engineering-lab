@@ -3,6 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:4173';
 const aptabaseUrl = process.env.PUBLIC_APTABASE_URL || 'http://127.0.0.1:4000';
 const aptabaseKey = process.env.PUBLIC_APTABASE_KEY || 'A-US-TESTKEY';
+const aptabaseDebug = process.env.PUBLIC_APTABASE_DEBUG || 'true';
 
 /**
  * Read environment variables from file.
@@ -84,6 +85,7 @@ export default defineConfig({
       ...process.env,
       PUBLIC_APTABASE_URL: aptabaseUrl,
       PUBLIC_APTABASE_KEY: aptabaseKey,
+      PUBLIC_APTABASE_DEBUG: aptabaseDebug,
     },
   },
 });

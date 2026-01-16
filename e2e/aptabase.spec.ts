@@ -64,6 +64,14 @@ test('Aptabase page_view 이벤트가 2xx로 전송된다', async ({ page }) => 
   const findEvent = (name: string) =>
     events.find((e) => (e as { eventName?: string }).eventName === name);
 
+  await expect.poll(() => findEvent('session_info'), { timeout: 5_000 }).toBeTruthy();
+  const sessionInfo = findEvent('session_info') as
+    | {
+        props?: Record<string, unknown>;
+        systemProps?: Record<string, unknown>;
+      }
+    | undefined;
+
   await expect.poll(() => findEvent('page_view'), { timeout: 5_000 }).toBeTruthy();
   const pageView = findEvent('page_view') as
     | {
@@ -85,4 +93,8 @@ test('Aptabase page_view 이벤트가 2xx로 전송된다', async ({ page }) => 
   ).toBeTruthy();
   const warnOrError = consoleMessages.filter((msg) => msg.startsWith('warning') || msg.startsWith('error'));
   expect.soft(warnOrError).toEqual([]);
+  expect(sessionInfo?.systemProps?.isDebug).toBe(true);
+  expect(sessionInfo?.props?.device_category).toBeTruthy();
+  expect(sessionInfo?.props?.device_os).toBeTruthy();
+  expect(sessionInfo?.props?.screen_width).toBeTruthy();
 });
