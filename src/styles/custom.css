@@ -13,6 +13,12 @@ img[alt$="emoji"] {
   vertical-align: -.3em;
 }
 
+/* Remove Starlight content wrapper horizontal padding globally */
+:global(.content-panel) {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .header {
   display: flex;
   align-items: center;

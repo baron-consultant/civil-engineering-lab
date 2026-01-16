@@ -17,6 +17,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_APTABASE_URL: ${{ vars.APTABASE_URL }}
+      PUBLIC_APTABASE_KEY: ${{ vars.APTABASE_KEY }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4

@@ -9,7 +9,10 @@
     "preview": "astro preview",
     "lint": "biome check .",
     "format": "biome format .",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "npm run test:e2e",
+    "test:e2e": "playwright test",
+    "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.35.2",
@@ -21,6 +24,8 @@
     "starlight-theme-nova": "^0.9.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.11"
+    "@biomejs/biome": "^2.3.11",
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.8"
   }
 }
