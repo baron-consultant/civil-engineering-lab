@@ -7,6 +7,11 @@ on:
     branches: [ main ]
   # GitHub의 Actions 탭에서 이 워크플로를 수동으로 실행할 수 있습니다.
   workflow_dispatch:
+    inputs:
+      pdf_enabled:
+        description: "Generate/upload PDF and expose download link"
+        required: false
+        default: "false"
 
 # Allow this job to clone the repo and create a page deployment
 permissions:
@@ -21,15 +26,97 @@ jobs:
       PUBLIC_APTABASE_URL: ${{ vars.APTABASE_URL }}
       PUBLIC_APTABASE_KEY: ${{ vars.APTABASE_KEY }}
       PUBLIC_COMMIT_SHA: ${{ github.sha }}
+      PDF_ENABLED: ${{ github.event.inputs.pdf_enabled || vars.PDF_ICON_ENABLED || 'false' }}
+      PUBLIC_PDF_ICON_ENABLED: ${{ github.event.inputs.pdf_enabled || vars.PDF_ICON_ENABLED || 'false' }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
-        # with:
-          # path: . # 저장소 내 Astro 프로젝트의 루트 위치입니다. (선택 사항)
-          # node-version: 20 # 사이트를 빌드하는 데 사용해야 하는 특정 버전의 Node입니다. 기본값은 20입니다. (선택 사항)
-          # package-manager: pnpm@latest # 종속성을 설치하고 사이트를 빌드하는 데 사용해야 하는 노드 패키지 관리자입니다. lockfile을 기반으로 자동으로 감지됩니다. (선택 사항)
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Compute short SHA and PDF URL
+        id: vars
+        run: |
+          short_sha="${GITHUB_SHA::7}"
+          echo "short_sha=${short_sha}" >> "$GITHUB_OUTPUT"
+          echo "short_sha=${short_sha}" >> "$GITHUB_ENV"
+          echo "PUBLIC_PDF_DOWNLOAD_URL=" >> "$GITHUB_ENV"
+
+      - name: Build and export PDF
+        if: env.PDF_ENABLED == 'true'
+        run: npm run export:pdf
+        env:
+          PUBLIC_PDF_ICON_ENABLED: ${{ env.PUBLIC_PDF_ICON_ENABLED || 'false' }}
+
+      - name: Upload PDF artifact
+        if: env.PDF_ENABLED == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-${{ steps.vars.outputs.short_sha }}
+          path: dist/pdf/*.pdf
+          retention-days: 7
+
+      - name: Remove old PDF artifacts (keep latest 1)
+        if: env.PDF_ENABLED == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const artifacts = await github.rest.actions.listArtifactsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 50,
+            });
+            const pdfArtifacts = artifacts.data.artifacts
+              .filter(a => a.name.startsWith('pdf-'))
+              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const toDelete = pdfArtifacts.slice(1);
+            for (const artifact of toDelete) {
+              core.info(`Deleting old PDF artifact ${artifact.name} (${artifact.id})`);
+              await github.rest.actions.deleteArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: artifact.id,
+              });
+            }
+
+      - name: Set PDF download URL from artifact
+        if: env.PDF_ENABLED == 'true'
+        id: pdf_url
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const runId = context.runId;
+            const { data } = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: runId,
+              per_page: 50,
+            });
+            const target = data.artifacts.find(a => a.name === `pdf-${process.env.short_sha}`);
+            if (!target) {
+              core.setFailed('PDF artifact not found for current run.');
+              return;
+            }
+            const url = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}/artifacts/${target.id}`;
+            core.exportVariable('PUBLIC_PDF_DOWNLOAD_URL', url);
+            core.setOutput('pdf_download_url', url);
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
   deploy:
     needs: build

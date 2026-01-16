@@ -1,0 +1,13 @@
+<svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="PDF Download">
+  <!-- 문서 배경 (그레이 톤) -->
+  <path d="M0 4C0 1.79086 1.79086 0 4 0H20L30 10V36C30 38.2091 28.2091 40 26 40H4C1.79086 40 0 38.2091 0 36V4Z" fill="#757575"/>
+  
+  <!-- 우측 상단 접힌 모서리 (더 짙은 그레이 음영) -->
+  <path d="M20 0V10H30" fill="#424242"/>
+  
+  <!-- 다운로드 화살표 아이콘 -->
+  <path d="M15 24L8 16H11.5V6H18.5V16H22L15 24Z" fill="white"/>
+  
+  <!-- PDF 텍스트 -->
+  <text x="15" y="35" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="9" text-anchor="middle" fill="white">PDF</text>
+</svg>

@@ -5,7 +5,6 @@ img[alt$="emoji"] {
   vertical-align: -.1em;
 }
 
-
 .emoji {
   display: inline-block;
   width: 1.3em;
@@ -33,6 +32,38 @@ img[alt$="emoji"] {
 
 .variant-switcher {
   margin-left: auto;
+}
+
+.pdf-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  border: none;
+  border-radius: 0;
+  color: var(--sl-color-text, #e2e8f0);
+  background: transparent;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+  margin-inline-end: 0.35rem;
+  padding: 0.15rem 0.1rem;
+}
+
+.pdf-download-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.pdf-download-btn img {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+.nova-header-actions-lg {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .variant-switcher select {
