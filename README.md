@@ -22,6 +22,7 @@ npm install
 - `npm run test:e2e`: Playwright E2E 테스트. 내부적으로 `npm run dev -- --host --port 4173` 서버를 띄운 뒤 테스트를 수행합니다. 최초 실행 전 한번 `npx playwright install --with-deps`로 브라우저를 설치하세요.
 - `npm run test:e2e:report`: 마지막 Playwright HTML 리포트를 엽니다.
 - `npm run astro -- <cmd>`: Astro CLI 직접 사용(예: `npm run astro -- check`).
+- `npm run export:pdf`: 사이트를 빌드 후 섹션별(랜딩 + Civil DX/기반기술/설계/시공) 페이지를 기사 본문만 PDF로 병합해 `dist/pdf/civil-engineering-lab-<sha>.pdf`에 생성합니다. 헤더/사이드바 등 레이아웃은 제외되고, `[data-pagefind-body]`가 없는 페이지(404 등)와 help 폰트 데모 같은 비콘텐츠 페이지는 스킵합니다. 해상도는 뷰포트 2400×3200에 스케일 2로 출력합니다.
 
 ## UI 메모
 - 우측 목차는 데스크톱 해상도(기본 72rem, 약 1152px) 이상에서 표시되며, 목차 왼쪽 경계에 맞춘 토글 버튼(⟫/⟪)으로 접고 펼칠 수 있습니다.
